@@ -259,6 +259,7 @@ if not meson.is_subproject()
       'simde/x86/avx.h',
       'simde/x86/clmul.h',
       'simde/x86/fma.h',
+      'simde/x86/f16c.h',
       'simde/x86/gfni.h',
       'simde/x86/mmx.h',
       'simde/x86/sse2.h',
