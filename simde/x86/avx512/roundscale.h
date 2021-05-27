@@ -20,13 +20,25 @@ SIMDE_BEGIN_DECLS_
   simde_mm_roundscale_ps_internal_ (simde__m128 result, simde__m128 a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
-    HEDLEY_STATIC_CAST(void, a);
-    // simde__m128 r, clear_sign;
 
+    simde__m128_private
+      r_,
+      result_ = simde__m128_to_private(result),
+      a_ = simde__m128_to_private(a);
+
+    SIMDE_VECTORIZE
+    for (size_t i = 0 ; i < (sizeof(r_.f32) / sizeof(r_.f32[0])) ; i++) {
+      if ((result_.f32[i] == SIMDE_MATH_INFINITYF) || (result_.f32[i] == -SIMDE_MATH_INFINITYF)) {
+        r_.f32[i] = a_.f32[i];
+      }
+      else {
+        r_.f32[i] = result_.f32[i];
+      }
+    }
     // clear_sign = simde_mm_andnot_ps(simde_mm_set1_ps(SIMDE_FLOAT32_C(-0.0)), result);
     // r = simde_x_mm_select_ps(result, a, simde_mm_cmpeq_ps(clear_sign, simde_mm_set1_ps(SIMDE_MATH_INFINITY)));
 
-    return result;
+    return simde__m128_from_private(r_);
   }
   #define simde_mm_roundscale_ps(a, imm8) \
     simde_mm_roundscale_ps_internal_( \
@@ -68,13 +80,25 @@ SIMDE_BEGIN_DECLS_
   simde_mm256_roundscale_ps_internal_ (simde__m256 result, simde__m256 a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
-    HEDLEY_STATIC_CAST(void, a);
     // simde__m256 r, clear_sign;
+    simde__m256_private
+      r_,
+      result_ = simde__m256_to_private(result),
+      a_ = simde__m256_to_private(a);
 
+    SIMDE_VECTORIZE
+    for (size_t i = 0 ; i < (sizeof(r_.f32) / sizeof(r_.f32[0])) ; i++) {
+      if ((result_.f32[i] == SIMDE_MATH_INFINITYF) || (result_.f32[i] == -SIMDE_MATH_INFINITYF)) {
+        r_.f32[i] = a_.f32[i];
+      }
+      else {
+        r_.f32[i] = result_.f32[i];
+      }
+    }
     // clear_sign = simde_mm256_andnot_ps(simde_mm256_set1_ps(SIMDE_FLOAT32_C(-0.0)), result);
     // r = simde_x_mm256_select_ps(result, a, simde_mm256_castsi256_ps(simde_mm256_cmpeq_epi32(simde_mm256_castps_si256(clear_sign), simde_mm256_castps_si256(simde_mm256_set1_ps(SIMDE_MATH_INFINITY)))));
 
-    return result;
+    return simde__m256_from_private(r_);
   }
   #define simde_mm256_roundscale_ps(a, imm8) \
     simde_mm256_roundscale_ps_internal_( \
@@ -116,13 +140,25 @@ SIMDE_BEGIN_DECLS_
   simde_mm512_roundscale_ps_internal_ (simde__m512 result, simde__m512 a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
-    HEDLEY_STATIC_CAST(void, a);
     // simde__m512 r, clear_sign;
+    simde__m512_private
+      r_,
+      result_ = simde__m512_to_private(result),
+      a_ = simde__m512_to_private(a);
 
+    SIMDE_VECTORIZE
+    for (size_t i = 0 ; i < (sizeof(r_.f32) / sizeof(r_.f32[0])) ; i++) {
+      if ((result_.f32[i] == SIMDE_MATH_INFINITYF) || (result_.f32[i] == -SIMDE_MATH_INFINITYF)) {
+        r_.f32[i] = a_.f32[i];
+      }
+      else {
+        r_.f32[i] = result_.f32[i];
+      }
+    }
     // clear_sign = simde_mm512_andnot_ps(simde_mm512_set1_ps(SIMDE_FLOAT32_C(-0.0)), result);
     // r = simde_mm512_mask_mov_ps(result, simde_mm512_cmpeq_epi32_mask(simde_mm512_castps_si512(clear_sign), simde_mm512_castps_si512(simde_mm512_set1_ps(SIMDE_MATH_INFINITY))), a);
 
-    return result;
+    return simde__m512_from_private(r_);
   }
   #define simde_mm512_roundscale_ps(a, imm8) \
     simde_mm512_roundscale_ps_internal_( \
@@ -152,13 +188,25 @@ SIMDE_BEGIN_DECLS_
   simde_mm_roundscale_pd_internal_ (simde__m128d result, simde__m128d a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
-    HEDLEY_STATIC_CAST(void, a);
     // simde__m128d r, clear_sign;
+    simde__m128d_private
+      r_,
+      result_ = simde__m128d_to_private(result),
+      a_ = simde__m128d_to_private(a);
 
+    SIMDE_VECTORIZE
+    for (size_t i = 0 ; i < (sizeof(r_.f64) / sizeof(r_.f64[0])) ; i++) {
+      if ((result_.f64[i] == SIMDE_MATH_INFINITY) || (result_.f64[i] == -SIMDE_MATH_INFINITY)) {
+        r_.f64[i] = a_.f64[i];
+      }
+      else {
+        r_.f64[i] = result_.f64[i];
+      }
+    }
     // clear_sign = simde_mm_andnot_pd(simde_mm_set1_pd(SIMDE_FLOAT64_C(-0.0)), result);
     // r = simde_x_mm_select_pd(result, a, simde_mm_cmpeq_pd(clear_sign, simde_mm_set1_pd(SIMDE_MATH_INFINITY)));
 
-    return result;
+    return simde__m128d_from_private(r_);
   }
   #define simde_mm_roundscale_pd(a, imm8) \
     simde_mm_roundscale_pd_internal_( \
@@ -200,13 +248,25 @@ SIMDE_BEGIN_DECLS_
   simde_mm256_roundscale_pd_internal_ (simde__m256d result, simde__m256d a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
-    HEDLEY_STATIC_CAST(void, a);
     // simde__m256d r, clear_sign;
+    simde__m256d_private
+      r_,
+      result_ = simde__m256d_to_private(result),
+      a_ = simde__m256d_to_private(a);
 
+    SIMDE_VECTORIZE
+    for (size_t i = 0 ; i < (sizeof(r_.f64) / sizeof(r_.f64[0])) ; i++) {
+      if ((result_.f64[i] == SIMDE_MATH_INFINITY) || (result_.f64[i] == -SIMDE_MATH_INFINITY)) {
+        r_.f64[i] = a_.f64[i];
+      }
+      else {
+        r_.f64[i] = result_.f64[i];
+      }
+    }
     // clear_sign = simde_mm256_andnot_pd(simde_mm256_set1_pd(SIMDE_FLOAT64_C(-0.0)), result);
     // r = simde_x_mm256_select_pd(result, a, simde_mm256_castsi256_pd(simde_mm256_cmpeq_epi64(simde_mm256_castpd_si256(clear_sign), simde_mm256_castpd_si256(simde_mm256_set1_pd(SIMDE_MATH_INFINITY)))));
 
-    return result;
+    return simde__m256d_from_private(r_);
   }
   #define simde_mm256_roundscale_pd(a, imm8) \
     simde_mm256_roundscale_pd_internal_( \
@@ -248,13 +308,25 @@ SIMDE_BEGIN_DECLS_
   simde_mm512_roundscale_pd_internal_ (simde__m512d result, simde__m512d a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
-    HEDLEY_STATIC_CAST(void, a);
     // simde__m512d r, clear_sign;
+    simde__m512d_private
+      r_,
+      result_ = simde__m512d_to_private(result),
+      a_ = simde__m512d_to_private(a);
 
+    SIMDE_VECTORIZE
+    for (size_t i = 0 ; i < (sizeof(r_.f64) / sizeof(r_.f64[0])) ; i++) {
+      if ((result_.f64[i] == SIMDE_MATH_INFINITY) || (result_.f64[i] == -SIMDE_MATH_INFINITY)) {
+        r_.f64[i] = a_.f64[i];
+      }
+      else {
+        r_.f64[i] = result_.f64[i];
+      }
+    }
     // clear_sign = simde_mm512_andnot_pd(simde_mm512_set1_pd(SIMDE_FLOAT64_C(-0.0)), result);
     // r = simde_mm512_mask_mov_pd(result, simde_mm512_cmpeq_epi64_mask(simde_mm512_castpd_si512(clear_sign), simde_mm512_castpd_si512(simde_mm512_set1_pd(SIMDE_MATH_INFINITY))), a);
 
-    return result;
+    return simde__m512d_from_private(r_);
   }
   #define simde_mm512_roundscale_pd(a, imm8) \
     simde_mm512_roundscale_pd_internal_( \
