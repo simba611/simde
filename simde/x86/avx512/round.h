@@ -167,7 +167,6 @@ simde_x_mm512_round_pd (simde__m512d a, int rounding)
 
     case SIMDE_MM_FROUND_TO_NEAREST_INT:
       #if defined(SIMDE_POWER_ALTIVEC_P7_NATIVE) || defined(SIMDE_ZARCH_ZVECTOR_13_NATIVE)
-        r_.altivec_f64 = HEDLEY_REINTERPRET_CAST(SIMDE_POWER_ALTIVEC_VECTOR(double), vec_round(a_.altivec_f64));
         for (size_t i = 0 ; i < (sizeof(r_.m128d_private) / sizeof(r_.m128d_private[0])) ; i++) {
           r_.m128d_private[i].altivec_f64 = HEDLEY_REINTERPRET_CAST(SIMDE_POWER_ALTIVEC_VECTOR(double), vec_round(a_.m128d_private[i].altivec_f64));
         }
