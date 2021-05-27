@@ -4,7 +4,6 @@
 #include "types.h"
 #include "andnot.h"
 #include "set1.h"
-#include "cmp.h"
 #include "mul.h"
 #include "round.h"
 #include "cmpeq.h"
@@ -24,7 +23,7 @@ SIMDE_BEGIN_DECLS_
 
     simde__m128 r, clear_sign;
 
-    clear_sign = simde_mm_andnot_ps(simde_mm_set1_ps(SIMDE_FLOAT32_C(-0.0)), a);
+    clear_sign = simde_mm_andnot_ps(simde_mm_set1_ps(SIMDE_FLOAT32_C(-0.0)), result);
     r = simde_x_mm_select_ps(result, a, simde_mm_cmpeq_ps(clear_sign, simde_mm_set1_ps(SIMDE_MATH_INFINITY)));
 
     return r;
@@ -72,7 +71,7 @@ SIMDE_BEGIN_DECLS_
 
     simde__m256 r, clear_sign;
 
-    clear_sign = simde_mm256_andnot_ps(simde_mm256_set1_ps(SIMDE_FLOAT32_C(-0.0)), a);
+    clear_sign = simde_mm256_andnot_ps(simde_mm256_set1_ps(SIMDE_FLOAT32_C(-0.0)), result);
     r = simde_x_mm256_select_ps(result, a, simde_mm256_castsi256_ps(simde_mm256_cmpeq_epi32(simde_mm256_castps_si256(clear_sign), simde_mm256_castps_si256(simde_mm256_set1_ps(SIMDE_MATH_INFINITY)))));
 
     return r;
@@ -120,7 +119,7 @@ SIMDE_BEGIN_DECLS_
 
     simde__m512 r, clear_sign;
 
-    clear_sign = simde_mm512_andnot_ps(simde_mm512_set1_ps(SIMDE_FLOAT32_C(-0.0)), a);
+    clear_sign = simde_mm512_andnot_ps(simde_mm512_set1_ps(SIMDE_FLOAT32_C(-0.0)), result);
     r = simde_mm512_mask_mov_ps(result, simde_mm512_cmpeq_epi32_mask(simde_mm512_castps_si512(clear_sign), simde_mm512_castps_si512(simde_mm512_set1_ps(SIMDE_MATH_INFINITY))), a);
 
     return r;
@@ -156,7 +155,7 @@ SIMDE_BEGIN_DECLS_
 
     simde__m128d r, clear_sign;
 
-    clear_sign = simde_mm_andnot_pd(simde_mm_set1_pd(SIMDE_FLOAT64_C(-0.0)), a);
+    clear_sign = simde_mm_andnot_pd(simde_mm_set1_pd(SIMDE_FLOAT64_C(-0.0)), result);
     r = simde_x_mm_select_pd(result, a, simde_mm_cmpeq_pd(clear_sign, simde_mm_set1_pd(SIMDE_MATH_INFINITY)));
 
     return r;
@@ -204,7 +203,7 @@ SIMDE_BEGIN_DECLS_
 
     simde__m256d r, clear_sign;
 
-    clear_sign = simde_mm256_andnot_pd(simde_mm256_set1_pd(SIMDE_FLOAT64_C(-0.0)), a);
+    clear_sign = simde_mm256_andnot_pd(simde_mm256_set1_pd(SIMDE_FLOAT64_C(-0.0)), result);
     r = simde_x_mm256_select_pd(result, a, simde_mm256_castsi256_pd(simde_mm256_cmpeq_epi64(simde_mm256_castpd_si256(clear_sign), simde_mm256_castpd_si256(simde_mm256_set1_pd(SIMDE_MATH_INFINITY)))));
 
     return r;
@@ -252,7 +251,7 @@ SIMDE_BEGIN_DECLS_
 
     simde__m512d r, clear_sign;
 
-    clear_sign = simde_mm512_andnot_pd(simde_mm512_set1_pd(SIMDE_FLOAT64_C(-0.0)), a);
+    clear_sign = simde_mm512_andnot_pd(simde_mm512_set1_pd(SIMDE_FLOAT64_C(-0.0)), result);
     r = simde_mm512_mask_mov_pd(result, simde_mm512_cmpeq_epi64_mask(simde_mm512_castpd_si512(clear_sign), simde_mm512_castpd_si512(simde_mm512_set1_pd(SIMDE_MATH_INFINITY))), a);
 
     return r;
