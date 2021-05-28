@@ -20,6 +20,7 @@ SIMDE_BEGIN_DECLS_
   simde_mm_roundscale_ps_internal_ (simde__m128 result, simde__m128 a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
+
     simde__m128 r, clear_sign;
 
     clear_sign = simde_mm_andnot_ps(simde_mm_set1_ps(SIMDE_FLOAT32_C(-0.0)), result);
@@ -67,6 +68,7 @@ SIMDE_BEGIN_DECLS_
   simde_mm256_roundscale_ps_internal_ (simde__m256 result, simde__m256 a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
+
     simde__m256 r, clear_sign;
 
     clear_sign = simde_mm256_andnot_ps(simde_mm256_set1_ps(SIMDE_FLOAT32_C(-0.0)), result);
@@ -114,6 +116,7 @@ SIMDE_BEGIN_DECLS_
   simde_mm512_roundscale_ps_internal_ (simde__m512 result, simde__m512 a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
+
     simde__m512 r, clear_sign;
 
     clear_sign = simde_mm512_andnot_ps(simde_mm512_set1_ps(SIMDE_FLOAT32_C(-0.0)), result);
@@ -149,6 +152,7 @@ SIMDE_BEGIN_DECLS_
   simde_mm_roundscale_pd_internal_ (simde__m128d result, simde__m128d a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
+
     simde__m128d r, clear_sign;
 
     clear_sign = simde_mm_andnot_pd(simde_mm_set1_pd(SIMDE_FLOAT64_C(-0.0)), result);
@@ -196,6 +200,7 @@ SIMDE_BEGIN_DECLS_
   simde_mm256_roundscale_pd_internal_ (simde__m256d result, simde__m256d a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
+
     simde__m256d r, clear_sign;
 
     clear_sign = simde_mm256_andnot_pd(simde_mm256_set1_pd(SIMDE_FLOAT64_C(-0.0)), result);
@@ -243,6 +248,7 @@ SIMDE_BEGIN_DECLS_
   simde_mm512_roundscale_pd_internal_ (simde__m512d result, simde__m512d a, int imm8)
       SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
     HEDLEY_STATIC_CAST(void, imm8);
+
     simde__m512d r, clear_sign;
 
     clear_sign = simde_mm512_andnot_pd(simde_mm512_set1_pd(SIMDE_FLOAT64_C(-0.0)), result);
