@@ -48,6 +48,26 @@ SIMDE_BEGIN_DECLS_
   #define _mm_roundscale_ps(a, imm8) simde_mm_roundscale_ps(a, imm8)
 #endif
 
+#if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
+  #define simde_mm_mask_roundscale_ps(src, k, a, imm8) _mm_mask_roundscale_ps(src, k, a, imm8)
+#else
+  #define simde_mm_mask_roundscale_ps(src, k, a, imm8) simde_mm_mask_mov_ps(src, k, simde_mm_roundscale_ps(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES)
+  #undef _mm_mask_roundscale_ps
+  #define _mm_mask_roundscale_ps(src, k, a, imm8) simde_mm_mask_roundscale_ps(src, k, a, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
+  #define simde_mm_maskz_roundscale_ps(k, a, imm8) _mm_maskz_roundscale_ps(k, a, imm8)
+#else
+  #define simde_mm_maskz_roundscale_ps(k, a, imm8) simde_mm_maskz_mov_ps(k, simde_mm_roundscale_ps(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES)
+  #undef _mm_maskz_roundscale_ps
+  #define _mm_maskz_roundscale_ps(k, a, imm8) simde_mm_maskz_roundscale_ps(k, a, imm8)
+#endif
+
 #if defined(SIMDE_X86_AVX512VL_NATIVE) && defined(SIMDE_X86_AVX512F_NATIVE)
   #define simde_mm256_roundscale_ps(a, imm8) _mm256_roundscale_ps((a), (imm8))
 #elif SIMDE_NATURAL_VECTOR_SIZE_LE(128) && defined(SIMDE_STATEMENT_EXPR_)
@@ -94,6 +114,26 @@ SIMDE_BEGIN_DECLS_
 #if defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
   #undef _mm256_roundscale_ps
   #define _mm256_roundscale_ps(a, imm8) simde_mm256_roundscale_ps(a, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
+  #define simde_mm256_mask_roundscale_ps(src, k, a, imm8) _mm256_mask_roundscale_ps(src, k, a, imm8)
+#else
+  #define simde_mm256_mask_roundscale_ps(src, k, a, imm8) simde_mm256_mask_mov_ps(src, k, simde_mm256_roundscale_ps(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES)
+  #undef _mm256_mask_roundscale_ps
+  #define _mm256_mask_roundscale_ps(src, k, a, imm8) simde_mm256_mask_roundscale_ps(src, k, a, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
+  #define simde_mm256_maskz_roundscale_ps(k, a, imm8) _mm256_maskz_roundscale_ps(k, a, imm8)
+#else
+  #define simde_mm256_maskz_roundscale_ps(k, a, imm8) simde_mm256_maskz_mov_ps(k, simde_mm256_roundscale_ps(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES)
+  #undef _mm256_maskz_roundscale_ps
+  #define _mm256_maskz_roundscale_ps(k, a, imm8) simde_mm256_maskz_roundscale_ps(k, a, imm8)
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE)
@@ -144,6 +184,26 @@ SIMDE_BEGIN_DECLS_
   #define _mm512_roundscale_ps(a, imm8) simde_mm512_roundscale_ps(a, imm8)
 #endif
 
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm512_mask_roundscale_ps(src, k, a, imm8) _mm512_mask_roundscale_ps(src, k, a, imm8)
+#else
+  #define simde_mm512_mask_roundscale_ps(src, k, a, imm8) simde_mm512_mask_mov_ps(src, k, simde_mm512_roundscale_ps(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm512_mask_roundscale_ps
+  #define _mm512_mask_roundscale_ps(src, k, a, imm8) simde_mm512_mask_roundscale_ps(src, k, a, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm512_maskz_roundscale_ps(k, a, imm8) _mm512_maskz_roundscale_ps(k, a, imm8)
+#else
+  #define simde_mm512_maskz_roundscale_ps(k, a, imm8) simde_mm512_maskz_mov_ps(k, simde_mm512_roundscale_ps(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm512_maskz_roundscale_ps
+  #define _mm512_maskz_roundscale_ps(k, a, imm8) simde_mm512_maskz_roundscale_ps(k, a, imm8)
+#endif
+
 #if defined(SIMDE_X86_AVX512VL_NATIVE) && defined(SIMDE_X86_AVX512F_NATIVE)
   #define simde_mm_roundscale_pd(a, imm8) _mm_roundscale_pd((a), (imm8))
 #else
@@ -178,6 +238,26 @@ SIMDE_BEGIN_DECLS_
 #if defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
   #undef _mm_roundscale_ps
   #define _mm_roundscale_ps(a, imm8) simde_mm_roundscale_ps(a, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
+  #define simde_mm_mask_roundscale_pd(src, k, a, imm8) _mm_mask_roundscale_pd(src, k, a, imm8)
+#else
+  #define simde_mm_mask_roundscale_pd(src, k, a, imm8) simde_mm_mask_mov_pd(src, k, simde_mm_roundscale_pd(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES)
+  #undef _mm_mask_roundscale_pd
+  #define _mm_mask_roundscale_pd(src, k, a, imm8) simde_mm_mask_roundscale_pd(src, k, a, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
+  #define simde_mm_maskz_roundscale_pd(k, a, imm8) _mm_maskz_roundscale_pd(k, a, imm8)
+#else
+  #define simde_mm_maskz_roundscale_pd(k, a, imm8) simde_mm_maskz_mov_pd(k, simde_mm_roundscale_pd(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES)
+  #undef _mm_maskz_roundscale_pd
+  #define _mm_maskz_roundscale_pd(k, a, imm8) simde_mm_maskz_roundscale_pd(k, a, imm8)
 #endif
 
 #if defined(SIMDE_X86_AVX512VL_NATIVE) && defined(SIMDE_X86_AVX512F_NATIVE)
@@ -228,6 +308,26 @@ SIMDE_BEGIN_DECLS_
   #define _mm256_roundscale_pd(a, imm8) simde_mm256_roundscale_pd(a, imm8)
 #endif
 
+#if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
+  #define simde_mm256_mask_roundscale_pd(src, k, a, imm8) _mm256_mask_roundscale_pd(src, k, a, imm8)
+#else
+  #define simde_mm256_mask_roundscale_pd(src, k, a, imm8) simde_mm256_mask_mov_pd(src, k, simde_mm256_roundscale_pd(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES)
+  #undef _mm256_mask_roundscale_pd
+  #define _mm256_mask_roundscale_pd(src, k, a, imm8) simde_mm256_mask_roundscale_pd(src, k, a, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
+  #define simde_mm256_maskz_roundscale_pd(k, a, imm8) _mm256_maskz_roundscale_pd(k, a, imm8)
+#else
+  #define simde_mm256_maskz_roundscale_pd(k, a, imm8) simde_mm256_maskz_mov_pd(k, simde_mm256_roundscale_pd(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES)
+  #undef _mm256_maskz_roundscale_pd
+  #define _mm256_maskz_roundscale_pd(k, a, imm8) simde_mm256_maskz_roundscale_pd(k, a, imm8)
+#endif
+
 #if defined(SIMDE_X86_AVX512F_NATIVE)
   #define simde_mm512_roundscale_pd(a, imm8) _mm512_roundscale_pd((a), (imm8))
 #elif SIMDE_NATURAL_VECTOR_SIZE_LE(256) && defined(SIMDE_STATEMENT_EXPR_)
@@ -274,6 +374,26 @@ SIMDE_BEGIN_DECLS_
 #if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
   #undef _mm512_roundscale_pd
   #define _mm512_roundscale_pd(a, imm8) simde_mm512_roundscale_pd(a, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm512_mask_roundscale_pd(src, k, a, imm8) _mm512_mask_roundscale_pd(src, k, a, imm8)
+#else
+  #define simde_mm512_mask_roundscale_pd(src, k, a, imm8) simde_mm512_mask_mov_pd(src, k, simde_mm512_roundscale_pd(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm512_mask_roundscale_pd
+  #define _mm512_mask_roundscale_pd(src, k, a, imm8) simde_mm512_mask_roundscale_pd(src, k, a, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm512_maskz_roundscale_pd(k, a, imm8) _mm512_maskz_roundscale_pd(k, a, imm8)
+#else
+  #define simde_mm512_maskz_roundscale_pd(k, a, imm8) simde_mm512_maskz_mov_pd(k, simde_mm512_roundscale_pd(a, imm8))
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm512_maskz_roundscale_pd
+  #define _mm512_maskz_roundscale_pd(k, a, imm8) simde_mm512_maskz_roundscale_pd(k, a, imm8)
 #endif
 
 SIMDE_END_DECLS_
