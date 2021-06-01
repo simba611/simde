@@ -396,6 +396,246 @@ SIMDE_BEGIN_DECLS_
   #define _mm512_maskz_roundscale_pd(k, a, imm8) simde_mm512_maskz_roundscale_pd(k, a, imm8)
 #endif
 
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm_roundscale_ss(a, b, imm8) _mm_roundscale_ss((a), (b), (imm8))
+#else
+  SIMDE_FUNCTION_ATTRIBUTES
+  simde__m128
+  simde_mm_roundscale_ss_internal_ (simde__m128 result, simde__m128 b, int imm8)
+      SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
+    HEDLEY_STATIC_CAST(void, imm8);
+
+    simde__m128_private
+      r_ = simde__m128_to_private(result),
+      b_ = simde__m128_to_private(b);
+
+    if((simde_uint32_as_float32(r_.u32[0] & UINT32_C(2147483647)) == SIMDE_MATH_INFINITYF))
+      r_.f32[0] = b_.f32[0];
+
+    return simde__m128_from_private(r_);
+  }
+  #define simde_mm_roundscale_ss(a, b, imm8) \
+    simde_mm_roundscale_ss_internal_( \
+      simde_mm_mul_ss( \
+        simde_mm_round_ss( \
+          a, \
+          simde_mm_mul_ss( \
+            b, \
+            simde_mm_set1_ps(simde_uint32_as_float32((UINT64_C(127) + ((imm8 >> 4) & 15)) << 23))), \
+          ((imm8) & 15) \
+        ), \
+        simde_mm_set1_ps(simde_uint32_as_float32((UINT64_C(127) - ((imm8 >> 4) & 15)) << 23)) \
+      ), \
+      (b), \
+      (imm8) \
+    )
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm_roundscale_ss
+  #define _mm_roundscale_ss(a, b, imm8) simde_mm_roundscale_ss(a, b, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm_mask_roundscale_ss(src, k, a, b, imm8) _mm_mask_roundscale_ss((src), (k), (a), (b), (imm8))
+#else
+  SIMDE_FUNCTION_ATTRIBUTES
+  simde__m128
+  simde_mm_mask_roundscale_ss_internal_ (simde__m128 a, simde__m128 b, simde__mmask8 k) {
+    simde__m128 r;
+
+    if(k & 1)
+      r = a;
+    else
+      r = b;
+
+    return r;
+  }
+  #define simde_mm_mask_roundscale_ss(src, k, a, b, imm8) \
+    simde_mm_mask_roundscale_ss_internal_( \
+      simde_mm_roundscale_ss_internal_( \
+        simde_mm_mul_ss( \
+          simde_mm_round_ss( \
+            a, \
+            simde_mm_mul_ss( \
+              b, \
+              simde_mm_set1_ps(simde_uint32_as_float32((UINT32_C(127) + ((imm8 >> 4) & 15)) << 23))), \
+            ((imm8) & 15) \
+          ), \
+          simde_mm_set1_ps(simde_uint32_as_float32((UINT32_C(127) - ((imm8 >> 4) & 15)) << 23)) \
+        ), \
+        (b), \
+        (imm8) \
+      ), \
+      simde_mm_move_ss( \
+        (a), \
+        (src) \
+      ), \
+      (k) \
+    )
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm_mask_roundscale_ss
+  #define _mm_mask_roundscale_ss(src, k, a, b, imm8) simde_mm_mask_roundscale_ss(src, k, a, b, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm_maskz_roundscale_ss(k, a, b, imm8) _mm_maskz_roundscale_ss((k), (a), (b), (imm8))
+#else
+  SIMDE_FUNCTION_ATTRIBUTES
+  simde__m128
+  simde_mm_maskz_roundscale_ss_internal_ (simde__m128 a, simde__m128 b, simde__mmask8 k) {
+    simde__m128 r;
+
+    if(k & 1)
+      r = a;
+    else
+      r = b;
+
+    return r;
+  }
+  #define simde_mm_maskz_roundscale_ss(k, a, b, imm8) \
+    simde_mm_maskz_roundscale_ss_internal_( \
+      simde_mm_roundscale_ss_internal_( \
+        simde_mm_mul_ss( \
+          simde_mm_round_ss( \
+            a, \
+            simde_mm_mul_ss( \
+              b, \
+              simde_mm_set1_ps(simde_uint32_as_float32((UINT32_C(127) + ((imm8 >> 4) & 15)) << 23))), \
+            ((imm8) & 15) \
+          ), \
+          simde_mm_set1_ps(simde_uint32_as_float32((UINT32_C(127) - ((imm8 >> 4) & 15)) << 23)) \
+        ), \
+        (b), \
+        (imm8) \
+      ), \
+      simde_mm_move_ss( \
+        (a), \
+        simde_mm_setzero_ps() \
+      ), \
+      (k) \
+    )
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm_maskz_roundscale_ss
+  #define _mm_maskz_roundscale_ss(k, a, b, imm8) simde_mm_maskz_roundscale_ss(k, a, b, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm_roundscale_sd(a, b, imm8) _mm_roundscale_sd((a), (b), (imm8))
+#else
+  SIMDE_FUNCTION_ATTRIBUTES
+  simde__m128d
+  simde_mm_roundscale_sd_internal_ (simde__m128d result, simde__m128d b, int imm8)
+      SIMDE_REQUIRE_CONSTANT_RANGE(imm8, 0, 255) {
+    HEDLEY_STATIC_CAST(void, imm8);
+
+    simde__m128d_private
+      r_ = simde__m128d_to_private(result),
+      b_ = simde__m128d_to_private(b);
+
+    if((simde_uint64_as_float64(r_.u32[0] & UINT64_C(9223372036854775807)) == SIMDE_MATH_INFINITY))
+      r_.f64[0] = b_.f64[0];
+
+    return simde__m128d_from_private(r_);
+  }
+  #define simde_mm_roundscale_sd(a, b, imm8) \
+    simde_mm_roundscale_sd_internal_( \
+      simde_mm_mul_sd( \
+        simde_mm_round_sd( \
+          a, \
+          simde_mm_mul_sd( \
+            b, \
+            simde_mm_set1_pd(simde_uint64_as_float64((UINT64_C(1023) + ((imm8 >> 4) & 15)) << 52))), \
+          ((imm8) & 15) \
+        ), \
+        simde_mm_set1_pd(simde_uint64_as_float64((UINT64_C(1023) - ((imm8 >> 4) & 15)) << 52)) \
+      ), \
+      (b), \
+      (imm8) \
+    )
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm_roundscale_sd
+  #define _mm_roundscale_sd(a, b, imm8) simde_mm_roundscale_sd(a, b, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm_mask_roundscale_sd(src, k, a, b, imm8) _mm_mask_roundscale_sd((src), (k), (a), (b), (imm8))
+#else
+  SIMDE_FUNCTION_ATTRIBUTES
+  simde__m128d
+  simde_mm_mask_roundscale_sd_internal_ (simde__m128d a, simde__m128d b, simde__mmask8 k) {
+    simde__m128d r;
+
+    if(k & 1)
+      r = a;
+    else
+      r = b;
+
+    return r;
+  }
+  #define simde_mm_mask_roundscale_sd(src, k, a, b, imm8) \
+    simde_mm_mask_roundscale_sd_internal_( \
+      simde_mm_roundscale_sd_internal_( \
+        simde_mm_mul_sd( \
+          simde_mm_round_sd( \
+            a, \
+            simde_mm_mul_sd( \
+              b, \
+              simde_mm_set1_pd(simde_uint64_as_float64((UINT64_C(1023) + ((imm8 >> 4) & 15)) << 52))), \
+            ((imm8) & 15) \
+          ), \
+          simde_mm_set1_pd(simde_uint64_as_float64((UINT64_C(1023) - ((imm8 >> 4) & 15)) << 52)) \
+        ), \
+        (b), \
+        (imm8) \
+      ), \
+      simde_mm_move_sd( \
+        (a), \
+        (src) \
+      ), \
+      (k) \
+    )
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm_mask_roundscale_sd
+  #define _mm_mask_roundscale_sd(src, k, a, b, imm8) simde_mm_mask_roundscale_sd(src, k, a, b, imm8)
+#endif
+
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm_maskz_roundscale_sd(k, a, b, imm8) _mm_maskz_roundscale_sd((k), (a), (b), (imm8))
+#else
+  #define simde_mm_maskz_roundscale_sd(k, a, b, imm8) \
+    ( \
+    (k & 1) \
+    ? \
+      simde_mm_roundscale_sd_internal_( \
+        simde_mm_mul_sd( \
+          simde_mm_round_sd( \
+            a, \
+            simde_mm_mul_sd( \
+              b, \
+              simde_mm_set1_pd(simde_uint64_as_float64((UINT64_C(1023) + ((imm8 >> 4) & 15)) << 52))), \
+            ((imm8) & 15) \
+          ), \
+          simde_mm_set1_pd(simde_uint64_as_float64((UINT64_C(1023) - ((imm8 >> 4) & 15)) << 52)) \
+        ), \
+        (b), \
+        (imm8) \
+      ) \
+    : \
+      simde_mm_move_sd( \
+        (a), \
+        simde_mm_setzero_pd() \
+      ) \
+    )
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm_maskz_roundscale_sd
+  #define _mm_maskz_roundscale_sd(k, a, b, imm8) simde_mm_maskz_roundscale_sd(k, a, b, imm8)
+#endif
+
 SIMDE_END_DECLS_
 HEDLEY_DIAGNOSTIC_POP
 
