@@ -606,10 +606,20 @@ SIMDE_BEGIN_DECLS_
 #if defined(SIMDE_X86_AVX512F_NATIVE)
   #define simde_mm_maskz_roundscale_sd(k, a, b, imm8) _mm_maskz_roundscale_sd((k), (a), (b), (imm8))
 #else
+  SIMDE_FUNCTION_ATTRIBUTES
+  simde__m128d
+  simde_mm_maskz_roundscale_sd_internal_ (simde__m128d a, simde__m128d b, simde__mmask8 k) {
+    simde__m128d r;
+
+    if(k & 1)
+      r = a;
+    else
+      r = b;
+
+    return r;
+  }
   #define simde_mm_maskz_roundscale_sd(k, a, b, imm8) \
-    ( \
-    (k & 1) \
-    ? \
+    simde_mm_maskz_roundscale_sd_internal_( \
       simde_mm_roundscale_sd_internal_( \
         simde_mm_mul_sd( \
           simde_mm_round_sd( \
@@ -623,12 +633,12 @@ SIMDE_BEGIN_DECLS_
         ), \
         (b), \
         (imm8) \
-      ) \
-    : \
+      ), \
       simde_mm_move_sd( \
         (a), \
         simde_mm_setzero_pd() \
-      ) \
+      ), \
+      (k) \
     )
 #endif
 #if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
