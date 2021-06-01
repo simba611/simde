@@ -435,7 +435,7 @@ SIMDE_BEGIN_DECLS_
   #define _mm_roundscale_ss(a, b, imm8) simde_mm_roundscale_ss(a, b, imm8)
 #endif
 
-#if defined(SIMDE_X86_AVX512F_NATIVE)
+#if defined(SIMDE_X86_AVX512F_NATIVE) && !defined(SIMDE_BUG_GCC_92035)
   #define simde_mm_mask_roundscale_ss(src, k, a, b, imm8) _mm_mask_roundscale_ss((src), (k), (a), (b), (imm8))
 #else
   SIMDE_FUNCTION_ATTRIBUTES
@@ -478,7 +478,7 @@ SIMDE_BEGIN_DECLS_
   #define _mm_mask_roundscale_ss(src, k, a, b, imm8) simde_mm_mask_roundscale_ss(src, k, a, b, imm8)
 #endif
 
-#if defined(SIMDE_X86_AVX512F_NATIVE)
+#if defined(SIMDE_X86_AVX512F_NATIVE) && !defined(SIMDE_BUG_GCC_92035)
   #define simde_mm_maskz_roundscale_ss(k, a, b, imm8) _mm_maskz_roundscale_ss((k), (a), (b), (imm8))
 #else
   SIMDE_FUNCTION_ATTRIBUTES
@@ -560,7 +560,7 @@ SIMDE_BEGIN_DECLS_
   #define _mm_roundscale_sd(a, b, imm8) simde_mm_roundscale_sd(a, b, imm8)
 #endif
 
-#if defined(SIMDE_X86_AVX512F_NATIVE)
+#if defined(SIMDE_X86_AVX512F_NATIVE) && !defined(SIMDE_BUG_GCC_92035)
   #define simde_mm_mask_roundscale_sd(src, k, a, b, imm8) _mm_mask_roundscale_sd((src), (k), (a), (b), (imm8))
 #else
   SIMDE_FUNCTION_ATTRIBUTES
@@ -603,7 +603,7 @@ SIMDE_BEGIN_DECLS_
   #define _mm_mask_roundscale_sd(src, k, a, b, imm8) simde_mm_mask_roundscale_sd(src, k, a, b, imm8)
 #endif
 
-#if defined(SIMDE_X86_AVX512F_NATIVE)
+#if defined(SIMDE_X86_AVX512F_NATIVE) && !defined(SIMDE_BUG_GCC_92035)
   #define simde_mm_maskz_roundscale_sd(k, a, b, imm8) _mm_maskz_roundscale_sd((k), (a), (b), (imm8))
 #else
   SIMDE_FUNCTION_ATTRIBUTES
