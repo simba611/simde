@@ -1259,7 +1259,7 @@ simde_x_mm_ternarylogic_impl_0x7f_(uint32_t a, uint32_t b, uint32_t c) {
       b_ = simde__m128i_to_private(b),
       c_ = simde__m128i_to_private(c);
 
-    switch(((imm8 & 128) ? ~imm8 : imm8) & 127) {
+    switch(((imm8 & ~127) ? ~imm8 : imm8) & 127) {
       case 0:
         SIMDE_VECTORIZE
         for(size_t i = 0 ; i < (sizeof(r_.u32) / sizeof(r_.u32[0])) ; i++) {
