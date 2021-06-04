@@ -34,6 +34,26 @@ test_simde_mm_ternarylogic_epi32_1 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(   296186114), -INT32_C(  2034259385),  INT32_C(  1046451548),  INT32_C(  1456060212) },
        INT32_C(           3),
       {  INT32_C(    34145681),  INT32_C(   780420355),  INT32_C(    34081024),  INT32_C(   537223184) } },
+    { { -INT32_C(   555160815), -INT32_C(   840014859), -INT32_C(   978152648), -INT32_C(  1616810591) },
+      {  INT32_C(  1116601083),  INT32_C(    13192356),  INT32_C(   373172450), -INT32_C(   261290017) },
+      { -INT32_C(   405907982), -INT32_C(   256590664), -INT32_C(   256481713), -INT32_C(   812689453) },
+       INT32_C(           4),
+      {  INT32_C(       65544),  INT32_C(       65536),  INT32_C(    34080896),  INT32_C(   541065228) } },
+    { { -INT32_C(   183428015),  INT32_C(  1274403433), -INT32_C(   513723646),  INT32_C(   752012858) },
+      { -INT32_C(   602693597), -INT32_C(  1395865763),  INT32_C(    27099694),  INT32_C(   735063258) },
+      { -INT32_C(  1306402231), -INT32_C(  1073932612), -INT32_C(  2069864886),  INT32_C(  1353806381) },
+       INT32_C(           5),
+      {  INT32_C(   147718566),  INT32_C(      139522),  INT32_C(   438206645), -INT32_C(  2096365120) } },
+    { {  INT32_C(  1881981971), -INT32_C(  1172506228),  INT32_C(  1438366075),  INT32_C(   797019366) },
+      {  INT32_C(   719430254),  INT32_C(    48881336),  INT32_C(  1770490428),  INT32_C(   263862524) },
+      { -INT32_C(  2004883716),  INT32_C(  1531092191),  INT32_C(  1001455189), -INT32_C(   127258230) },
+       INT32_C(           6),
+      { -INT32_C(  2104360832),  INT32_C(  1101202019),  INT32_C(    33833984), -INT32_C(   800063216) } },
+    { { -INT32_C(  1943909421),  INT32_C(  1720585257), -INT32_C(  1831922282),  INT32_C(  1252165965) },
+      {  INT32_C(  1339171184),  INT32_C(   329913789), -INT32_C(  1655809261),  INT32_C(  1620425100) },
+      {  INT32_C(   787265284),  INT32_C(  1502902979), -INT32_C(   571710576),  INT32_C(  1562873581) },
+       INT32_C(           7),
+      {  INT32_C(  1897763884), -INT32_C(  2005802154),  INT32_C(  1613801577), -INT32_C(  1252493774) } },
   };
 
   simde__m128i a, b, c, r;
@@ -61,6 +81,30 @@ test_simde_mm_ternarylogic_epi32_1 (SIMDE_MUNIT_TEST_ARGS) {
   c = simde_x_mm_loadu_epi32(test_vec[3].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           3));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           4));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           5));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           6));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           7));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -92,26 +136,46 @@ test_simde_mm_ternarylogic_epi32_2 (SIMDE_MUNIT_TEST_ARGS) {
     const int32_t imm8;
     const int32_t r[4];
   } test_vec[] = {
-    { { -INT32_C(   555160815), -INT32_C(   840014859), -INT32_C(   978152648), -INT32_C(  1616810591) },
-      {  INT32_C(  1116601083),  INT32_C(    13192356),  INT32_C(   373172450), -INT32_C(   261290017) },
-      { -INT32_C(   405907982), -INT32_C(   256590664), -INT32_C(   256481713), -INT32_C(   812689453) },
-       INT32_C(           4),
-      {  INT32_C(       65544),  INT32_C(       65536),  INT32_C(    34080896),  INT32_C(   541065228) } },
-    { { -INT32_C(   183428015),  INT32_C(  1274403433), -INT32_C(   513723646),  INT32_C(   752012858) },
-      { -INT32_C(   602693597), -INT32_C(  1395865763),  INT32_C(    27099694),  INT32_C(   735063258) },
-      { -INT32_C(  1306402231), -INT32_C(  1073932612), -INT32_C(  2069864886),  INT32_C(  1353806381) },
-       INT32_C(           5),
-      {  INT32_C(   147718566),  INT32_C(      139522),  INT32_C(   438206645), -INT32_C(  2096365120) } },
-    { {  INT32_C(  1881981971), -INT32_C(  1172506228),  INT32_C(  1438366075),  INT32_C(   797019366) },
-      {  INT32_C(   719430254),  INT32_C(    48881336),  INT32_C(  1770490428),  INT32_C(   263862524) },
-      { -INT32_C(  2004883716),  INT32_C(  1531092191),  INT32_C(  1001455189), -INT32_C(   127258230) },
-       INT32_C(           6),
-      { -INT32_C(  2104360832),  INT32_C(  1101202019),  INT32_C(    33833984), -INT32_C(   800063216) } },
-    { { -INT32_C(  1943909421),  INT32_C(  1720585257), -INT32_C(  1831922282),  INT32_C(  1252165965) },
-      {  INT32_C(  1339171184),  INT32_C(   329913789), -INT32_C(  1655809261),  INT32_C(  1620425100) },
-      {  INT32_C(   787265284),  INT32_C(  1502902979), -INT32_C(   571710576),  INT32_C(  1562873581) },
-       INT32_C(           7),
-      {  INT32_C(  1897763884), -INT32_C(  2005802154),  INT32_C(  1613801577), -INT32_C(  1252493774) } },
+    { {  INT32_C(  1840052911),  INT32_C(   578836239),  INT32_C(  1052757682), -INT32_C(  1935780729) },
+      { -INT32_C(   809858549), -INT32_C(  1792520699), -INT32_C(  1636690767),  INT32_C(  1392220834) },
+      { -INT32_C(  1547720556), -INT32_C(  1312473089), -INT32_C(  1779465203), -INT32_C(   484340008) },
+       INT32_C(           8),
+      { -INT32_C(  2112749568), -INT32_C(  1862268928), -INT32_C(  2143289343),  INT32_C(  1109494272) } },
+    { {  INT32_C(   498260760), -INT32_C(   625812695), -INT32_C(  1837554193),  INT32_C(  1407481023) },
+      {  INT32_C(   469148444), -INT32_C(   271795230),  INT32_C(   394574911),  INT32_C(  1660593482) },
+      { -INT32_C(  1451184768),  INT32_C(  2005152392),  INT32_C(   369753431), -INT32_C(  1905660559) },
+       INT32_C(           9),
+      {  INT32_C(  1074339939),  INT32_C(   621094036),  INT32_C(  1812109840),  INT32_C(      557888) } },
+    { {  INT32_C(  1923702672),  INT32_C(  1499624986),  INT32_C(  2087773746),  INT32_C(   215903116) },
+      { -INT32_C(  1598661096), -INT32_C(   401130863), -INT32_C(  1459674825), -INT32_C(  1623824370) },
+      { -INT32_C(   502144824), -INT32_C(  2009304234), -INT32_C(   435901350),  INT32_C(   804446743) },
+       INT32_C(          10),
+      { -INT32_C(  2146394040), -INT32_C(  2145648316), -INT32_C(  2113664952),  INT32_C(   589332499) } },
+    { { -INT32_C(   758142911),  INT32_C(   431679458),  INT32_C(   381860104), -INT32_C(   357173214) },
+      {  INT32_C(   785172440), -INT32_C(  1800009670), -INT32_C(   864372043), -INT32_C(   553882211) },
+      { -INT32_C(   122631403), -INT32_C(  1173263694),  INT32_C(  1188156196), -INT32_C(  1540323636) },
+       INT32_C(          11),
+      {  INT32_C(   691032886), -INT32_C(   499050475),  INT32_C(  1628784230),  INT32_C(    84018892) } },
+    { { -INT32_C(  1999373235), -INT32_C(  1172535035), -INT32_C(   511273148),  INT32_C(   431981060) },
+      {  INT32_C(     1142606), -INT32_C(    38067239), -INT32_C(  1035760394),  INT32_C(  1617392402) },
+      {  INT32_C(  1978153584),  INT32_C(   120521923), -INT32_C(  1612139109), -INT32_C(  2034653384) },
+       INT32_C(          12),
+      {  INT32_C(         770),  INT32_C(  1168319192),  INT32_C(    37816498),  INT32_C(  1614835986) } },
+    { { -INT32_C(   259601898), -INT32_C(   454213139), -INT32_C(   525979187),  INT32_C(   339742116) },
+      {  INT32_C(   193538119), -INT32_C(   938297300), -INT32_C(  1503134866), -INT32_C(  1188290398) },
+      { -INT32_C(   659967253), -INT32_C(  1044605196),  INT32_C(  1822516167), -INT32_C(  1199513232) },
+       INT32_C(          13),
+      {  INT32_C(   257500481),  INT32_C(   437434370),  INT32_C(   391761458), -INT32_C(   348179957) } },
+    { {  INT32_C(   918751753),  INT32_C(   822007234),  INT32_C(  1943430608),  INT32_C(  1898709638) },
+      { -INT32_C(  1454778955),  INT32_C(   862586475), -INT32_C(   643888023), -INT32_C(   141484051) },
+      { -INT32_C(   332573655), -INT32_C(    98817238),  INT32_C(   376304528), -INT32_C(  1433953803) },
+       INT32_C(          14),
+      { -INT32_C(   919808588), -INT32_C(   889181655), -INT32_C(  1943430615), -INT32_C(  1902928519) } },
+    { { -INT32_C(   632041106),  INT32_C(  1074642647), -INT32_C(  1223054134), -INT32_C(   173102133) },
+      {  INT32_C(   702667775), -INT32_C(  1759183610), -INT32_C(   424832528), -INT32_C(  1718602453) },
+      { -INT32_C(   579607546),  INT32_C(  1813872802), -INT32_C(   131910100), -INT32_C(   504507679) },
+       INT32_C(          15),
+      {  INT32_C(   632041105), -INT32_C(  1074642648),  INT32_C(  1223054133),  INT32_C(   173102132) } },
   };
 
   simde__m128i a, b, c, r;
@@ -119,26 +183,50 @@ test_simde_mm_ternarylogic_epi32_2 (SIMDE_MUNIT_TEST_ARGS) {
   a = simde_x_mm_loadu_epi32(test_vec[0].a);
   b = simde_x_mm_loadu_epi32(test_vec[0].b);
   c = simde_x_mm_loadu_epi32(test_vec[0].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           4));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           8));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
 
   a = simde_x_mm_loadu_epi32(test_vec[1].a);
   b = simde_x_mm_loadu_epi32(test_vec[1].b);
   c = simde_x_mm_loadu_epi32(test_vec[1].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           5));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           9));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
 
   a = simde_x_mm_loadu_epi32(test_vec[2].a);
   b = simde_x_mm_loadu_epi32(test_vec[2].b);
   c = simde_x_mm_loadu_epi32(test_vec[2].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           6));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          10));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
 
   a = simde_x_mm_loadu_epi32(test_vec[3].a);
   b = simde_x_mm_loadu_epi32(test_vec[3].b);
   c = simde_x_mm_loadu_epi32(test_vec[3].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           7));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          11));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          12));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          13));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          14));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          15));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -170,26 +258,46 @@ test_simde_mm_ternarylogic_epi32_3 (SIMDE_MUNIT_TEST_ARGS) {
     const int32_t imm8;
     const int32_t r[4];
   } test_vec[] = {
-    { {  INT32_C(  1840052911),  INT32_C(   578836239),  INT32_C(  1052757682), -INT32_C(  1935780729) },
-      { -INT32_C(   809858549), -INT32_C(  1792520699), -INT32_C(  1636690767),  INT32_C(  1392220834) },
-      { -INT32_C(  1547720556), -INT32_C(  1312473089), -INT32_C(  1779465203), -INT32_C(   484340008) },
-       INT32_C(           8),
-      { -INT32_C(  2112749568), -INT32_C(  1862268928), -INT32_C(  2143289343),  INT32_C(  1109494272) } },
-    { {  INT32_C(   498260760), -INT32_C(   625812695), -INT32_C(  1837554193),  INT32_C(  1407481023) },
-      {  INT32_C(   469148444), -INT32_C(   271795230),  INT32_C(   394574911),  INT32_C(  1660593482) },
-      { -INT32_C(  1451184768),  INT32_C(  2005152392),  INT32_C(   369753431), -INT32_C(  1905660559) },
-       INT32_C(           9),
-      {  INT32_C(  1074339939),  INT32_C(   621094036),  INT32_C(  1812109840),  INT32_C(      557888) } },
-    { {  INT32_C(  1923702672),  INT32_C(  1499624986),  INT32_C(  2087773746),  INT32_C(   215903116) },
-      { -INT32_C(  1598661096), -INT32_C(   401130863), -INT32_C(  1459674825), -INT32_C(  1623824370) },
-      { -INT32_C(   502144824), -INT32_C(  2009304234), -INT32_C(   435901350),  INT32_C(   804446743) },
-       INT32_C(          10),
-      { -INT32_C(  2146394040), -INT32_C(  2145648316), -INT32_C(  2113664952),  INT32_C(   589332499) } },
-    { { -INT32_C(   758142911),  INT32_C(   431679458),  INT32_C(   381860104), -INT32_C(   357173214) },
-      {  INT32_C(   785172440), -INT32_C(  1800009670), -INT32_C(   864372043), -INT32_C(   553882211) },
-      { -INT32_C(   122631403), -INT32_C(  1173263694),  INT32_C(  1188156196), -INT32_C(  1540323636) },
-       INT32_C(          11),
-      {  INT32_C(   691032886), -INT32_C(   499050475),  INT32_C(  1628784230),  INT32_C(    84018892) } },
+    { { -INT32_C(  1274360147), -INT32_C(  1135923509), -INT32_C(   341641024),  INT32_C(   864301613) },
+      { -INT32_C(  1206847466), -INT32_C(  1524355720),  INT32_C(  1167935588), -INT32_C(   953775590) },
+      {  INT32_C(   595276120),  INT32_C(   534759007), -INT32_C(   334855745), -INT32_C(   903835724) },
+       INT32_C(          16),
+      {  INT32_C(    67110561),  INT32_C(         128),  INT32_C(    35663872),  INT32_C(   813707265) } },
+    { { -INT32_C(     8179577), -INT32_C(  1029396642),  INT32_C(   151470575),  INT32_C(   600911563) },
+      { -INT32_C(  1102623649), -INT32_C(   757193197),  INT32_C(  1556015272), -INT32_C(    31007113) },
+      {  INT32_C(  1845405967),  INT32_C(  1076863569), -INT32_C(  1354090780), -INT32_C(  1009575068) },
+       INT32_C(          17),
+      {  INT32_C(        4768),  INT32_C(   754997676),  INT32_C(       65811),  INT32_C(      532616) } },
+    { {  INT32_C(  2055346791), -INT32_C(   397647808), -INT32_C(  1069282488), -INT32_C(   121738263) },
+      {  INT32_C(  1701166100),  INT32_C(  1134990431),  INT32_C(   804450507),  INT32_C(  1928578315) },
+      {  INT32_C(   552433119),  INT32_C(   487078357),  INT32_C(   786255172), -INT32_C(   869884744) },
+       INT32_C(          18),
+      {  INT32_C(   436880296), -INT32_C(  1270855296), -INT32_C(  1073150460),  INT32_C(    67646032) } },
+    { { -INT32_C(  1221424040), -INT32_C(   335882208), -INT32_C(   753144376), -INT32_C(  1840968014) },
+      {  INT32_C(  1488073347), -INT32_C(  1334461844), -INT32_C(  1075948793),  INT32_C(  1200358895) },
+      { -INT32_C(  1308639599),  INT32_C(  1587411350), -INT32_C(  1724794650),  INT32_C(  1227585222) },
+       INT32_C(          19),
+      {  INT32_C(   105726316),  INT32_C(    84018579),  INT32_C(  1075840056), -INT32_C(  1200424944) } },
+    { {  INT32_C(   362929577), -INT32_C(  1614473577),  INT32_C(  1482597481),  INT32_C(   983624361) },
+      {  INT32_C(  1055629224),  INT32_C(  2140965016),  INT32_C(   102288704), -INT32_C(   313572540) },
+      { -INT32_C(  1224544224),  INT32_C(  1884735239),  INT32_C(   348763499),  INT32_C(  1213098399) },
+       INT32_C(          20),
+      {  INT32_C(   138936833), -INT32_C(  2146887672),  INT32_C(  1241925632), -INT32_C(  1751023520) } },
+    { { -INT32_C(  1601816056),  INT32_C(    52372418),  INT32_C(   873019376), -INT32_C(  1709090438) },
+      {  INT32_C(  1347560265),  INT32_C(  1455532267), -INT32_C(    43283875), -INT32_C(    79316493) },
+      { -INT32_C(  1231303693), -INT32_C(   541475858),  INT32_C(  1830011634),  INT32_C(  1694971163) },
+       INT32_C(          21),
+      {  INT32_C(  1231295492),  INT32_C(   541475857), -INT32_C(  2098971379),  INT32_C(    16302724) } },
+    { {  INT32_C(  1135958360),  INT32_C(  1603958274), -INT32_C(   212073216), -INT32_C(  1292983874) },
+      {  INT32_C(  1533577837),  INT32_C(   926556485), -INT32_C(     6009117), -INT32_C(   614159229) },
+      {  INT32_C(   119478533), -INT32_C(  1872250480),  INT32_C(  2089075646), -INT32_C(   768707995) },
+       INT32_C(          22),
+      {  INT32_C(   482525744), -INT32_C(   389689641),  INT32_C(     7899229),  INT32_C(   696278872) } },
+    { {  INT32_C(  1093506812), -INT32_C(  1686542153),  INT32_C(   966401462), -INT32_C(   820707639) },
+      { -INT32_C(  1479134441), -INT32_C(  1439154708),  INT32_C(  1713880065),  INT32_C(   725112110) },
+      { -INT32_C(  1553177108), -INT32_C(  2093029939), -INT32_C(   860039165), -INT32_C(   291778090) },
+       INT32_C(          23),
+      {  INT32_C(  1553188867),  INT32_C(  1959236114), -INT32_C(  1824431108),  INT32_C(   283585073) } },
   };
 
   simde__m128i a, b, c, r;
@@ -197,26 +305,50 @@ test_simde_mm_ternarylogic_epi32_3 (SIMDE_MUNIT_TEST_ARGS) {
   a = simde_x_mm_loadu_epi32(test_vec[0].a);
   b = simde_x_mm_loadu_epi32(test_vec[0].b);
   c = simde_x_mm_loadu_epi32(test_vec[0].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           8));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          16));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
 
   a = simde_x_mm_loadu_epi32(test_vec[1].a);
   b = simde_x_mm_loadu_epi32(test_vec[1].b);
   c = simde_x_mm_loadu_epi32(test_vec[1].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(           9));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          17));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
 
   a = simde_x_mm_loadu_epi32(test_vec[2].a);
   b = simde_x_mm_loadu_epi32(test_vec[2].b);
   c = simde_x_mm_loadu_epi32(test_vec[2].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          10));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          18));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
 
   a = simde_x_mm_loadu_epi32(test_vec[3].a);
   b = simde_x_mm_loadu_epi32(test_vec[3].b);
   c = simde_x_mm_loadu_epi32(test_vec[3].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          11));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          19));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          20));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          21));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          22));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          23));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -248,26 +380,46 @@ test_simde_mm_ternarylogic_epi32_4 (SIMDE_MUNIT_TEST_ARGS) {
     const int32_t imm8;
     const int32_t r[4];
   } test_vec[] = {
-    { { -INT32_C(  1999373235), -INT32_C(  1172535035), -INT32_C(   511273148),  INT32_C(   431981060) },
-      {  INT32_C(     1142606), -INT32_C(    38067239), -INT32_C(  1035760394),  INT32_C(  1617392402) },
-      {  INT32_C(  1978153584),  INT32_C(   120521923), -INT32_C(  1612139109), -INT32_C(  2034653384) },
-       INT32_C(          12),
-      {  INT32_C(         770),  INT32_C(  1168319192),  INT32_C(    37816498),  INT32_C(  1614835986) } },
-    { { -INT32_C(   259601898), -INT32_C(   454213139), -INT32_C(   525979187),  INT32_C(   339742116) },
-      {  INT32_C(   193538119), -INT32_C(   938297300), -INT32_C(  1503134866), -INT32_C(  1188290398) },
-      { -INT32_C(   659967253), -INT32_C(  1044605196),  INT32_C(  1822516167), -INT32_C(  1199513232) },
-       INT32_C(          13),
-      {  INT32_C(   257500481),  INT32_C(   437434370),  INT32_C(   391761458), -INT32_C(   348179957) } },
-    { {  INT32_C(   918751753),  INT32_C(   822007234),  INT32_C(  1943430608),  INT32_C(  1898709638) },
-      { -INT32_C(  1454778955),  INT32_C(   862586475), -INT32_C(   643888023), -INT32_C(   141484051) },
-      { -INT32_C(   332573655), -INT32_C(    98817238),  INT32_C(   376304528), -INT32_C(  1433953803) },
-       INT32_C(          14),
-      { -INT32_C(   919808588), -INT32_C(   889181655), -INT32_C(  1943430615), -INT32_C(  1902928519) } },
-    { { -INT32_C(   632041106),  INT32_C(  1074642647), -INT32_C(  1223054134), -INT32_C(   173102133) },
-      {  INT32_C(   702667775), -INT32_C(  1759183610), -INT32_C(   424832528), -INT32_C(  1718602453) },
-      { -INT32_C(   579607546),  INT32_C(  1813872802), -INT32_C(   131910100), -INT32_C(   504507679) },
-       INT32_C(          15),
-      {  INT32_C(   632041105), -INT32_C(  1074642648),  INT32_C(  1223054133),  INT32_C(   173102132) } },
+    { { -INT32_C(   241864188), -INT32_C(  1331966545), -INT32_C(  1206467959),  INT32_C(    82005528) },
+      { -INT32_C(  2119741516),  INT32_C(   939910709), -INT32_C(  1794850370), -INT32_C(  1752981358) },
+      { -INT32_C(  1048045550),  INT32_C(  1869751270), -INT32_C(    30963482), -INT32_C(  1962800425) },
+       INT32_C(          24),
+      {  INT32_C(   806365200), -INT32_C(  2004342264),  INT32_C(    68157991), -INT32_C(  2090842998) } },
+    { { -INT32_C(  1894995622),  INT32_C(  1321669007),  INT32_C(  1709427667),  INT32_C(  2113693291) },
+      {  INT32_C(  1681884286), -INT32_C(  1898663512),  INT32_C(   277674809),  INT32_C(  1620807174) },
+      { -INT32_C(   940595145), -INT32_C(  1944734023), -INT32_C(   302843775), -INT32_C(   596971938) },
+       INT32_C(          25),
+      {  INT32_C(  1478710180), -INT32_C(   247797658),  INT32_C(    33633350),  INT32_C(    50764197) } },
+    { {  INT32_C(   457288051), -INT32_C(  1800858278),  INT32_C(   379860240), -INT32_C(    92913469) },
+      { -INT32_C(  1581160984), -INT32_C(  1657874917),  INT32_C(   747249870), -INT32_C(  2130054130) },
+      { -INT32_C(   123975010),  INT32_C(  1871463775),  INT32_C(  1032204666),  INT32_C(  1496906865) },
+       INT32_C(          26),
+      { -INT32_C(   493043059),  INT32_C(  1795506181),  INT32_C(   723649642),  INT32_C(   592362672) } },
+    { {  INT32_C(  2113599842), -INT32_C(  1642452784),  INT32_C(  1472963656),  INT32_C(   936957081) },
+      {  INT32_C(  2100262174),  INT32_C(   904707258),  INT32_C(  1584558829), -INT32_C(   776492433) },
+      {  INT32_C(  1951314340),  INT32_C(   571632090), -INT32_C(  1501962995), -INT32_C(   807578959) },
+       INT32_C(          27),
+      { -INT32_C(  2104227131), -INT32_C(   402570481), -INT32_C(  1582016233), -INT32_C(   402323680) } },
+    { { -INT32_C(  2125722169), -INT32_C(  1229571639),  INT32_C(   437529003),  INT32_C(  2011941843) },
+      {  INT32_C(  1458256508), -INT32_C(  1334182237), -INT32_C(  1923616037),  INT32_C(   190592068) },
+      {  INT32_C(   177056065), -INT32_C(  1916779550),  INT32_C(  1084806252),  INT32_C(   481792927) },
+       INT32_C(          28),
+      { -INT32_C(   677169478),  INT32_C(    38782506), -INT32_C(  1757160624),  INT32_C(  1746172932) } },
+    { {  INT32_C(  1886561229),  INT32_C(  2082597793),  INT32_C(   571046110), -INT32_C(   298948948) },
+      { -INT32_C(   235357425),  INT32_C(  1803467262),  INT32_C(   766191245), -INT32_C(  2025233734) },
+      { -INT32_C(  1493648635), -INT32_C(  2061297241),  INT32_C(  1034366097), -INT32_C(  1590962798) },
+       INT32_C(          29),
+      { -INT32_C(  1987093262),  INT32_C(   333338206), -INT32_C(   806168733),  INT32_C(  1507133527) } },
+    { { -INT32_C(  1886247792),  INT32_C(  1794773469), -INT32_C(   241720009),  INT32_C(   226091015) },
+      {  INT32_C(  1135833500),  INT32_C(   466146954), -INT32_C(  1789366525), -INT32_C(   717781947) },
+      { -INT32_C(  2056992344),  INT32_C(   317677274),  INT32_C(   184780547),  INT32_C(    51936359) },
+       INT32_C(          30),
+      {  INT32_C(  1214635308),  INT32_C(  1897254663),  INT32_C(  1858882100), -INT32_C(   632939424) } },
+    { {  INT32_C(  2001128429), -INT32_C(  1517154654), -INT32_C(  1019548802),  INT32_C(   395866479) },
+      {  INT32_C(   362609979),  INT32_C(  1596427099),  INT32_C(  2053778194), -INT32_C(  1786936665) },
+      { -INT32_C(   284375987),  INT32_C(  1351917522), -INT32_C(   116142198),  INT32_C(  2064690240) },
+       INT32_C(          31),
+      { -INT32_C(  1996802414), -INT32_C(    93458051),  INT32_C(  1019548901), -INT32_C(   387457128) } },
   };
 
   simde__m128i a, b, c, r;
@@ -275,26 +427,50 @@ test_simde_mm_ternarylogic_epi32_4 (SIMDE_MUNIT_TEST_ARGS) {
   a = simde_x_mm_loadu_epi32(test_vec[0].a);
   b = simde_x_mm_loadu_epi32(test_vec[0].b);
   c = simde_x_mm_loadu_epi32(test_vec[0].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          12));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          24));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
 
   a = simde_x_mm_loadu_epi32(test_vec[1].a);
   b = simde_x_mm_loadu_epi32(test_vec[1].b);
   c = simde_x_mm_loadu_epi32(test_vec[1].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          13));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          25));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
 
   a = simde_x_mm_loadu_epi32(test_vec[2].a);
   b = simde_x_mm_loadu_epi32(test_vec[2].b);
   c = simde_x_mm_loadu_epi32(test_vec[2].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          14));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          26));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
 
   a = simde_x_mm_loadu_epi32(test_vec[3].a);
   b = simde_x_mm_loadu_epi32(test_vec[3].b);
   c = simde_x_mm_loadu_epi32(test_vec[3].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          15));
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          27));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          28));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          29));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          30));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
+
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
+  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          31));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -326,318 +502,6 @@ test_simde_mm_ternarylogic_epi32_5 (SIMDE_MUNIT_TEST_ARGS) {
     const int32_t imm8;
     const int32_t r[4];
   } test_vec[] = {
-    { { -INT32_C(  1274360147), -INT32_C(  1135923509), -INT32_C(   341641024),  INT32_C(   864301613) },
-      { -INT32_C(  1206847466), -INT32_C(  1524355720),  INT32_C(  1167935588), -INT32_C(   953775590) },
-      {  INT32_C(   595276120),  INT32_C(   534759007), -INT32_C(   334855745), -INT32_C(   903835724) },
-       INT32_C(          16),
-      {  INT32_C(    67110561),  INT32_C(         128),  INT32_C(    35663872),  INT32_C(   813707265) } },
-    { { -INT32_C(     8179577), -INT32_C(  1029396642),  INT32_C(   151470575),  INT32_C(   600911563) },
-      { -INT32_C(  1102623649), -INT32_C(   757193197),  INT32_C(  1556015272), -INT32_C(    31007113) },
-      {  INT32_C(  1845405967),  INT32_C(  1076863569), -INT32_C(  1354090780), -INT32_C(  1009575068) },
-       INT32_C(          17),
-      {  INT32_C(        4768),  INT32_C(   754997676),  INT32_C(       65811),  INT32_C(      532616) } },
-    { {  INT32_C(  2055346791), -INT32_C(   397647808), -INT32_C(  1069282488), -INT32_C(   121738263) },
-      {  INT32_C(  1701166100),  INT32_C(  1134990431),  INT32_C(   804450507),  INT32_C(  1928578315) },
-      {  INT32_C(   552433119),  INT32_C(   487078357),  INT32_C(   786255172), -INT32_C(   869884744) },
-       INT32_C(          18),
-      {  INT32_C(   436880296), -INT32_C(  1270855296), -INT32_C(  1073150460),  INT32_C(    67646032) } },
-    { { -INT32_C(  1221424040), -INT32_C(   335882208), -INT32_C(   753144376), -INT32_C(  1840968014) },
-      {  INT32_C(  1488073347), -INT32_C(  1334461844), -INT32_C(  1075948793),  INT32_C(  1200358895) },
-      { -INT32_C(  1308639599),  INT32_C(  1587411350), -INT32_C(  1724794650),  INT32_C(  1227585222) },
-       INT32_C(          19),
-      {  INT32_C(   105726316),  INT32_C(    84018579),  INT32_C(  1075840056), -INT32_C(  1200424944) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          16));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          17));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          18));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          19));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
-
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 0 ; i < 32 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_6 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(   362929577), -INT32_C(  1614473577),  INT32_C(  1482597481),  INT32_C(   983624361) },
-      {  INT32_C(  1055629224),  INT32_C(  2140965016),  INT32_C(   102288704), -INT32_C(   313572540) },
-      { -INT32_C(  1224544224),  INT32_C(  1884735239),  INT32_C(   348763499),  INT32_C(  1213098399) },
-       INT32_C(          20),
-      {  INT32_C(   138936833), -INT32_C(  2146887672),  INT32_C(  1241925632), -INT32_C(  1751023520) } },
-    { { -INT32_C(  1601816056),  INT32_C(    52372418),  INT32_C(   873019376), -INT32_C(  1709090438) },
-      {  INT32_C(  1347560265),  INT32_C(  1455532267), -INT32_C(    43283875), -INT32_C(    79316493) },
-      { -INT32_C(  1231303693), -INT32_C(   541475858),  INT32_C(  1830011634),  INT32_C(  1694971163) },
-       INT32_C(          21),
-      {  INT32_C(  1231295492),  INT32_C(   541475857), -INT32_C(  2098971379),  INT32_C(    16302724) } },
-    { {  INT32_C(  1135958360),  INT32_C(  1603958274), -INT32_C(   212073216), -INT32_C(  1292983874) },
-      {  INT32_C(  1533577837),  INT32_C(   926556485), -INT32_C(     6009117), -INT32_C(   614159229) },
-      {  INT32_C(   119478533), -INT32_C(  1872250480),  INT32_C(  2089075646), -INT32_C(   768707995) },
-       INT32_C(          22),
-      {  INT32_C(   482525744), -INT32_C(   389689641),  INT32_C(     7899229),  INT32_C(   696278872) } },
-    { {  INT32_C(  1093506812), -INT32_C(  1686542153),  INT32_C(   966401462), -INT32_C(   820707639) },
-      { -INT32_C(  1479134441), -INT32_C(  1439154708),  INT32_C(  1713880065),  INT32_C(   725112110) },
-      { -INT32_C(  1553177108), -INT32_C(  2093029939), -INT32_C(   860039165), -INT32_C(   291778090) },
-       INT32_C(          23),
-      {  INT32_C(  1553188867),  INT32_C(  1959236114), -INT32_C(  1824431108),  INT32_C(   283585073) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          20));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          21));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          22));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          23));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
-
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 0 ; i < 32 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_7 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(   241864188), -INT32_C(  1331966545), -INT32_C(  1206467959),  INT32_C(    82005528) },
-      { -INT32_C(  2119741516),  INT32_C(   939910709), -INT32_C(  1794850370), -INT32_C(  1752981358) },
-      { -INT32_C(  1048045550),  INT32_C(  1869751270), -INT32_C(    30963482), -INT32_C(  1962800425) },
-       INT32_C(          24),
-      {  INT32_C(   806365200), -INT32_C(  2004342264),  INT32_C(    68157991), -INT32_C(  2090842998) } },
-    { { -INT32_C(  1894995622),  INT32_C(  1321669007),  INT32_C(  1709427667),  INT32_C(  2113693291) },
-      {  INT32_C(  1681884286), -INT32_C(  1898663512),  INT32_C(   277674809),  INT32_C(  1620807174) },
-      { -INT32_C(   940595145), -INT32_C(  1944734023), -INT32_C(   302843775), -INT32_C(   596971938) },
-       INT32_C(          25),
-      {  INT32_C(  1478710180), -INT32_C(   247797658),  INT32_C(    33633350),  INT32_C(    50764197) } },
-    { {  INT32_C(   457288051), -INT32_C(  1800858278),  INT32_C(   379860240), -INT32_C(    92913469) },
-      { -INT32_C(  1581160984), -INT32_C(  1657874917),  INT32_C(   747249870), -INT32_C(  2130054130) },
-      { -INT32_C(   123975010),  INT32_C(  1871463775),  INT32_C(  1032204666),  INT32_C(  1496906865) },
-       INT32_C(          26),
-      { -INT32_C(   493043059),  INT32_C(  1795506181),  INT32_C(   723649642),  INT32_C(   592362672) } },
-    { {  INT32_C(  2113599842), -INT32_C(  1642452784),  INT32_C(  1472963656),  INT32_C(   936957081) },
-      {  INT32_C(  2100262174),  INT32_C(   904707258),  INT32_C(  1584558829), -INT32_C(   776492433) },
-      {  INT32_C(  1951314340),  INT32_C(   571632090), -INT32_C(  1501962995), -INT32_C(   807578959) },
-       INT32_C(          27),
-      { -INT32_C(  2104227131), -INT32_C(   402570481), -INT32_C(  1582016233), -INT32_C(   402323680) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          24));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          25));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          26));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          27));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
-
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 0 ; i < 32 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_8 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(  2125722169), -INT32_C(  1229571639),  INT32_C(   437529003),  INT32_C(  2011941843) },
-      {  INT32_C(  1458256508), -INT32_C(  1334182237), -INT32_C(  1923616037),  INT32_C(   190592068) },
-      {  INT32_C(   177056065), -INT32_C(  1916779550),  INT32_C(  1084806252),  INT32_C(   481792927) },
-       INT32_C(          28),
-      { -INT32_C(   677169478),  INT32_C(    38782506), -INT32_C(  1757160624),  INT32_C(  1746172932) } },
-    { {  INT32_C(  1886561229),  INT32_C(  2082597793),  INT32_C(   571046110), -INT32_C(   298948948) },
-      { -INT32_C(   235357425),  INT32_C(  1803467262),  INT32_C(   766191245), -INT32_C(  2025233734) },
-      { -INT32_C(  1493648635), -INT32_C(  2061297241),  INT32_C(  1034366097), -INT32_C(  1590962798) },
-       INT32_C(          29),
-      { -INT32_C(  1987093262),  INT32_C(   333338206), -INT32_C(   806168733),  INT32_C(  1507133527) } },
-    { { -INT32_C(  1886247792),  INT32_C(  1794773469), -INT32_C(   241720009),  INT32_C(   226091015) },
-      {  INT32_C(  1135833500),  INT32_C(   466146954), -INT32_C(  1789366525), -INT32_C(   717781947) },
-      { -INT32_C(  2056992344),  INT32_C(   317677274),  INT32_C(   184780547),  INT32_C(    51936359) },
-       INT32_C(          30),
-      {  INT32_C(  1214635308),  INT32_C(  1897254663),  INT32_C(  1858882100), -INT32_C(   632939424) } },
-    { {  INT32_C(  2001128429), -INT32_C(  1517154654), -INT32_C(  1019548802),  INT32_C(   395866479) },
-      {  INT32_C(   362609979),  INT32_C(  1596427099),  INT32_C(  2053778194), -INT32_C(  1786936665) },
-      { -INT32_C(   284375987),  INT32_C(  1351917522), -INT32_C(   116142198),  INT32_C(  2064690240) },
-       INT32_C(          31),
-      { -INT32_C(  1996802414), -INT32_C(    93458051),  INT32_C(  1019548901), -INT32_C(   387457128) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          28));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          29));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          30));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
-
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
-  r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          31));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
-
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 0 ; i < 32 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_9 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
     { {  INT32_C(  1012020612), -INT32_C(  2059365601), -INT32_C(  1433117876),  INT32_C(  2048428691) },
       { -INT32_C(  1944738913),  INT32_C(     8137278),  INT32_C(  1100919444), -INT32_C(   976915135) },
       { -INT32_C(   905898069), -INT32_C(   162578006),  INT32_C(   799073180),  INT32_C(   212449389) },
@@ -658,6 +522,26 @@ test_simde_mm_ternarylogic_epi32_9 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(  2022336143), -INT32_C(  1239977604),  INT32_C(  1599999730), -INT32_C(  2008983056) },
        INT32_C(          35),
       { -INT32_C(  1423393437), -INT32_C(  2147130148),  INT32_C(  1225226241),  INT32_C(   268701809) } },
+    { { -INT32_C(  1126393959), -INT32_C(  1472409934),  INT32_C(  1449006292), -INT32_C(   179953277) },
+      {  INT32_C(   930921402),  INT32_C(   535663404), -INT32_C(  1853993823),  INT32_C(  1041874853) },
+      {  INT32_C(   150664534), -INT32_C(  1733282109), -INT32_C(   823259574), -INT32_C(   356305873) },
+       INT32_C(          36),
+      {  INT32_C(   192941088), -INT32_C(  2024733298),  INT32_C(  1191198817), -INT32_C(  1067808254) } },
+    { {  INT32_C(   471941103),  INT32_C(  1950027474), -INT32_C(    16402086), -INT32_C(   818077832) },
+      { -INT32_C(   656984044), -INT32_C(  1183807378), -INT32_C(   964206954), -INT32_C(  2102375789) },
+      {  INT32_C(  1537134985),  INT32_C(   986700255),  INT32_C(   188339602),  INT32_C(   148535284) },
+       INT32_C(          37),
+      { -INT32_C(  1606418023), -INT32_C(  2129977168),  INT32_C(   163742501),  INT32_C(   940086627) } },
+    { {  INT32_C(   501264815), -INT32_C(   791261127),  INT32_C(  1117150639),  INT32_C(   818169511) },
+      { -INT32_C(   158571753), -INT32_C(   818914500),  INT32_C(   618293808), -INT32_C(  1876052767) },
+      { -INT32_C(  1616048795),  INT32_C(   225412190), -INT32_C(  1991309855),  INT32_C(  1656296267) },
+       INT32_C(          38),
+      {  INT32_C(  1763790448),  INT32_C(    38768450), -INT32_C(  1392171055), -INT32_C(   493837558) } },
+    { { -INT32_C(  1286060682), -INT32_C(   779974239), -INT32_C(   722051853),  INT32_C(  1969496848) },
+      { -INT32_C(  1911287504),  INT32_C(  2006680469), -INT32_C(   754914680),  INT32_C(  1949678078) },
+      { -INT32_C(  1608020225),  INT32_C(   175221015),  INT32_C(   366896901), -INT32_C(  1148501366) },
+       INT32_C(          39),
+      {  INT32_C(  1822670543),  INT32_C(   745307722),  INT32_C(   786400525), -INT32_C(  1952784795) } },
   };
 
   simde__m128i a, b, c, r;
@@ -686,83 +570,29 @@ test_simde_mm_ternarylogic_epi32_9 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          35));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 32 ; i < 64 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_2(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_10 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(  1126393959), -INT32_C(  1472409934),  INT32_C(  1449006292), -INT32_C(   179953277) },
-      {  INT32_C(   930921402),  INT32_C(   535663404), -INT32_C(  1853993823),  INT32_C(  1041874853) },
-      {  INT32_C(   150664534), -INT32_C(  1733282109), -INT32_C(   823259574), -INT32_C(   356305873) },
-       INT32_C(          36),
-      {  INT32_C(   192941088), -INT32_C(  2024733298),  INT32_C(  1191198817), -INT32_C(  1067808254) } },
-    { {  INT32_C(   471941103),  INT32_C(  1950027474), -INT32_C(    16402086), -INT32_C(   818077832) },
-      { -INT32_C(   656984044), -INT32_C(  1183807378), -INT32_C(   964206954), -INT32_C(  2102375789) },
-      {  INT32_C(  1537134985),  INT32_C(   986700255),  INT32_C(   188339602),  INT32_C(   148535284) },
-       INT32_C(          37),
-      { -INT32_C(  1606418023), -INT32_C(  2129977168),  INT32_C(   163742501),  INT32_C(   940086627) } },
-    { {  INT32_C(   501264815), -INT32_C(   791261127),  INT32_C(  1117150639),  INT32_C(   818169511) },
-      { -INT32_C(   158571753), -INT32_C(   818914500),  INT32_C(   618293808), -INT32_C(  1876052767) },
-      { -INT32_C(  1616048795),  INT32_C(   225412190), -INT32_C(  1991309855),  INT32_C(  1656296267) },
-       INT32_C(          38),
-      {  INT32_C(  1763790448),  INT32_C(    38768450), -INT32_C(  1392171055), -INT32_C(   493837558) } },
-    { { -INT32_C(  1286060682), -INT32_C(   779974239), -INT32_C(   722051853),  INT32_C(  1969496848) },
-      { -INT32_C(  1911287504),  INT32_C(  2006680469), -INT32_C(   754914680),  INT32_C(  1949678078) },
-      { -INT32_C(  1608020225),  INT32_C(   175221015),  INT32_C(   366896901), -INT32_C(  1148501366) },
-       INT32_C(          39),
-      {  INT32_C(  1822670543),  INT32_C(   745307722),  INT32_C(   786400525), -INT32_C(  1952784795) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          36));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          37));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          38));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          39));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -785,7 +615,7 @@ test_simde_mm_ternarylogic_epi32_10 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_11 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_6 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -814,6 +644,26 @@ test_simde_mm_ternarylogic_epi32_11 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(  1028550274),  INT32_C(   284112010),  INT32_C(  1142760932),  INT32_C(  1527734721) },
        INT32_C(          43),
       { -INT32_C(   659055753),  INT32_C(   300820139), -INT32_C(   502459015),  INT32_C(  1906271645) } },
+    { { -INT32_C(    56403870),  INT32_C(   435944501), -INT32_C(   915420314),  INT32_C(  1683591397) },
+      { -INT32_C(  1406793182),  INT32_C(   599594303), -INT32_C(    60302789), -INT32_C(  1638435268) },
+      {  INT32_C(    77331150),  INT32_C(  1545443062),  INT32_C(  1176931425),  INT32_C(  1068138269) },
+       INT32_C(          44),
+      {  INT32_C(     8737344),  INT32_C(   973373706),  INT32_C(   872419417), -INT32_C(  1173461479) } },
+    { { -INT32_C(   924069495),  INT32_C(   569092326), -INT32_C(  1088597117), -INT32_C(  1738705463) },
+      {  INT32_C(  1721563247), -INT32_C(   272451186),  INT32_C(  1664542790), -INT32_C(   240983961) },
+      { -INT32_C(  1732670031), -INT32_C(  1179015882), -INT32_C(  1049045000), -INT32_C(  1151740596) },
+       INT32_C(          45),
+      { -INT32_C(  1355469850), -INT32_C(   835890391), -INT32_C(  1062552636),  INT32_C(  1845206846) } },
+    { {  INT32_C(  1545729486), -INT32_C(   179510097),  INT32_C(   878215884),  INT32_C(   338033250) },
+      { -INT32_C(  1112744313),  INT32_C(  2071356803), -INT32_C(  2009207236), -INT32_C(  1840998716) },
+      {  INT32_C(  1005479308),  INT32_C(   372259401),  INT32_C(   524978364),  INT32_C(   154365826) },
+       INT32_C(          46),
+      { -INT32_C(  1546769655),  INT32_C(   238164808), -INT32_C(  1620611920), -INT32_C(  1955369594) } },
+    { { -INT32_C(   775430323), -INT32_C(  2125710012), -INT32_C(   267810516), -INT32_C(  1400746720) },
+      { -INT32_C(    51941197),  INT32_C(  1729238955),  INT32_C(   562453663),  INT32_C(   422230475) },
+      { -INT32_C(   571805288),  INT32_C(  1532900911), -INT32_C(   531929152),  INT32_C(  1754058165) },
+       INT32_C(          47),
+      {  INT32_C(   792240570),  INT32_C(  2130698943), -INT32_C(   805341229),  INT32_C(  1946023679) } },
   };
 
   simde__m128i a, b, c, r;
@@ -842,83 +692,29 @@ test_simde_mm_ternarylogic_epi32_11 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          43));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 32 ; i < 64 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_2(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_12 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(    56403870),  INT32_C(   435944501), -INT32_C(   915420314),  INT32_C(  1683591397) },
-      { -INT32_C(  1406793182),  INT32_C(   599594303), -INT32_C(    60302789), -INT32_C(  1638435268) },
-      {  INT32_C(    77331150),  INT32_C(  1545443062),  INT32_C(  1176931425),  INT32_C(  1068138269) },
-       INT32_C(          44),
-      {  INT32_C(     8737344),  INT32_C(   973373706),  INT32_C(   872419417), -INT32_C(  1173461479) } },
-    { { -INT32_C(   924069495),  INT32_C(   569092326), -INT32_C(  1088597117), -INT32_C(  1738705463) },
-      {  INT32_C(  1721563247), -INT32_C(   272451186),  INT32_C(  1664542790), -INT32_C(   240983961) },
-      { -INT32_C(  1732670031), -INT32_C(  1179015882), -INT32_C(  1049045000), -INT32_C(  1151740596) },
-       INT32_C(          45),
-      { -INT32_C(  1355469850), -INT32_C(   835890391), -INT32_C(  1062552636),  INT32_C(  1845206846) } },
-    { {  INT32_C(  1545729486), -INT32_C(   179510097),  INT32_C(   878215884),  INT32_C(   338033250) },
-      { -INT32_C(  1112744313),  INT32_C(  2071356803), -INT32_C(  2009207236), -INT32_C(  1840998716) },
-      {  INT32_C(  1005479308),  INT32_C(   372259401),  INT32_C(   524978364),  INT32_C(   154365826) },
-       INT32_C(          46),
-      { -INT32_C(  1546769655),  INT32_C(   238164808), -INT32_C(  1620611920), -INT32_C(  1955369594) } },
-    { { -INT32_C(   775430323), -INT32_C(  2125710012), -INT32_C(   267810516), -INT32_C(  1400746720) },
-      { -INT32_C(    51941197),  INT32_C(  1729238955),  INT32_C(   562453663),  INT32_C(   422230475) },
-      { -INT32_C(   571805288),  INT32_C(  1532900911), -INT32_C(   531929152),  INT32_C(  1754058165) },
-       INT32_C(          47),
-      {  INT32_C(   792240570),  INT32_C(  2130698943), -INT32_C(   805341229),  INT32_C(  1946023679) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          44));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          45));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          46));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          47));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -941,7 +737,7 @@ test_simde_mm_ternarylogic_epi32_12 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_13 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_7 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -970,6 +766,26 @@ test_simde_mm_ternarylogic_epi32_13 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(   880061304), -INT32_C(   356488520),  INT32_C(  1878321645),  INT32_C(  1799449020) },
        INT32_C(          51),
       { -INT32_C(   194411184),  INT32_C(  1318231430), -INT32_C(  1634880184),  INT32_C(   334226009) } },
+    { {  INT32_C(  1551292387), -INT32_C(   250682310), -INT32_C(   732790738),  INT32_C(   633431709) },
+      {  INT32_C(  1945193659), -INT32_C(  1554140746),  INT32_C(  1460818586), -INT32_C(  1631431493) },
+      {  INT32_C(  1710962987),  INT32_C(  1263929629),  INT32_C(   656451977), -INT32_C(   900931313) },
+       INT32_C(          52),
+      {  INT32_C(   235311952),  INT32_C(  1342395528), -INT32_C(  2143235532),  INT32_C(   822293028) } },
+    { { -INT32_C(   465748691), -INT32_C(  1987601425), -INT32_C(  1461675283),  INT32_C(   424059886) },
+      { -INT32_C(   109100580), -INT32_C(   733686454), -INT32_C(  1896127362),  INT32_C(  1935165253) },
+      {  INT32_C(  1951897221),  INT32_C(   519953969),  INT32_C(  1724309112),  INT32_C(  1568672897) },
+       INT32_C(          53),
+      {  INT32_C(   260078707),  INT32_C(  1770203813),  INT32_C(   823769987), -INT32_C(  1438650182) } },
+    { { -INT32_C(  1739129010),  INT32_C(  1399626452),  INT32_C(  1155622911),  INT32_C(   884423087) },
+      {  INT32_C(    11013839),  INT32_C(  1696507373),  INT32_C(    80536707),  INT32_C(  1063341297) },
+      {  INT32_C(   534230859),  INT32_C(  1366443090),  INT32_C(  1519735723),  INT32_C(  1552829837) },
+       INT32_C(          54),
+      { -INT32_C(  1619005056),  INT32_C(   912292667),  INT32_C(  1513722748),  INT32_C(  1138635102) } },
+    { {  INT32_C(  1214068315),  INT32_C(  1605270492),  INT32_C(  1365539424),  INT32_C(   294700486) },
+      { -INT32_C(   818911363),  INT32_C(  1461756843), -INT32_C(  2085505546),  INT32_C(  1591754754) },
+      {  INT32_C(  1386626422),  INT32_C(   414340280), -INT32_C(  1805052210),  INT32_C(  1487272411) },
+       INT32_C(          55),
+      { -INT32_C(  1244669822), -INT32_C(  1461724073),  INT32_C(  2128530201), -INT32_C(  1486897155) } },
   };
 
   simde__m128i a, b, c, r;
@@ -998,83 +814,29 @@ test_simde_mm_ternarylogic_epi32_13 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          51));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 32 ; i < 64 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_2(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_14 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(  1551292387), -INT32_C(   250682310), -INT32_C(   732790738),  INT32_C(   633431709) },
-      {  INT32_C(  1945193659), -INT32_C(  1554140746),  INT32_C(  1460818586), -INT32_C(  1631431493) },
-      {  INT32_C(  1710962987),  INT32_C(  1263929629),  INT32_C(   656451977), -INT32_C(   900931313) },
-       INT32_C(          52),
-      {  INT32_C(   235311952),  INT32_C(  1342395528), -INT32_C(  2143235532),  INT32_C(   822293028) } },
-    { { -INT32_C(   465748691), -INT32_C(  1987601425), -INT32_C(  1461675283),  INT32_C(   424059886) },
-      { -INT32_C(   109100580), -INT32_C(   733686454), -INT32_C(  1896127362),  INT32_C(  1935165253) },
-      {  INT32_C(  1951897221),  INT32_C(   519953969),  INT32_C(  1724309112),  INT32_C(  1568672897) },
-       INT32_C(          53),
-      {  INT32_C(   260078707),  INT32_C(  1770203813),  INT32_C(   823769987), -INT32_C(  1438650182) } },
-    { { -INT32_C(  1739129010),  INT32_C(  1399626452),  INT32_C(  1155622911),  INT32_C(   884423087) },
-      {  INT32_C(    11013839),  INT32_C(  1696507373),  INT32_C(    80536707),  INT32_C(  1063341297) },
-      {  INT32_C(   534230859),  INT32_C(  1366443090),  INT32_C(  1519735723),  INT32_C(  1552829837) },
-       INT32_C(          54),
-      { -INT32_C(  1619005056),  INT32_C(   912292667),  INT32_C(  1513722748),  INT32_C(  1138635102) } },
-    { {  INT32_C(  1214068315),  INT32_C(  1605270492),  INT32_C(  1365539424),  INT32_C(   294700486) },
-      { -INT32_C(   818911363),  INT32_C(  1461756843), -INT32_C(  2085505546),  INT32_C(  1591754754) },
-      {  INT32_C(  1386626422),  INT32_C(   414340280), -INT32_C(  1805052210),  INT32_C(  1487272411) },
-       INT32_C(          55),
-      { -INT32_C(  1244669822), -INT32_C(  1461724073),  INT32_C(  2128530201), -INT32_C(  1486897155) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          52));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          53));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          54));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          55));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -1097,7 +859,7 @@ test_simde_mm_ternarylogic_epi32_14 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_15 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_8 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -1126,6 +888,26 @@ test_simde_mm_ternarylogic_epi32_15 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(  1528625601),  INT32_C(   772858030),  INT32_C(  1128573131), -INT32_C(  1471073842) },
        INT32_C(          59),
       {  INT32_C(    29975607), -INT32_C(   442731878),  INT32_C(  2101756779), -INT32_C(  1330422817) } },
+    { { -INT32_C(  1062828079), -INT32_C(  1445066219),  INT32_C(  1751947206), -INT32_C(  1957185460) },
+      {  INT32_C(  1831877311), -INT32_C(   442810342), -INT32_C(  1238835224), -INT32_C(   513902320) },
+      {  INT32_C(   362873856), -INT32_C(   725647602),  INT32_C(  1648110358), -INT32_C(  1561422877) },
+       INT32_C(          60),
+      { -INT32_C(  1382630034),  INT32_C(  1279609359), -INT32_C(   565950418),  INT32_C(  1779024220) } },
+    { { -INT32_C(   418439475),  INT32_C(  1187818078), -INT32_C(  1694698359),  INT32_C(  1853577837) },
+      {  INT32_C(  1837309278), -INT32_C(  1287568740),  INT32_C(  1360363117), -INT32_C(   537722095) },
+      {  INT32_C(  2143683361),  INT32_C(   935695277), -INT32_C(   170802809),  INT32_C(  2053327899) },
+       INT32_C(          61),
+      { -INT32_C(  1967332461), -INT32_C(    37753662), -INT32_C(   873755916), -INT32_C(  1316161028) } },
+    { {  INT32_C(   115861097), -INT32_C(  1766250455), -INT32_C(  1192767834), -INT32_C(   208151598) },
+      { -INT32_C(  1955373602),  INT32_C(  2025994480),  INT32_C(   359502842),  INT32_C(  1234161888) },
+      { -INT32_C(   548440394),  INT32_C(  1165363359), -INT32_C(  1443013161),  INT32_C(   379360312) },
+       INT32_C(          62),
+      { -INT32_C(   576930889), -INT32_C(   276885281), -INT32_C(  1382392483), -INT32_C(  1105719494) } },
+    { { -INT32_C(   492695566),  INT32_C(  1113220168), -INT32_C(   665335816),  INT32_C(  1310844823) },
+      { -INT32_C(    64130723),  INT32_C(  1346544505),  INT32_C(   972635905), -INT32_C(   967797036) },
+      { -INT32_C(   307694939),  INT32_C(  1311703894),  INT32_C(  1646692298), -INT32_C(   877639570) },
+       INT32_C(          63),
+      {  INT32_C(   534773423), -INT32_C(  1078075465), -INT32_C(   407963393), -INT32_C(  1174439573) } },
   };
 
   simde__m128i a, b, c, r;
@@ -1154,83 +936,29 @@ test_simde_mm_ternarylogic_epi32_15 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          59));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 32 ; i < 64 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_2(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_16 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(  1062828079), -INT32_C(  1445066219),  INT32_C(  1751947206), -INT32_C(  1957185460) },
-      {  INT32_C(  1831877311), -INT32_C(   442810342), -INT32_C(  1238835224), -INT32_C(   513902320) },
-      {  INT32_C(   362873856), -INT32_C(   725647602),  INT32_C(  1648110358), -INT32_C(  1561422877) },
-       INT32_C(          60),
-      { -INT32_C(  1382630034),  INT32_C(  1279609359), -INT32_C(   565950418),  INT32_C(  1779024220) } },
-    { { -INT32_C(   418439475),  INT32_C(  1187818078), -INT32_C(  1694698359),  INT32_C(  1853577837) },
-      {  INT32_C(  1837309278), -INT32_C(  1287568740),  INT32_C(  1360363117), -INT32_C(   537722095) },
-      {  INT32_C(  2143683361),  INT32_C(   935695277), -INT32_C(   170802809),  INT32_C(  2053327899) },
-       INT32_C(          61),
-      { -INT32_C(  1967332461), -INT32_C(    37753662), -INT32_C(   873755916), -INT32_C(  1316161028) } },
-    { {  INT32_C(   115861097), -INT32_C(  1766250455), -INT32_C(  1192767834), -INT32_C(   208151598) },
-      { -INT32_C(  1955373602),  INT32_C(  2025994480),  INT32_C(   359502842),  INT32_C(  1234161888) },
-      { -INT32_C(   548440394),  INT32_C(  1165363359), -INT32_C(  1443013161),  INT32_C(   379360312) },
-       INT32_C(          62),
-      { -INT32_C(   576930889), -INT32_C(   276885281), -INT32_C(  1382392483), -INT32_C(  1105719494) } },
-    { { -INT32_C(   492695566),  INT32_C(  1113220168), -INT32_C(   665335816),  INT32_C(  1310844823) },
-      { -INT32_C(    64130723),  INT32_C(  1346544505),  INT32_C(   972635905), -INT32_C(   967797036) },
-      { -INT32_C(   307694939),  INT32_C(  1311703894),  INT32_C(  1646692298), -INT32_C(   877639570) },
-       INT32_C(          63),
-      {  INT32_C(   534773423), -INT32_C(  1078075465), -INT32_C(   407963393), -INT32_C(  1174439573) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          60));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          61));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          62));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          63));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -1253,7 +981,7 @@ test_simde_mm_ternarylogic_epi32_16 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_17 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_9 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -1282,6 +1010,26 @@ test_simde_mm_ternarylogic_epi32_17 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(   740912000), -INT32_C(   983879248),  INT32_C(  1556335921),  INT32_C(  1854882173) },
        INT32_C(          67),
       {  INT32_C(   338365029),  INT32_C(  1293979275), -INT32_C(  1584531678), -INT32_C(   939512000) } },
+    { {  INT32_C(  1377004587), -INT32_C(  1022565398), -INT32_C(  1984213269),  INT32_C(   797984431) },
+      { -INT32_C(  1979553830), -INT32_C(   900768360), -INT32_C(  1473899989),  INT32_C(  2115417427) },
+      {  INT32_C(   214968866), -INT32_C(   120595443), -INT32_C(   629044693), -INT32_C(  1442245936) },
+       INT32_C(          68),
+      { -INT32_C(  2113780264),  INT32_C(    33554832),  INT32_C(   539365376),  INT32_C(  1410770179) } },
+    { {  INT32_C(   288623481), -INT32_C(  1814330520), -INT32_C(   381943147), -INT32_C(   647540041) },
+      { -INT32_C(  1981466500),  INT32_C(  1065530388),  INT32_C(   236520254), -INT32_C(  1900535275) },
+      { -INT32_C(  1767838675),  INT32_C(    86604655),  INT32_C(   904815997),  INT32_C(   873354680) },
+       INT32_C(          69),
+      {  INT32_C(  1766789330),  INT32_C(  2055636112),  INT32_C(   168925698), -INT32_C(  1968133563) } },
+    { { -INT32_C(  1564543859), -INT32_C(   404668248),  INT32_C(  1509292867),  INT32_C(  1273474589) },
+      {  INT32_C(   182552474), -INT32_C(  2146498045),  INT32_C(   683015536), -INT32_C(   530791342) },
+      {  INT32_C(  1619139256), -INT32_C(  1639488678),  INT32_C(  2096577886), -INT32_C(  2050498837) },
+       INT32_C(          70),
+      {  INT32_C(  1247907106),  INT32_C(   403188049),  INT32_C(    67289132),  INT32_C(  1679298736) } },
+    { {  INT32_C(  1771022438),  INT32_C(   585735858), -INT32_C(   297099365),  INT32_C(   466528099) },
+      {  INT32_C(   477843649),  INT32_C(   314229683), -INT32_C(   342970112), -INT32_C(   177187441) },
+      { -INT32_C(  1352793859),  INT32_C(   986859678),  INT32_C(  1244142823), -INT32_C(  2056915261) },
+       INT32_C(          71),
+      { -INT32_C(  1843308776), -INT32_C(   852712595), -INT32_C(  1313349276),  INT32_C(  1880164636) } },
   };
 
   simde__m128i a, b, c, r;
@@ -1310,83 +1058,29 @@ test_simde_mm_ternarylogic_epi32_17 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          67));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 64 ; i < 96 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_3(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_18 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(  1377004587), -INT32_C(  1022565398), -INT32_C(  1984213269),  INT32_C(   797984431) },
-      { -INT32_C(  1979553830), -INT32_C(   900768360), -INT32_C(  1473899989),  INT32_C(  2115417427) },
-      {  INT32_C(   214968866), -INT32_C(   120595443), -INT32_C(   629044693), -INT32_C(  1442245936) },
-       INT32_C(          68),
-      { -INT32_C(  2113780264),  INT32_C(    33554832),  INT32_C(   539365376),  INT32_C(  1410770179) } },
-    { {  INT32_C(   288623481), -INT32_C(  1814330520), -INT32_C(   381943147), -INT32_C(   647540041) },
-      { -INT32_C(  1981466500),  INT32_C(  1065530388),  INT32_C(   236520254), -INT32_C(  1900535275) },
-      { -INT32_C(  1767838675),  INT32_C(    86604655),  INT32_C(   904815997),  INT32_C(   873354680) },
-       INT32_C(          69),
-      {  INT32_C(  1766789330),  INT32_C(  2055636112),  INT32_C(   168925698), -INT32_C(  1968133563) } },
-    { { -INT32_C(  1564543859), -INT32_C(   404668248),  INT32_C(  1509292867),  INT32_C(  1273474589) },
-      {  INT32_C(   182552474), -INT32_C(  2146498045),  INT32_C(   683015536), -INT32_C(   530791342) },
-      {  INT32_C(  1619139256), -INT32_C(  1639488678),  INT32_C(  2096577886), -INT32_C(  2050498837) },
-       INT32_C(          70),
-      {  INT32_C(  1247907106),  INT32_C(   403188049),  INT32_C(    67289132),  INT32_C(  1679298736) } },
-    { {  INT32_C(  1771022438),  INT32_C(   585735858), -INT32_C(   297099365),  INT32_C(   466528099) },
-      {  INT32_C(   477843649),  INT32_C(   314229683), -INT32_C(   342970112), -INT32_C(   177187441) },
-      { -INT32_C(  1352793859),  INT32_C(   986859678),  INT32_C(  1244142823), -INT32_C(  2056915261) },
-       INT32_C(          71),
-      { -INT32_C(  1843308776), -INT32_C(   852712595), -INT32_C(  1313349276),  INT32_C(  1880164636) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          68));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          69));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          70));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          71));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -1409,7 +1103,7 @@ test_simde_mm_ternarylogic_epi32_18 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_19 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_10 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -1438,6 +1132,26 @@ test_simde_mm_ternarylogic_epi32_19 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(  1039525538),  INT32_C(   809264622),  INT32_C(   452659237),  INT32_C(  2140653366) },
        INT32_C(          75),
       {  INT32_C(  2120694792),  INT32_C(  1235528347), -INT32_C(   265226841), -INT32_C(  2112100029) } },
+    { {  INT32_C(   723150761), -INT32_C(  2045300148),  INT32_C(  1783901167), -INT32_C(   992276122) },
+      {  INT32_C(   428270890),  INT32_C(  1867104842),  INT32_C(    25773514), -INT32_C(  1249894132) },
+      { -INT32_C(   723477880), -INT32_C(  1151665972), -INT32_C(  1994019037), -INT32_C(   364052288) },
+       INT32_C(          76),
+      {  INT32_C(   428270882),  INT32_C(  1833550338),  INT32_C(    25773256),  INT32_C(   897589516) } },
+    { {  INT32_C(   805557221),  INT32_C(  1621052822), -INT32_C(  1637799534), -INT32_C(   766188982) },
+      {  INT32_C(  1235629180),  INT32_C(  1342439468),  INT32_C(  1876503215),  INT32_C(   274343722) },
+      { -INT32_C(  1874829830),  INT32_C(  1022484394),  INT32_C(  1390105096), -INT32_C(  1323028684) },
+       INT32_C(          77),
+      {  INT32_C(  1337861148), -INT32_C(   754704275),  INT32_C(  1838984943),  INT32_C(   215684523) } },
+    { { -INT32_C(  1862612381),  INT32_C(  2061565643),  INT32_C(  1407891752), -INT32_C(   614251296) },
+      {  INT32_C(  1282122657), -INT32_C(  1953997694), -INT32_C(   472030289), -INT32_C(   158072174) },
+      { -INT32_C(  1752789300), -INT32_C(  1257085299),  INT32_C(      588831), -INT32_C(   505713856) },
+       INT32_C(          78),
+      {  INT32_C(  1332553133), -INT32_C(  1885726714), -INT32_C(   472561737),  INT32_C(   916204434) } },
+    { { -INT32_C(  1859303922),  INT32_C(  1377613475), -INT32_C(  1405748967), -INT32_C(   928855301) },
+      { -INT32_C(   446748584), -INT32_C(  1382321778), -INT32_C(  1381129363),  INT32_C(   495945743) },
+      {  INT32_C(  1924054223), -INT32_C(  1933260174), -INT32_C(  1086785084),  INT32_C(   478665411) },
+       INT32_C(          79),
+      { -INT32_C(   271336975), -INT32_C(  1376028196),  INT32_C(  1406076655),  INT32_C(   928855308) } },
   };
 
   simde__m128i a, b, c, r;
@@ -1466,83 +1180,29 @@ test_simde_mm_ternarylogic_epi32_19 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          75));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 64 ; i < 96 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_3(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_20 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(   723150761), -INT32_C(  2045300148),  INT32_C(  1783901167), -INT32_C(   992276122) },
-      {  INT32_C(   428270890),  INT32_C(  1867104842),  INT32_C(    25773514), -INT32_C(  1249894132) },
-      { -INT32_C(   723477880), -INT32_C(  1151665972), -INT32_C(  1994019037), -INT32_C(   364052288) },
-       INT32_C(          76),
-      {  INT32_C(   428270882),  INT32_C(  1833550338),  INT32_C(    25773256),  INT32_C(   897589516) } },
-    { {  INT32_C(   805557221),  INT32_C(  1621052822), -INT32_C(  1637799534), -INT32_C(   766188982) },
-      {  INT32_C(  1235629180),  INT32_C(  1342439468),  INT32_C(  1876503215),  INT32_C(   274343722) },
-      { -INT32_C(  1874829830),  INT32_C(  1022484394),  INT32_C(  1390105096), -INT32_C(  1323028684) },
-       INT32_C(          77),
-      {  INT32_C(  1337861148), -INT32_C(   754704275),  INT32_C(  1838984943),  INT32_C(   215684523) } },
-    { { -INT32_C(  1862612381),  INT32_C(  2061565643),  INT32_C(  1407891752), -INT32_C(   614251296) },
-      {  INT32_C(  1282122657), -INT32_C(  1953997694), -INT32_C(   472030289), -INT32_C(   158072174) },
-      { -INT32_C(  1752789300), -INT32_C(  1257085299),  INT32_C(      588831), -INT32_C(   505713856) },
-       INT32_C(          78),
-      {  INT32_C(  1332553133), -INT32_C(  1885726714), -INT32_C(   472561737),  INT32_C(   916204434) } },
-    { { -INT32_C(  1859303922),  INT32_C(  1377613475), -INT32_C(  1405748967), -INT32_C(   928855301) },
-      { -INT32_C(   446748584), -INT32_C(  1382321778), -INT32_C(  1381129363),  INT32_C(   495945743) },
-      {  INT32_C(  1924054223), -INT32_C(  1933260174), -INT32_C(  1086785084),  INT32_C(   478665411) },
-       INT32_C(          79),
-      { -INT32_C(   271336975), -INT32_C(  1376028196),  INT32_C(  1406076655),  INT32_C(   928855308) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          76));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          77));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          78));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          79));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -1565,7 +1225,7 @@ test_simde_mm_ternarylogic_epi32_20 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_21 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_11 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -1594,6 +1254,26 @@ test_simde_mm_ternarylogic_epi32_21 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(   785238923), -INT32_C(  1985233673), -INT32_C(  1846659320), -INT32_C(  1077528479) },
        INT32_C(          83),
       {  INT32_C(   767855232),  INT32_C(  1930774284),  INT32_C(  1734572246),  INT32_C(  1208817406) } },
+    { { -INT32_C(   826407634),  INT32_C(   693248000),  INT32_C(  1843555308), -INT32_C(  1423715786) },
+      { -INT32_C(    25406201),  INT32_C(   445064978), -INT32_C(  1062505122), -INT32_C(   595627346) },
+      {  INT32_C(  2007645559),  INT32_C(  1252130142), -INT32_C(  1632140440),  INT32_C(  1548343893) },
+       INT32_C(          84),
+      { -INT32_C(  2007744504),  INT32_C(   827720192),  INT32_C(  1632140438), -INT32_C(  1556733782) } },
+    { {  INT32_C(  1096468015),  INT32_C(  1281155821),  INT32_C(    84674391), -INT32_C(   236876935) },
+      {  INT32_C(   661163209), -INT32_C(   244250231), -INT32_C(   493934452),  INT32_C(   826202114) },
+      { -INT32_C(  1938581090), -INT32_C(   757543045),  INT32_C(  1356391638),  INT32_C(   943831407) },
+       INT32_C(          85),
+      {  INT32_C(  1938581089),  INT32_C(   757543044), -INT32_C(  1356391639), -INT32_C(   943831408) } },
+    { { -INT32_C(   832591547),  INT32_C(  1069535411), -INT32_C(    98480392), -INT32_C(   986947545) },
+      {  INT32_C(  1951506425),  INT32_C(  1145448814),  INT32_C(  2106859021),  INT32_C(   498456024) },
+      {  INT32_C(   854332799), -INT32_C(   562975771),  INT32_C(   567841786), -INT32_C(   320469773) },
+       INT32_C(          86),
+      { -INT32_C(   860640638), -INT32_C(  1584508390), -INT32_C(   563229433),  INT32_C(   828109068) } },
+    { {  INT32_C(   291518627),  INT32_C(  1867949665), -INT32_C(  1645417787),  INT32_C(  1069195712) },
+      { -INT32_C(  1670273354),  INT32_C(  1283121746),  INT32_C(  1751994997), -INT32_C(    95136937) },
+      { -INT32_C(   317934453),  INT32_C(   542925403),  INT32_C(   213731404), -INT32_C(  1605666839) },
+       INT32_C(          87),
+      {  INT32_C(  1929333628), -INT32_C(   542925396), -INT32_C(   212682821),  INT32_C(  1605733438) } },
   };
 
   simde__m128i a, b, c, r;
@@ -1622,83 +1302,29 @@ test_simde_mm_ternarylogic_epi32_21 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          83));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 64 ; i < 96 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_3(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_22 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(   826407634),  INT32_C(   693248000),  INT32_C(  1843555308), -INT32_C(  1423715786) },
-      { -INT32_C(    25406201),  INT32_C(   445064978), -INT32_C(  1062505122), -INT32_C(   595627346) },
-      {  INT32_C(  2007645559),  INT32_C(  1252130142), -INT32_C(  1632140440),  INT32_C(  1548343893) },
-       INT32_C(          84),
-      { -INT32_C(  2007744504),  INT32_C(   827720192),  INT32_C(  1632140438), -INT32_C(  1556733782) } },
-    { {  INT32_C(  1096468015),  INT32_C(  1281155821),  INT32_C(    84674391), -INT32_C(   236876935) },
-      {  INT32_C(   661163209), -INT32_C(   244250231), -INT32_C(   493934452),  INT32_C(   826202114) },
-      { -INT32_C(  1938581090), -INT32_C(   757543045),  INT32_C(  1356391638),  INT32_C(   943831407) },
-       INT32_C(          85),
-      {  INT32_C(  1938581089),  INT32_C(   757543044), -INT32_C(  1356391639), -INT32_C(   943831408) } },
-    { { -INT32_C(   832591547),  INT32_C(  1069535411), -INT32_C(    98480392), -INT32_C(   986947545) },
-      {  INT32_C(  1951506425),  INT32_C(  1145448814),  INT32_C(  2106859021),  INT32_C(   498456024) },
-      {  INT32_C(   854332799), -INT32_C(   562975771),  INT32_C(   567841786), -INT32_C(   320469773) },
-       INT32_C(          86),
-      { -INT32_C(   860640638), -INT32_C(  1584508390), -INT32_C(   563229433),  INT32_C(   828109068) } },
-    { {  INT32_C(   291518627),  INT32_C(  1867949665), -INT32_C(  1645417787),  INT32_C(  1069195712) },
-      { -INT32_C(  1670273354),  INT32_C(  1283121746),  INT32_C(  1751994997), -INT32_C(    95136937) },
-      { -INT32_C(   317934453),  INT32_C(   542925403),  INT32_C(   213731404), -INT32_C(  1605666839) },
-       INT32_C(          87),
-      {  INT32_C(  1929333628), -INT32_C(   542925396), -INT32_C(   212682821),  INT32_C(  1605733438) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          84));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          85));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          86));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          87));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -1721,7 +1347,7 @@ test_simde_mm_ternarylogic_epi32_22 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_23 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_12 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -1750,6 +1376,26 @@ test_simde_mm_ternarylogic_epi32_23 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(  1488532455),  INT32_C(   431087026), -INT32_C(  1679234743),  INT32_C(   956907016) },
        INT32_C(          91),
       { -INT32_C(   138024002),  INT32_C(  1737991115),  INT32_C(  1959892910), -INT32_C(   732110501) } },
+    { {  INT32_C(   719993684), -INT32_C(   995343446), -INT32_C(  1163732476), -INT32_C(   641099023) },
+      {  INT32_C(  2133951181), -INT32_C(  1449598368), -INT32_C(   750419509),  INT32_C(   319639231) },
+      {  INT32_C(   859699081),  INT32_C(  1056434490), -INT32_C(  1241998652),  INT32_C(    26132788) },
+       INT32_C(          92),
+      {  INT32_C(  1574144221), -INT32_C(   384261440),  INT32_C(  1262961099), -INT32_C(   632987953) } },
+    { { -INT32_C(  1535000508),  INT32_C(  1850546594),  INT32_C(  1497469594),  INT32_C(  1785482976) },
+      { -INT32_C(  2137150907),  INT32_C(  1472107923),  INT32_C(  1661843247), -INT32_C(  1134257288) },
+      { -INT32_C(    27204261), -INT32_C(  1720930561),  INT32_C(   569617728),  INT32_C(  1099653116) },
+       INT32_C(          93),
+      {  INT32_C(    27212453),  INT32_C(  2008274193), -INT32_C(    32737345), -INT32_C(  1099648741) } },
+    { { -INT32_C(  1648285687), -INT32_C(   319520579), -INT32_C(  1353776841), -INT32_C(   127093603) },
+      { -INT32_C(  1728656231), -INT32_C(  1154325894),  INT32_C(   215754000), -INT32_C(  1907529852) },
+      {  INT32_C(  1294667663), -INT32_C(   969334897), -INT32_C(  1099593439), -INT32_C(   692657859) },
+       INT32_C(          94),
+      { -INT32_C(   788600938),  INT32_C(  1003487090),  INT32_C(   297446422),  INT32_C(   786126752) } },
+    { {  INT32_C(   678407598),  INT32_C(   535011599),  INT32_C(  1244381126), -INT32_C(  1227327194) },
+      {  INT32_C(   386073480),  INT32_C(  1155349539),  INT32_C(    33706693), -INT32_C(   489048012) },
+      {  INT32_C(  1963608165), -INT32_C(  1349194007), -INT32_C(   721829715), -INT32_C(  1047866823) },
+       INT32_C(          95),
+      { -INT32_C(   537528357), -INT32_C(   260087818), -INT32_C(  1076461701),  INT32_C(  2138550239) } },
   };
 
   simde__m128i a, b, c, r;
@@ -1778,83 +1424,29 @@ test_simde_mm_ternarylogic_epi32_23 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          91));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 64 ; i < 96 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_3(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_24 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(   719993684), -INT32_C(   995343446), -INT32_C(  1163732476), -INT32_C(   641099023) },
-      {  INT32_C(  2133951181), -INT32_C(  1449598368), -INT32_C(   750419509),  INT32_C(   319639231) },
-      {  INT32_C(   859699081),  INT32_C(  1056434490), -INT32_C(  1241998652),  INT32_C(    26132788) },
-       INT32_C(          92),
-      {  INT32_C(  1574144221), -INT32_C(   384261440),  INT32_C(  1262961099), -INT32_C(   632987953) } },
-    { { -INT32_C(  1535000508),  INT32_C(  1850546594),  INT32_C(  1497469594),  INT32_C(  1785482976) },
-      { -INT32_C(  2137150907),  INT32_C(  1472107923),  INT32_C(  1661843247), -INT32_C(  1134257288) },
-      { -INT32_C(    27204261), -INT32_C(  1720930561),  INT32_C(   569617728),  INT32_C(  1099653116) },
-       INT32_C(          93),
-      {  INT32_C(    27212453),  INT32_C(  2008274193), -INT32_C(    32737345), -INT32_C(  1099648741) } },
-    { { -INT32_C(  1648285687), -INT32_C(   319520579), -INT32_C(  1353776841), -INT32_C(   127093603) },
-      { -INT32_C(  1728656231), -INT32_C(  1154325894),  INT32_C(   215754000), -INT32_C(  1907529852) },
-      {  INT32_C(  1294667663), -INT32_C(   969334897), -INT32_C(  1099593439), -INT32_C(   692657859) },
-       INT32_C(          94),
-      { -INT32_C(   788600938),  INT32_C(  1003487090),  INT32_C(   297446422),  INT32_C(   786126752) } },
-    { {  INT32_C(   678407598),  INT32_C(   535011599),  INT32_C(  1244381126), -INT32_C(  1227327194) },
-      {  INT32_C(   386073480),  INT32_C(  1155349539),  INT32_C(    33706693), -INT32_C(   489048012) },
-      {  INT32_C(  1963608165), -INT32_C(  1349194007), -INT32_C(   721829715), -INT32_C(  1047866823) },
-       INT32_C(          95),
-      { -INT32_C(   537528357), -INT32_C(   260087818), -INT32_C(  1076461701),  INT32_C(  2138550239) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          92));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          93));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          94));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          95));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -1877,7 +1469,7 @@ test_simde_mm_ternarylogic_epi32_24 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_25 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_13 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -1906,6 +1498,26 @@ test_simde_mm_ternarylogic_epi32_25 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(   937798410), -INT32_C(   549898617),  INT32_C(   409188727), -INT32_C(  1247748586) },
        INT32_C(          99),
       {  INT32_C(  1527609600), -INT32_C(   744499036),  INT32_C(   853490695),  INT32_C(   347710686) } },
+    { { -INT32_C(   749102752),  INT32_C(  2030008968),  INT32_C(  2126618621),  INT32_C(    73522938) },
+      {  INT32_C(   272320137), -INT32_C(   185633667),  INT32_C(  1124880941), -INT32_C(  1862750928) },
+      { -INT32_C(   832286138), -INT32_C(   918133812), -INT32_C(    45676797),  INT32_C(  1845602533) },
+       INT32_C(         100),
+      { -INT32_C(   765782839),  INT32_C(  1017714353),  INT32_C(  1044993324), -INT32_C(  1795619376) } },
+    { {  INT32_C(  1803435246), -INT32_C(   564105807), -INT32_C(   266179392),  INT32_C(  1602296345) },
+      {  INT32_C(   942531948),  INT32_C(  1258386248),  INT32_C(  1615349883), -INT32_C(   540063248) },
+      {  INT32_C(   927616390),  INT32_C(  2065017531),  INT32_C(   812332823), -INT32_C(  1097798574) },
+       INT32_C(         101),
+      { -INT32_C(  1947751685),  INT32_C(   277502453),  INT32_C(  1605823592),  INT32_C(  1097793956) } },
+    { {  INT32_C(   452443601), -INT32_C(  1402603471),  INT32_C(   822914625),  INT32_C(  2098256887) },
+      { -INT32_C(   457942231),  INT32_C(   476039685),  INT32_C(  1397606913), -INT32_C(  2012029513) },
+      { -INT32_C(   878573158),  INT32_C(  1115097089), -INT32_C(  1384872778), -INT32_C(  2010413985) },
+       INT32_C(         102),
+      {  INT32_C(   789992115),  INT32_C(  1579729412), -INT32_C(    29798729),  INT32_C(     3758568) } },
+    { { -INT32_C(   445849633), -INT32_C(  1425945687),  INT32_C(  1308511894), -INT32_C(   959115221) },
+      {  INT32_C(   462518297),  INT32_C(   912066944), -INT32_C(   320614003),  INT32_C(   896863830) },
+      { -INT32_C(  1759845906),  INT32_C(  1128406189), -INT32_C(  1768930966),  INT32_C(  1801217361) },
+       INT32_C(         103),
+      { -INT32_C(  1937008137),  INT32_C(  1975465343),  INT32_C(  2054402279),  INT32_C(  1579936647) } },
   };
 
   simde__m128i a, b, c, r;
@@ -1934,83 +1546,29 @@ test_simde_mm_ternarylogic_epi32_25 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(          99));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 96 ; i < 128 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_4(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_26 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(   749102752),  INT32_C(  2030008968),  INT32_C(  2126618621),  INT32_C(    73522938) },
-      {  INT32_C(   272320137), -INT32_C(   185633667),  INT32_C(  1124880941), -INT32_C(  1862750928) },
-      { -INT32_C(   832286138), -INT32_C(   918133812), -INT32_C(    45676797),  INT32_C(  1845602533) },
-       INT32_C(         100),
-      { -INT32_C(   765782839),  INT32_C(  1017714353),  INT32_C(  1044993324), -INT32_C(  1795619376) } },
-    { {  INT32_C(  1803435246), -INT32_C(   564105807), -INT32_C(   266179392),  INT32_C(  1602296345) },
-      {  INT32_C(   942531948),  INT32_C(  1258386248),  INT32_C(  1615349883), -INT32_C(   540063248) },
-      {  INT32_C(   927616390),  INT32_C(  2065017531),  INT32_C(   812332823), -INT32_C(  1097798574) },
-       INT32_C(         101),
-      { -INT32_C(  1947751685),  INT32_C(   277502453),  INT32_C(  1605823592),  INT32_C(  1097793956) } },
-    { {  INT32_C(   452443601), -INT32_C(  1402603471),  INT32_C(   822914625),  INT32_C(  2098256887) },
-      { -INT32_C(   457942231),  INT32_C(   476039685),  INT32_C(  1397606913), -INT32_C(  2012029513) },
-      { -INT32_C(   878573158),  INT32_C(  1115097089), -INT32_C(  1384872778), -INT32_C(  2010413985) },
-       INT32_C(         102),
-      {  INT32_C(   789992115),  INT32_C(  1579729412), -INT32_C(    29798729),  INT32_C(     3758568) } },
-    { { -INT32_C(   445849633), -INT32_C(  1425945687),  INT32_C(  1308511894), -INT32_C(   959115221) },
-      {  INT32_C(   462518297),  INT32_C(   912066944), -INT32_C(   320614003),  INT32_C(   896863830) },
-      { -INT32_C(  1759845906),  INT32_C(  1128406189), -INT32_C(  1768930966),  INT32_C(  1801217361) },
-       INT32_C(         103),
-      { -INT32_C(  1937008137),  INT32_C(  1975465343),  INT32_C(  2054402279),  INT32_C(  1579936647) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         100));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         101));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         102));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         103));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -2033,7 +1591,7 @@ test_simde_mm_ternarylogic_epi32_26 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_27 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_14 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -2062,6 +1620,26 @@ test_simde_mm_ternarylogic_epi32_27 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(  1114366819),  INT32_C(    73062399), -INT32_C(  1670769186), -INT32_C(   816082775) },
        INT32_C(         107),
       { -INT32_C(  1622412861), -INT32_C(  1637880837), -INT32_C(   109110562),  INT32_C(  2113579679) } },
+    { {  INT32_C(  1395312943),  INT32_C(  1540210344),  INT32_C(   490675877), -INT32_C(   770739601) },
+      {  INT32_C(  1427405398),  INT32_C(   794390097),  INT32_C(   768328836), -INT32_C(  2080627116) },
+      { -INT32_C(  1747507473), -INT32_C(  1963744027),  INT32_C(   833041090), -INT32_C(    83642715) },
+       INT32_C(         108),
+      {  INT32_C(  1175878265),  INT32_C(   630770417),  INT32_C(  1022154244),  INT32_C(  1375671409) } },
+    { { -INT32_C(  2125457616),  INT32_C(   162572933), -INT32_C(  1036551058), -INT32_C(  1840958558) },
+      {  INT32_C(  1059658842), -INT32_C(  2100749120), -INT32_C(   189566641),  INT32_C(  1492104743) },
+      {  INT32_C(  1406746573),  INT32_C(  1465682665), -INT32_C(  1474718970),  INT32_C(   557473735) },
+       INT32_C(         109),
+      {  INT32_C(  1048562522), -INT32_C(  1545873581),  INT32_C(  1977770457),  INT32_C(  1559209405) } },
+    { {  INT32_C(  1012950139), -INT32_C(   809621120), -INT32_C(  1027378534), -INT32_C(   166022616) },
+      { -INT32_C(   615910414), -INT32_C(  2093767299),  INT32_C(     2903097),  INT32_C(   656500395) },
+      {  INT32_C(  1264812490),  INT32_C(  1159340458), -INT32_C(  1140334957), -INT32_C(  2102255216) },
+       INT32_C(         110),
+      { -INT32_C(   752094280), -INT32_C(   970357505), -INT32_C(  1137729877), -INT32_C(  1514977349) } },
+    { { -INT32_C(  1839269100), -INT32_C(   652897888), -INT32_C(  1982250531),  INT32_C(  1924201128) },
+      {  INT32_C(   649925499), -INT32_C(   932456396),  INT32_C(  1183085238), -INT32_C(  1479985517) },
+      { -INT32_C(   784783567), -INT32_C(  1783935048),  INT32_C(   941524112), -INT32_C(    89403777) },
+       INT32_C(         111),
+      { -INT32_C(     5950229),  INT32_C(  2146107359),  INT32_C(  2126446118), -INT32_C(   579863041) } },
   };
 
   simde__m128i a, b, c, r;
@@ -2090,83 +1668,29 @@ test_simde_mm_ternarylogic_epi32_27 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         107));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 96 ; i < 128 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_4(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_28 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(  1395312943),  INT32_C(  1540210344),  INT32_C(   490675877), -INT32_C(   770739601) },
-      {  INT32_C(  1427405398),  INT32_C(   794390097),  INT32_C(   768328836), -INT32_C(  2080627116) },
-      { -INT32_C(  1747507473), -INT32_C(  1963744027),  INT32_C(   833041090), -INT32_C(    83642715) },
-       INT32_C(         108),
-      {  INT32_C(  1175878265),  INT32_C(   630770417),  INT32_C(  1022154244),  INT32_C(  1375671409) } },
-    { { -INT32_C(  2125457616),  INT32_C(   162572933), -INT32_C(  1036551058), -INT32_C(  1840958558) },
-      {  INT32_C(  1059658842), -INT32_C(  2100749120), -INT32_C(   189566641),  INT32_C(  1492104743) },
-      {  INT32_C(  1406746573),  INT32_C(  1465682665), -INT32_C(  1474718970),  INT32_C(   557473735) },
-       INT32_C(         109),
-      {  INT32_C(  1048562522), -INT32_C(  1545873581),  INT32_C(  1977770457),  INT32_C(  1559209405) } },
-    { {  INT32_C(  1012950139), -INT32_C(   809621120), -INT32_C(  1027378534), -INT32_C(   166022616) },
-      { -INT32_C(   615910414), -INT32_C(  2093767299),  INT32_C(     2903097),  INT32_C(   656500395) },
-      {  INT32_C(  1264812490),  INT32_C(  1159340458), -INT32_C(  1140334957), -INT32_C(  2102255216) },
-       INT32_C(         110),
-      { -INT32_C(   752094280), -INT32_C(   970357505), -INT32_C(  1137729877), -INT32_C(  1514977349) } },
-    { { -INT32_C(  1839269100), -INT32_C(   652897888), -INT32_C(  1982250531),  INT32_C(  1924201128) },
-      {  INT32_C(   649925499), -INT32_C(   932456396),  INT32_C(  1183085238), -INT32_C(  1479985517) },
-      { -INT32_C(   784783567), -INT32_C(  1783935048),  INT32_C(   941524112), -INT32_C(    89403777) },
-       INT32_C(         111),
-      { -INT32_C(     5950229),  INT32_C(  2146107359),  INT32_C(  2126446118), -INT32_C(   579863041) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         108));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         109));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         110));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         111));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -2189,7 +1713,7 @@ test_simde_mm_ternarylogic_epi32_28 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_29 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_15 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -2218,6 +1742,26 @@ test_simde_mm_ternarylogic_epi32_29 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(   775317547),  INT32_C(   855890658), -INT32_C(  1717216964),  INT32_C(   748670838) },
        INT32_C(         115),
       { -INT32_C(   379716019), -INT32_C(   722634532), -INT32_C(    78158115),  INT32_C(  1522039439) } },
+    { { -INT32_C(   154975790), -INT32_C(   354321976), -INT32_C(  1374774987),  INT32_C(  1247114527) },
+      { -INT32_C(  1065841698), -INT32_C(  1561101210),  INT32_C(  1262262485),  INT32_C(   980933480) },
+      { -INT32_C(   449824227), -INT32_C(   372239948), -INT32_C(   896016725),  INT32_C(   840232020) },
+       INT32_C(         116),
+      {  INT32_C(   919323074),  INT32_C(  1243835850), -INT32_C(  1523973772),  INT32_C(  1214461759) } },
+    { { -INT32_C(   571306633), -INT32_C(   561977847), -INT32_C(   433472386), -INT32_C(  1272864617) },
+      { -INT32_C(  1902489126),  INT32_C(   242707043), -INT32_C(  1663562168),  INT32_C(  1926163706) },
+      { -INT32_C(  2108702343),  INT32_C(   627101607),  INT32_C(   588024203),  INT32_C(    81210665) },
+       INT32_C(         117),
+      {  INT32_C(  2112929447), -INT32_C(   627067816), -INT32_C(    17566090), -INT32_C(    14036265) } },
+    { { -INT32_C(   510496386),  INT32_C(   619645659),  INT32_C(   331400984),  INT32_C(   763727796) },
+      { -INT32_C(   139406256),  INT32_C(   790368420), -INT32_C(  1018025830), -INT32_C(   725145003) },
+      {  INT32_C(  2008373915),  INT32_C(  2090575204),  INT32_C(   546265964),  INT32_C(   978195690) },
+       INT32_C(         118),
+      { -INT32_C(  2146979857),  INT32_C(  1407696859), -INT32_C(   203556874), -INT32_C(   276185153) } },
+    { { -INT32_C(  1926103319), -INT32_C(  1464054258), -INT32_C(   865333386), -INT32_C(   727698631) },
+      { -INT32_C(   246721139),  INT32_C(  1735321338),  INT32_C(   747109698), -INT32_C(    77081326) },
+      { -INT32_C(   494364461),  INT32_C(  1569342694), -INT32_C(  1943407021), -INT32_C(  1218328278) },
+       INT32_C(         119),
+      {  INT32_C(   536342398), -INT32_C(  1158300899), -INT32_C(   201454659),  INT32_C(  1285439229) } },
   };
 
   simde__m128i a, b, c, r;
@@ -2246,83 +1790,29 @@ test_simde_mm_ternarylogic_epi32_29 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         115));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 96 ; i < 128 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_4(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_30 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(   154975790), -INT32_C(   354321976), -INT32_C(  1374774987),  INT32_C(  1247114527) },
-      { -INT32_C(  1065841698), -INT32_C(  1561101210),  INT32_C(  1262262485),  INT32_C(   980933480) },
-      { -INT32_C(   449824227), -INT32_C(   372239948), -INT32_C(   896016725),  INT32_C(   840232020) },
-       INT32_C(         116),
-      {  INT32_C(   919323074),  INT32_C(  1243835850), -INT32_C(  1523973772),  INT32_C(  1214461759) } },
-    { { -INT32_C(   571306633), -INT32_C(   561977847), -INT32_C(   433472386), -INT32_C(  1272864617) },
-      { -INT32_C(  1902489126),  INT32_C(   242707043), -INT32_C(  1663562168),  INT32_C(  1926163706) },
-      { -INT32_C(  2108702343),  INT32_C(   627101607),  INT32_C(   588024203),  INT32_C(    81210665) },
-       INT32_C(         117),
-      {  INT32_C(  2112929447), -INT32_C(   627067816), -INT32_C(    17566090), -INT32_C(    14036265) } },
-    { { -INT32_C(   510496386),  INT32_C(   619645659),  INT32_C(   331400984),  INT32_C(   763727796) },
-      { -INT32_C(   139406256),  INT32_C(   790368420), -INT32_C(  1018025830), -INT32_C(   725145003) },
-      {  INT32_C(  2008373915),  INT32_C(  2090575204),  INT32_C(   546265964),  INT32_C(   978195690) },
-       INT32_C(         118),
-      { -INT32_C(  2146979857),  INT32_C(  1407696859), -INT32_C(   203556874), -INT32_C(   276185153) } },
-    { { -INT32_C(  1926103319), -INT32_C(  1464054258), -INT32_C(   865333386), -INT32_C(   727698631) },
-      { -INT32_C(   246721139),  INT32_C(  1735321338),  INT32_C(   747109698), -INT32_C(    77081326) },
-      { -INT32_C(   494364461),  INT32_C(  1569342694), -INT32_C(  1943407021), -INT32_C(  1218328278) },
-       INT32_C(         119),
-      {  INT32_C(   536342398), -INT32_C(  1158300899), -INT32_C(   201454659),  INT32_C(  1285439229) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         116));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         117));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         118));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         119));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -2345,7 +1835,7 @@ test_simde_mm_ternarylogic_epi32_30 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_31 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_16 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -2374,6 +1864,26 @@ test_simde_mm_ternarylogic_epi32_31 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(  1933607591), -INT32_C(  1957732019), -INT32_C(  1403109779), -INT32_C(  1852430243) },
        INT32_C(         123),
       { -INT32_C(      266533), -INT32_C(   739262481),  INT32_C(  2147463927),  INT32_C(  2071967343) } },
+    { {  INT32_C(   156638073), -INT32_C(    24728349), -INT32_C(  1148053717),  INT32_C(   507474294) },
+      {  INT32_C(  1100054516),  INT32_C(  1322049761),  INT32_C(  2096769823), -INT32_C(   871526061) },
+      { -INT32_C(  1864997972),  INT32_C(   999185423), -INT32_C(   352968333), -INT32_C(  2046282094) },
+       INT32_C(         124),
+      {  INT32_C(  1237810397), -INT32_C(   196416286), -INT32_C(   681034180), -INT32_C(   633872027) } },
+    { { -INT32_C(  1765303883), -INT32_C(  1713007494),  INT32_C(   303423423),  INT32_C(   501097072) },
+      { -INT32_C(  1800555387), -INT32_C(  2066793712), -INT32_C(   277952932), -INT32_C(  1317701892) },
+      { -INT32_C(  1991754481), -INT32_C(  1876808239),  INT32_C(  2107782924), -INT32_C(   560299943) },
+       INT32_C(         125),
+      {  INT32_C(  1996484592),  INT32_C(  2147483502), -INT32_C(     8398349), -INT32_C(  1376813138) } },
+    { {  INT32_C(  1165182773), -INT32_C(   540458366),  INT32_C(    80623368), -INT32_C(  1112128595) },
+      {  INT32_C(  1363607168),  INT32_C(   937519403), -INT32_C(    88833120),  INT32_C(   970477060) },
+      {  INT32_C(   410930069), -INT32_C(  1762178930),  INT32_C(   765183359), -INT32_C(  1981132536) },
+       INT32_C(         126),
+      {  INT32_C(  1564327349), -INT32_C(   381801555), -INT32_C(     8390913), -INT32_C(  1266802771) } },
+    { {  INT32_C(  2061119567),  INT32_C(   984726681),  INT32_C(  1127507519),  INT32_C(  1249643700) },
+      { -INT32_C(   429720744), -INT32_C(  1032038077),  INT32_C(   653203230), -INT32_C(  1213212312) },
+      { -INT32_C(  1557034486), -INT32_C(  2049055930), -INT32_C(    37154487),  INT32_C(  1984382238) },
+       INT32_C(         127),
+      { -INT32_C(   570425353), -INT32_C(     1048577), -INT32_C(           9), -INT32_C(    33816577) } },
   };
 
   simde__m128i a, b, c, r;
@@ -2402,83 +1912,29 @@ test_simde_mm_ternarylogic_epi32_31 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         123));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 96 ; i < 128 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_4(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_32 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(   156638073), -INT32_C(    24728349), -INT32_C(  1148053717),  INT32_C(   507474294) },
-      {  INT32_C(  1100054516),  INT32_C(  1322049761),  INT32_C(  2096769823), -INT32_C(   871526061) },
-      { -INT32_C(  1864997972),  INT32_C(   999185423), -INT32_C(   352968333), -INT32_C(  2046282094) },
-       INT32_C(         124),
-      {  INT32_C(  1237810397), -INT32_C(   196416286), -INT32_C(   681034180), -INT32_C(   633872027) } },
-    { { -INT32_C(  1765303883), -INT32_C(  1713007494),  INT32_C(   303423423),  INT32_C(   501097072) },
-      { -INT32_C(  1800555387), -INT32_C(  2066793712), -INT32_C(   277952932), -INT32_C(  1317701892) },
-      { -INT32_C(  1991754481), -INT32_C(  1876808239),  INT32_C(  2107782924), -INT32_C(   560299943) },
-       INT32_C(         125),
-      {  INT32_C(  1996484592),  INT32_C(  2147483502), -INT32_C(     8398349), -INT32_C(  1376813138) } },
-    { {  INT32_C(  1165182773), -INT32_C(   540458366),  INT32_C(    80623368), -INT32_C(  1112128595) },
-      {  INT32_C(  1363607168),  INT32_C(   937519403), -INT32_C(    88833120),  INT32_C(   970477060) },
-      {  INT32_C(   410930069), -INT32_C(  1762178930),  INT32_C(   765183359), -INT32_C(  1981132536) },
-       INT32_C(         126),
-      {  INT32_C(  1564327349), -INT32_C(   381801555), -INT32_C(     8390913), -INT32_C(  1266802771) } },
-    { {  INT32_C(  2061119567),  INT32_C(   984726681),  INT32_C(  1127507519),  INT32_C(  1249643700) },
-      { -INT32_C(   429720744), -INT32_C(  1032038077),  INT32_C(   653203230), -INT32_C(  1213212312) },
-      { -INT32_C(  1557034486), -INT32_C(  2049055930), -INT32_C(    37154487),  INT32_C(  1984382238) },
-       INT32_C(         127),
-      { -INT32_C(   570425353), -INT32_C(     1048577), -INT32_C(           9), -INT32_C(    33816577) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         124));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         125));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         126));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         127));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -2501,7 +1957,7 @@ test_simde_mm_ternarylogic_epi32_32 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_33 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_17 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -2530,6 +1986,26 @@ test_simde_mm_ternarylogic_epi32_33 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(   483253325),  INT32_C(   371868365), -INT32_C(  1413280969),  INT32_C(   966397204) },
        INT32_C(         131),
       {  INT32_C(  1074241731),  INT32_C(   887570952), -INT32_C(   233045853),  INT32_C(   814110094) } },
+    { {  INT32_C(  1374511722), -INT32_C(  1075841375),  INT32_C(  1768218980),  INT32_C(   948754309) },
+      { -INT32_C(   937705734),  INT32_C(   937313536),  INT32_C(  1709416784),  INT32_C(   429817263) },
+      { -INT32_C(  2123723553), -INT32_C(   431994494), -INT32_C(  1336957909),  INT32_C(  1994972284) },
+       INT32_C(         132),
+      {  INT32_C(   135794762),  INT32_C(   641744896),  INT32_C(   616603664),  INT32_C(   295334918) } },
+    { { -INT32_C(  1690434662), -INT32_C(  1714283191),  INT32_C(  1845409214),  INT32_C(   310811954) },
+      { -INT32_C(  1416367831),  INT32_C(  1704055610), -INT32_C(   216670089),  INT32_C(  1466629564) },
+      {  INT32_C(  1257416705), -INT32_C(  2065447739), -INT32_C(  1393433990), -INT32_C(  1463912321) },
+       INT32_C(         133),
+      {  INT32_C(   773018724),  INT32_C(  1653350962),  INT32_C(   839952435),  INT32_C(  1162025648) } },
+    { { -INT32_C(  1554820759), -INT32_C(  1677073372), -INT32_C(  2121326908),  INT32_C(   500758812) },
+      {  INT32_C(  1734855330),  INT32_C(   149637774), -INT32_C(  1414144724), -INT32_C(  1101827243) },
+      { -INT32_C(   379476283),  INT32_C(  1334143626), -INT32_C(  1513089655), -INT32_C(  1329420274) },
+       INT32_C(         134),
+      {  INT32_C(   759507974),  INT32_C(  1265057792), -INT32_C(  1881091039),  INT32_C(   306258503) } },
+    { {  INT32_C(     1583474), -INT32_C(  1610022029),  INT32_C(   894156512), -INT32_C(   151806159) },
+      { -INT32_C(   790604475),  INT32_C(  1210017215), -INT32_C(  1980895366),  INT32_C(   154775447) },
+      {  INT32_C(  1275679192),  INT32_C(   904663637),  INT32_C(    40581072),  INT32_C(   486039254) },
+       INT32_C(         135),
+      { -INT32_C(  1075345459),  INT32_C(  1610284185), -INT32_C(   891460017),  INT32_C(    20213336) } },
   };
 
   simde__m128i a, b, c, r;
@@ -2558,83 +2034,29 @@ test_simde_mm_ternarylogic_epi32_33 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         131));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 128 ; i < (128 + 32) ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_5(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_34 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(  1374511722), -INT32_C(  1075841375),  INT32_C(  1768218980),  INT32_C(   948754309) },
-      { -INT32_C(   937705734),  INT32_C(   937313536),  INT32_C(  1709416784),  INT32_C(   429817263) },
-      { -INT32_C(  2123723553), -INT32_C(   431994494), -INT32_C(  1336957909),  INT32_C(  1994972284) },
-       INT32_C(         132),
-      {  INT32_C(   135794762),  INT32_C(   641744896),  INT32_C(   616603664),  INT32_C(   295334918) } },
-    { { -INT32_C(  1690434662), -INT32_C(  1714283191),  INT32_C(  1845409214),  INT32_C(   310811954) },
-      { -INT32_C(  1416367831),  INT32_C(  1704055610), -INT32_C(   216670089),  INT32_C(  1466629564) },
-      {  INT32_C(  1257416705), -INT32_C(  2065447739), -INT32_C(  1393433990), -INT32_C(  1463912321) },
-       INT32_C(         133),
-      {  INT32_C(   773018724),  INT32_C(  1653350962),  INT32_C(   839952435),  INT32_C(  1162025648) } },
-    { { -INT32_C(  1554820759), -INT32_C(  1677073372), -INT32_C(  2121326908),  INT32_C(   500758812) },
-      {  INT32_C(  1734855330),  INT32_C(   149637774), -INT32_C(  1414144724), -INT32_C(  1101827243) },
-      { -INT32_C(   379476283),  INT32_C(  1334143626), -INT32_C(  1513089655), -INT32_C(  1329420274) },
-       INT32_C(         134),
-      {  INT32_C(   759507974),  INT32_C(  1265057792), -INT32_C(  1881091039),  INT32_C(   306258503) } },
-    { {  INT32_C(     1583474), -INT32_C(  1610022029),  INT32_C(   894156512), -INT32_C(   151806159) },
-      { -INT32_C(   790604475),  INT32_C(  1210017215), -INT32_C(  1980895366),  INT32_C(   154775447) },
-      {  INT32_C(  1275679192),  INT32_C(   904663637),  INT32_C(    40581072),  INT32_C(   486039254) },
-       INT32_C(         135),
-      { -INT32_C(  1075345459),  INT32_C(  1610284185), -INT32_C(   891460017),  INT32_C(    20213336) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         132));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         133));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         134));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         135));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -2657,7 +2079,7 @@ test_simde_mm_ternarylogic_epi32_34 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_35 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_18 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -2686,6 +2108,26 @@ test_simde_mm_ternarylogic_epi32_35 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(  1017790775), -INT32_C(  1642537260),  INT32_C(  1258848165),  INT32_C(  1006521842) },
        INT32_C(         139),
       {  INT32_C(    58584953), -INT32_C(  1168707692), -INT32_C(   947357275),  INT32_C(   502959579) } },
+    { { -INT32_C(  1753824518), -INT32_C(  1196415480), -INT32_C(  1190525466),  INT32_C(   135430975) },
+      {  INT32_C(   382494785), -INT32_C(   340466618),  INT32_C(  1429716323),  INT32_C(    76559626) },
+      { -INT32_C(     6551817),  INT32_C(   330779693), -INT32_C(  1848852142), -INT32_C(  2036736188) },
+       INT32_C(         140),
+      {  INT32_C(   378284097),  INT32_C(  1135920198),  INT32_C(  1429584195),  INT32_C(    76559616) } },
+    { { -INT32_C(  1919130297), -INT32_C(  1384558518),  INT32_C(   402894861), -INT32_C(   602106907) },
+      { -INT32_C(   941901670),  INT32_C(  1473942021), -INT32_C(  1729583277), -INT32_C(   853638778) },
+      {  INT32_C(   828029671),  INT32_C(   417256202),  INT32_C(  1748033923),  INT32_C(   256134261) },
+       INT32_C(         141),
+      {  INT32_C(  1132181658),  INT32_C(  1390067381), -INT32_C(  1880313997),  INT32_C(   765927438) } },
+    { {  INT32_C(   181804805),  INT32_C(    90288305), -INT32_C(   576894633), -INT32_C(  1314210870) },
+      {  INT32_C(  2145518965),  INT32_C(  1553449432),  INT32_C(   398772130),  INT32_C(   421923092) },
+      { -INT32_C(   635175896),  INT32_C(    81757357), -INT32_C(  1746764595), -INT32_C(  1404466121) },
+       INT32_C(         142),
+      { -INT32_C(    14424968),  INT32_C(  1553974732),  INT32_C(   400750248),  INT32_C(   205851701) } },
+    { {  INT32_C(  1781214097), -INT32_C(  1882799124), -INT32_C(  1633252726), -INT32_C(  1128804973) },
+      {  INT32_C(  1989597897),  INT32_C(   729511262),  INT32_C(   683892209),  INT32_C(  2077494505) },
+      {  INT32_C(   619052855),  INT32_C(  1303620546), -INT32_C(   907323083), -INT32_C(   259677402) },
+       INT32_C(         143),
+      { -INT32_C(  1244340625),  INT32_C(  2033925459),  INT32_C(  1775992181),  INT32_C(  1942762092) } },
   };
 
   simde__m128i a, b, c, r;
@@ -2714,83 +2156,29 @@ test_simde_mm_ternarylogic_epi32_35 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         139));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 128 ; i < (128 + 32) ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_5(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_36 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(  1753824518), -INT32_C(  1196415480), -INT32_C(  1190525466),  INT32_C(   135430975) },
-      {  INT32_C(   382494785), -INT32_C(   340466618),  INT32_C(  1429716323),  INT32_C(    76559626) },
-      { -INT32_C(     6551817),  INT32_C(   330779693), -INT32_C(  1848852142), -INT32_C(  2036736188) },
-       INT32_C(         140),
-      {  INT32_C(   378284097),  INT32_C(  1135920198),  INT32_C(  1429584195),  INT32_C(    76559616) } },
-    { { -INT32_C(  1919130297), -INT32_C(  1384558518),  INT32_C(   402894861), -INT32_C(   602106907) },
-      { -INT32_C(   941901670),  INT32_C(  1473942021), -INT32_C(  1729583277), -INT32_C(   853638778) },
-      {  INT32_C(   828029671),  INT32_C(   417256202),  INT32_C(  1748033923),  INT32_C(   256134261) },
-       INT32_C(         141),
-      {  INT32_C(  1132181658),  INT32_C(  1390067381), -INT32_C(  1880313997),  INT32_C(   765927438) } },
-    { {  INT32_C(   181804805),  INT32_C(    90288305), -INT32_C(   576894633), -INT32_C(  1314210870) },
-      {  INT32_C(  2145518965),  INT32_C(  1553449432),  INT32_C(   398772130),  INT32_C(   421923092) },
-      { -INT32_C(   635175896),  INT32_C(    81757357), -INT32_C(  1746764595), -INT32_C(  1404466121) },
-       INT32_C(         142),
-      { -INT32_C(    14424968),  INT32_C(  1553974732),  INT32_C(   400750248),  INT32_C(   205851701) } },
-    { {  INT32_C(  1781214097), -INT32_C(  1882799124), -INT32_C(  1633252726), -INT32_C(  1128804973) },
-      {  INT32_C(  1989597897),  INT32_C(   729511262),  INT32_C(   683892209),  INT32_C(  2077494505) },
-      {  INT32_C(   619052855),  INT32_C(  1303620546), -INT32_C(   907323083), -INT32_C(   259677402) },
-       INT32_C(         143),
-      { -INT32_C(  1244340625),  INT32_C(  2033925459),  INT32_C(  1775992181),  INT32_C(  1942762092) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         140));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         141));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         142));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         143));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -2813,7 +2201,7 @@ test_simde_mm_ternarylogic_epi32_36 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_37 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_19 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -2842,6 +2230,26 @@ test_simde_mm_ternarylogic_epi32_37 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(   271440438), -INT32_C(  2031326995),  INT32_C(   420082591),  INT32_C(  1465809965) },
        INT32_C(         147),
       { -INT32_C(  1206964522), -INT32_C(  1014060651), -INT32_C(  1912761921),  INT32_C(   121455979) } },
+    { { -INT32_C(  1650868403), -INT32_C(  1235906851), -INT32_C(  1507174166), -INT32_C(  1536902438) },
+      { -INT32_C(   862701857),  INT32_C(  1045659807), -INT32_C(  1604887437),  INT32_C(   653768152) },
+      {  INT32_C(  1371770996),  INT32_C(   151525407),  INT32_C(  1269838449), -INT32_C(   856681236) },
+       INT32_C(         148),
+      {  INT32_C(     9181638), -INT32_C(  2147088803),  INT32_C(    72160488),  INT32_C(   107158474) } },
+    { { -INT32_C(   375880630),  INT32_C(  1999104772),  INT32_C(   538410568), -INT32_C(  1471803596) },
+      { -INT32_C(  1090909793), -INT32_C(  1815608798),  INT32_C(   551450676), -INT32_C(   689123700) },
+      {  INT32_C(  1455457618), -INT32_C(  1194465424), -INT32_C(  1696995994), -INT32_C(  1824382988) },
+       INT32_C(         149),
+      {  INT32_C(    27753127),  INT32_C(  1412569743),  INT32_C(  1160798873), -INT32_C(   319164913) } },
+    { {  INT32_C(  1263680553),  INT32_C(  1927158334),  INT32_C(   512998546), -INT32_C(   571179125) },
+      {  INT32_C(  1966388228),  INT32_C(    36503964), -INT32_C(   627308826),  INT32_C(  1332665894) },
+      {  INT32_C(  1503313947),  INT32_C(  1825339610), -INT32_C(  1081450700), -INT32_C(   476217634) },
+       INT32_C(         150),
+      {  INT32_C(  1744586806),  INT32_C(   473916280),  INT32_C(  2072372544),  INT32_C(  1896341363) } },
+    { { -INT32_C(   816262861), -INT32_C(  1177451054), -INT32_C(  1298961012),  INT32_C(  1711341899) },
+      { -INT32_C(  1681876031),  INT32_C(  1191676947), -INT32_C(   922250773),  INT32_C(  1135387664) },
+      {  INT32_C(  1192363125),  INT32_C(   369157002), -INT32_C(  1681353648),  INT32_C(  1459800469) },
+       INT32_C(         151),
+      {  INT32_C(   867135119), -INT32_C(   385942929), -INT32_C(   461608393), -INT32_C(    83919122) } },
   };
 
   simde__m128i a, b, c, r;
@@ -2870,83 +2278,29 @@ test_simde_mm_ternarylogic_epi32_37 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         147));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 128 ; i < (128 + 32) ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_5(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_38 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(  1650868403), -INT32_C(  1235906851), -INT32_C(  1507174166), -INT32_C(  1536902438) },
-      { -INT32_C(   862701857),  INT32_C(  1045659807), -INT32_C(  1604887437),  INT32_C(   653768152) },
-      {  INT32_C(  1371770996),  INT32_C(   151525407),  INT32_C(  1269838449), -INT32_C(   856681236) },
-       INT32_C(         148),
-      {  INT32_C(     9181638), -INT32_C(  2147088803),  INT32_C(    72160488),  INT32_C(   107158474) } },
-    { { -INT32_C(   375880630),  INT32_C(  1999104772),  INT32_C(   538410568), -INT32_C(  1471803596) },
-      { -INT32_C(  1090909793), -INT32_C(  1815608798),  INT32_C(   551450676), -INT32_C(   689123700) },
-      {  INT32_C(  1455457618), -INT32_C(  1194465424), -INT32_C(  1696995994), -INT32_C(  1824382988) },
-       INT32_C(         149),
-      {  INT32_C(    27753127),  INT32_C(  1412569743),  INT32_C(  1160798873), -INT32_C(   319164913) } },
-    { {  INT32_C(  1263680553),  INT32_C(  1927158334),  INT32_C(   512998546), -INT32_C(   571179125) },
-      {  INT32_C(  1966388228),  INT32_C(    36503964), -INT32_C(   627308826),  INT32_C(  1332665894) },
-      {  INT32_C(  1503313947),  INT32_C(  1825339610), -INT32_C(  1081450700), -INT32_C(   476217634) },
-       INT32_C(         150),
-      {  INT32_C(  1744586806),  INT32_C(   473916280),  INT32_C(  2072372544),  INT32_C(  1896341363) } },
-    { { -INT32_C(   816262861), -INT32_C(  1177451054), -INT32_C(  1298961012),  INT32_C(  1711341899) },
-      { -INT32_C(  1681876031),  INT32_C(  1191676947), -INT32_C(   922250773),  INT32_C(  1135387664) },
-      {  INT32_C(  1192363125),  INT32_C(   369157002), -INT32_C(  1681353648),  INT32_C(  1459800469) },
-       INT32_C(         151),
-      {  INT32_C(   867135119), -INT32_C(   385942929), -INT32_C(   461608393), -INT32_C(    83919122) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         148));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         149));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         150));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         151));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -2969,7 +2323,7 @@ test_simde_mm_ternarylogic_epi32_38 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_39 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_20 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -2998,6 +2352,26 @@ test_simde_mm_ternarylogic_epi32_39 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(    40836468),  INT32_C(   576946537), -INT32_C(  1544674953),  INT32_C(   565148394) },
        INT32_C(         155),
       {  INT32_C(   593717244),  INT32_C(   133412836),  INT32_C(   803565311), -INT32_C(  1347469341) } },
+    { {  INT32_C(  1845469434),  INT32_C(   524635624), -INT32_C(  1267533059),  INT32_C(   673534644) },
+      { -INT32_C(   668298129), -INT32_C(  1912894186), -INT32_C(  1724847697),  INT32_C(  1572593507) },
+      {  INT32_C(  1741339263),  INT32_C(    92672008), -INT32_C(  1095108342), -INT32_C(  1159274933) },
+       INT32_C(         156),
+      { -INT32_C(   803236625), -INT32_C(  1749368586), -INT32_C(  1720521894),  INT32_C(  1572528087) } },
+    { { -INT32_C(  1986915981),  INT32_C(  1293323678), -INT32_C(   639154570), -INT32_C(  1523080666) },
+      {  INT32_C(  1678573916),  INT32_C(   459969297), -INT32_C(   673635444),  INT32_C(  1972486146) },
+      {  INT32_C(  1878926545),  INT32_C(   683480241), -INT32_C(  2147376038), -INT32_C(  1574553530) },
+       INT32_C(         157),
+      { -INT32_C(   200418690), -INT32_C(   563578273), -INT32_C(  1371571799),  INT32_C(  2026391483) } },
+    { {  INT32_C(  1258763066),  INT32_C(  1399288262), -INT32_C(  1775615852), -INT32_C(   787760128) },
+      { -INT32_C(  1858008608),  INT32_C(  2025455133), -INT32_C(   386352222),  INT32_C(   764026611) },
+      {  INT32_C(   410620241), -INT32_C(  1754537982),  INT32_C(   556635424),  INT32_C(   837957969) },
+       INT32_C(         158),
+      { -INT32_C(   763384885), -INT32_C(  1128402983),  INT32_C(  2147483446), -INT32_C(   302801933) } },
+    { {  INT32_C(  1623405378), -INT32_C(   740787151),  INT32_C(   733728823),  INT32_C(  1079527151) },
+      { -INT32_C(   631713321), -INT32_C(   764296271), -INT32_C(  1426874791),  INT32_C(   450684375) },
+      {  INT32_C(  1249550105),  INT32_C(  1394496027),  INT32_C(   293525794), -INT32_C(   145566177) },
+       INT32_C(         159),
+      { -INT32_C(      131651),  INT32_C(  2125983711), -INT32_C(   730415156), -INT32_C(  1074266825) } },
   };
 
   simde__m128i a, b, c, r;
@@ -3026,83 +2400,29 @@ test_simde_mm_ternarylogic_epi32_39 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         155));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 128 ; i < (128 + 32) ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_5(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_40 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(  1845469434),  INT32_C(   524635624), -INT32_C(  1267533059),  INT32_C(   673534644) },
-      { -INT32_C(   668298129), -INT32_C(  1912894186), -INT32_C(  1724847697),  INT32_C(  1572593507) },
-      {  INT32_C(  1741339263),  INT32_C(    92672008), -INT32_C(  1095108342), -INT32_C(  1159274933) },
-       INT32_C(         156),
-      { -INT32_C(   803236625), -INT32_C(  1749368586), -INT32_C(  1720521894),  INT32_C(  1572528087) } },
-    { { -INT32_C(  1986915981),  INT32_C(  1293323678), -INT32_C(   639154570), -INT32_C(  1523080666) },
-      {  INT32_C(  1678573916),  INT32_C(   459969297), -INT32_C(   673635444),  INT32_C(  1972486146) },
-      {  INT32_C(  1878926545),  INT32_C(   683480241), -INT32_C(  2147376038), -INT32_C(  1574553530) },
-       INT32_C(         157),
-      { -INT32_C(   200418690), -INT32_C(   563578273), -INT32_C(  1371571799),  INT32_C(  2026391483) } },
-    { {  INT32_C(  1258763066),  INT32_C(  1399288262), -INT32_C(  1775615852), -INT32_C(   787760128) },
-      { -INT32_C(  1858008608),  INT32_C(  2025455133), -INT32_C(   386352222),  INT32_C(   764026611) },
-      {  INT32_C(   410620241), -INT32_C(  1754537982),  INT32_C(   556635424),  INT32_C(   837957969) },
-       INT32_C(         158),
-      { -INT32_C(   763384885), -INT32_C(  1128402983),  INT32_C(  2147483446), -INT32_C(   302801933) } },
-    { {  INT32_C(  1623405378), -INT32_C(   740787151),  INT32_C(   733728823),  INT32_C(  1079527151) },
-      { -INT32_C(   631713321), -INT32_C(   764296271), -INT32_C(  1426874791),  INT32_C(   450684375) },
-      {  INT32_C(  1249550105),  INT32_C(  1394496027),  INT32_C(   293525794), -INT32_C(   145566177) },
-       INT32_C(         159),
-      { -INT32_C(      131651),  INT32_C(  2125983711), -INT32_C(   730415156), -INT32_C(  1074266825) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         156));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         157));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         158));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         159));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -3125,7 +2445,7 @@ test_simde_mm_ternarylogic_epi32_40 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_41 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_21 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -3154,6 +2474,26 @@ test_simde_mm_ternarylogic_epi32_41 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(  1480471607), -INT32_C(   144708758),  INT32_C(  1884383114),  INT32_C(  1773762226) },
        INT32_C(         163),
       { -INT32_C(   597273580),  INT32_C(  1730112120),  INT32_C(  1974601674), -INT32_C(   839822680) } },
+    { {  INT32_C(   697587361),  INT32_C(  1002656775), -INT32_C(  1560604597), -INT32_C(   321582667) },
+      { -INT32_C(  1488710595), -INT32_C(  1969249281), -INT32_C(  1107628022),  INT32_C(   136754023) },
+      {  INT32_C(   288471561),  INT32_C(  1514992911), -INT32_C(  1157806075), -INT32_C(  1884892591) },
+       INT32_C(         164),
+      { -INT32_C(  2024795627), -INT32_C(  1706010889), -INT32_C(  1476812799), -INT32_C(  1937498093) } },
+    { { -INT32_C(   432608538), -INT32_C(  1737435763),  INT32_C(   760572614),  INT32_C(   641039133) },
+      {  INT32_C(  1161258806),  INT32_C(  1637844060),  INT32_C(   488414412),  INT32_C(  1437385327) },
+      {  INT32_C(   977003437),  INT32_C(  2127735736),  INT32_C(   850077461), -INT32_C(   648420957) },
+       INT32_C(         165),
+      {  INT32_C(   603125428),  INT32_C(   425558474), -INT32_C(   536759764),  INT32_C(     9659713) } },
+    { { -INT32_C(  1541500856), -INT32_C(   536494828), -INT32_C(   906092198), -INT32_C(  1860261148) },
+      {  INT32_C(  1187732109),  INT32_C(   465870341),  INT32_C(  1749905605), -INT32_C(  1723750831) },
+      {  INT32_C(  1262313271),  INT32_C(  1999389213),  INT32_C(  1212164708),  INT32_C(  1658412756) },
+       INT32_C(         166),
+      {  INT32_C(   167515570),  INT32_C(  1827422236),  INT32_C(  1749121761),  INT32_C(  1788369605) } },
+    { { -INT32_C(  1096244040),  INT32_C(   148466754),  INT32_C(   762324700),  INT32_C(    80130765) },
+      {  INT32_C(   776930065), -INT32_C(  1431995578),  INT32_C(  2062738853), -INT32_C(    52638908) },
+      { -INT32_C(  1296399249), -INT32_C(   843410448), -INT32_C(  2013648198), -INT32_C(   292830756) },
+       INT32_C(         167),
+      { -INT32_C(   201466002),  INT32_C(  2141094141), -INT32_C(   713163877),  INT32_C(   397643006) } },
   };
 
   simde__m128i a, b, c, r;
@@ -3182,83 +2522,29 @@ test_simde_mm_ternarylogic_epi32_41 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         163));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 160 ; i < 192 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_6(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_42 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(   697587361),  INT32_C(  1002656775), -INT32_C(  1560604597), -INT32_C(   321582667) },
-      { -INT32_C(  1488710595), -INT32_C(  1969249281), -INT32_C(  1107628022),  INT32_C(   136754023) },
-      {  INT32_C(   288471561),  INT32_C(  1514992911), -INT32_C(  1157806075), -INT32_C(  1884892591) },
-       INT32_C(         164),
-      { -INT32_C(  2024795627), -INT32_C(  1706010889), -INT32_C(  1476812799), -INT32_C(  1937498093) } },
-    { { -INT32_C(   432608538), -INT32_C(  1737435763),  INT32_C(   760572614),  INT32_C(   641039133) },
-      {  INT32_C(  1161258806),  INT32_C(  1637844060),  INT32_C(   488414412),  INT32_C(  1437385327) },
-      {  INT32_C(   977003437),  INT32_C(  2127735736),  INT32_C(   850077461), -INT32_C(   648420957) },
-       INT32_C(         165),
-      {  INT32_C(   603125428),  INT32_C(   425558474), -INT32_C(   536759764),  INT32_C(     9659713) } },
-    { { -INT32_C(  1541500856), -INT32_C(   536494828), -INT32_C(   906092198), -INT32_C(  1860261148) },
-      {  INT32_C(  1187732109),  INT32_C(   465870341),  INT32_C(  1749905605), -INT32_C(  1723750831) },
-      {  INT32_C(  1262313271),  INT32_C(  1999389213),  INT32_C(  1212164708),  INT32_C(  1658412756) },
-       INT32_C(         166),
-      {  INT32_C(   167515570),  INT32_C(  1827422236),  INT32_C(  1749121761),  INT32_C(  1788369605) } },
-    { { -INT32_C(  1096244040),  INT32_C(   148466754),  INT32_C(   762324700),  INT32_C(    80130765) },
-      {  INT32_C(   776930065), -INT32_C(  1431995578),  INT32_C(  2062738853), -INT32_C(    52638908) },
-      { -INT32_C(  1296399249), -INT32_C(   843410448), -INT32_C(  2013648198), -INT32_C(   292830756) },
-       INT32_C(         167),
-      { -INT32_C(   201466002),  INT32_C(  2141094141), -INT32_C(   713163877),  INT32_C(   397643006) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         164));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         165));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         166));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         167));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -3281,7 +2567,7 @@ test_simde_mm_ternarylogic_epi32_42 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_43 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_22 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -3310,6 +2596,26 @@ test_simde_mm_ternarylogic_epi32_43 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(    79704826), -INT32_C(  1172879138), -INT32_C(  1521097608),  INT32_C(  1301402371) },
        INT32_C(         171),
       { -INT32_C(    75502202), -INT32_C(  1170780962), -INT32_C(   445255813),  INT32_C(  1603392467) } },
+    { { -INT32_C(  1969678246),  INT32_C(   275346132), -INT32_C(  1063965773), -INT32_C(  1727972462) },
+      { -INT32_C(   426491640),  INT32_C(    44084361), -INT32_C(  1800931952),  INT32_C(   585185736) },
+      {  INT32_C(   632060497), -INT32_C(  1623910676), -INT32_C(   731854015),  INT32_C(   242049286) },
+       INT32_C(         172),
+      {  INT32_C(  1686919504),  INT32_C(   312581837), -INT32_C(   735912191),  INT32_C(   719397194) } },
+    { {  INT32_C(   754188706),  INT32_C(  1043240109),  INT32_C(  1372771721),  INT32_C(  1618195214) },
+      {  INT32_C(   428154669),  INT32_C(  2008660789), -INT32_C(  1941235322),  INT32_C(   496679034) },
+      {  INT32_C(  1732873913), -INT32_C(  1415219422),  INT32_C(  1543272268),  INT32_C(  1471901482) },
+       INT32_C(         173),
+      { -INT32_C(  1253867795),  INT32_C(  1811234672), -INT32_C(    36086466), -INT32_C(   574673925) } },
+    { { -INT32_C(   999276402), -INT32_C(  2126829061), -INT32_C(  1123187134), -INT32_C(   136665282) },
+      {  INT32_C(  1465787189), -INT32_C(   436075622), -INT32_C(  1539178886), -INT32_C(    50594707) },
+      {  INT32_C(   952134717), -INT32_C(   658834539), -INT32_C(  1080703103), -INT32_C(  1531547793) },
+       INT32_C(         174),
+      {  INT32_C(  1003384637), -INT32_C(    21300331), -INT32_C(  1076494407), -INT32_C(  1397260433) } },
+    { {  INT32_C(   754718098), -INT32_C(  1827471848),  INT32_C(  1782011133), -INT32_C(  1922682032) },
+      {  INT32_C(   885401247), -INT32_C(  1576239071), -INT32_C(  1235115705), -INT32_C(  1571088368) },
+      {  INT32_C(  1171150637),  INT32_C(  1389945173), -INT32_C(  2051207115), -INT32_C(   502062269) },
+       INT32_C(         175),
+      { -INT32_C(   674234515),  INT32_C(  2130567671), -INT32_C(  1778533577), -INT32_C(   224661521) } },
   };
 
   simde__m128i a, b, c, r;
@@ -3338,83 +2644,29 @@ test_simde_mm_ternarylogic_epi32_43 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         171));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 160 ; i < 192 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_6(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_44 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(  1969678246),  INT32_C(   275346132), -INT32_C(  1063965773), -INT32_C(  1727972462) },
-      { -INT32_C(   426491640),  INT32_C(    44084361), -INT32_C(  1800931952),  INT32_C(   585185736) },
-      {  INT32_C(   632060497), -INT32_C(  1623910676), -INT32_C(   731854015),  INT32_C(   242049286) },
-       INT32_C(         172),
-      {  INT32_C(  1686919504),  INT32_C(   312581837), -INT32_C(   735912191),  INT32_C(   719397194) } },
-    { {  INT32_C(   754188706),  INT32_C(  1043240109),  INT32_C(  1372771721),  INT32_C(  1618195214) },
-      {  INT32_C(   428154669),  INT32_C(  2008660789), -INT32_C(  1941235322),  INT32_C(   496679034) },
-      {  INT32_C(  1732873913), -INT32_C(  1415219422),  INT32_C(  1543272268),  INT32_C(  1471901482) },
-       INT32_C(         173),
-      { -INT32_C(  1253867795),  INT32_C(  1811234672), -INT32_C(    36086466), -INT32_C(   574673925) } },
-    { { -INT32_C(   999276402), -INT32_C(  2126829061), -INT32_C(  1123187134), -INT32_C(   136665282) },
-      {  INT32_C(  1465787189), -INT32_C(   436075622), -INT32_C(  1539178886), -INT32_C(    50594707) },
-      {  INT32_C(   952134717), -INT32_C(   658834539), -INT32_C(  1080703103), -INT32_C(  1531547793) },
-       INT32_C(         174),
-      {  INT32_C(  1003384637), -INT32_C(    21300331), -INT32_C(  1076494407), -INT32_C(  1397260433) } },
-    { {  INT32_C(   754718098), -INT32_C(  1827471848),  INT32_C(  1782011133), -INT32_C(  1922682032) },
-      {  INT32_C(   885401247), -INT32_C(  1576239071), -INT32_C(  1235115705), -INT32_C(  1571088368) },
-      {  INT32_C(  1171150637),  INT32_C(  1389945173), -INT32_C(  2051207115), -INT32_C(   502062269) },
-       INT32_C(         175),
-      { -INT32_C(   674234515),  INT32_C(  2130567671), -INT32_C(  1778533577), -INT32_C(   224661521) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         172));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         173));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         174));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         175));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -3437,7 +2689,7 @@ test_simde_mm_ternarylogic_epi32_44 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_45 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_23 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -3466,6 +2718,26 @@ test_simde_mm_ternarylogic_epi32_45 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(  1752389349),  INT32_C(   626919921),  INT32_C(  1373243506), -INT32_C(  1877430487) },
        INT32_C(         179),
       {  INT32_C(  1446816408), -INT32_C(   153269512), -INT32_C(  1852068097), -INT32_C(   778767379) } },
+    { { -INT32_C(   598875228), -INT32_C(  1175876711), -INT32_C(   164048924),  INT32_C(   405058812) },
+      {  INT32_C(  1320137053),  INT32_C(   745737658),  INT32_C(  1048464661), -INT32_C(  1580296452) },
+      {  INT32_C(   326966138), -INT32_C(  1949538649),  INT32_C(   830604597),  INT32_C(   373925561) },
+       INT32_C(         180),
+      { -INT32_C(  1865464927), -INT32_C(  1646624127), -INT32_C(   129726492), -INT32_C(  1180523336) } },
+    { {  INT32_C(   308607319),  INT32_C(   473880326),  INT32_C(   542817316), -INT32_C(   842978989) },
+      { -INT32_C(   337625532), -INT32_C(   646468444),  INT32_C(  1779169713), -INT32_C(   142584673) },
+      {  INT32_C(  1409934413), -INT32_C(   546289733),  INT32_C(  1459669508),  INT32_C(   941933043) },
+       INT32_C(         181),
+      { -INT32_C(  1181293577),  INT32_C(  1018789698), -INT32_C(  1997173281),  INT32_C(   173752159) } },
+    { { -INT32_C(  1541209088),  INT32_C(  1652464304),  INT32_C(   869042579),  INT32_C(   724192733) },
+      { -INT32_C(   310430927),  INT32_C(  2127359866), -INT32_C(  1378497351), -INT32_C(  1897530994) },
+      { -INT32_C(  1372452611),  INT32_C(   907063459),  INT32_C(   392813625),  INT32_C(  1531089705) },
+       INT32_C(         182),
+      { -INT32_C(   412205108),  INT32_C(   716363241), -INT32_C(  1686595309), -INT32_C(     7395461) } },
+    { {  INT32_C(  1095287238),  INT32_C(  1774130352),  INT32_C(  1863751137), -INT32_C(  1929512050) },
+      { -INT32_C(  1489359100),  INT32_C(   433933024),  INT32_C(  1345341222), -INT32_C(  1582599462) },
+      { -INT32_C(   471665869), -INT32_C(   397565689), -INT32_C(   984128714),  INT32_C(  1666274399) },
+       INT32_C(         183),
+      {  INT32_C(  1574297083), -INT32_C(    30408865), -INT32_C(       17927),  INT32_C(  1582816559) } },
   };
 
   simde__m128i a, b, c, r;
@@ -3494,83 +2766,29 @@ test_simde_mm_ternarylogic_epi32_45 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         179));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 160 ; i < 192 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_6(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_46 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(   598875228), -INT32_C(  1175876711), -INT32_C(   164048924),  INT32_C(   405058812) },
-      {  INT32_C(  1320137053),  INT32_C(   745737658),  INT32_C(  1048464661), -INT32_C(  1580296452) },
-      {  INT32_C(   326966138), -INT32_C(  1949538649),  INT32_C(   830604597),  INT32_C(   373925561) },
-       INT32_C(         180),
-      { -INT32_C(  1865464927), -INT32_C(  1646624127), -INT32_C(   129726492), -INT32_C(  1180523336) } },
-    { {  INT32_C(   308607319),  INT32_C(   473880326),  INT32_C(   542817316), -INT32_C(   842978989) },
-      { -INT32_C(   337625532), -INT32_C(   646468444),  INT32_C(  1779169713), -INT32_C(   142584673) },
-      {  INT32_C(  1409934413), -INT32_C(   546289733),  INT32_C(  1459669508),  INT32_C(   941933043) },
-       INT32_C(         181),
-      { -INT32_C(  1181293577),  INT32_C(  1018789698), -INT32_C(  1997173281),  INT32_C(   173752159) } },
-    { { -INT32_C(  1541209088),  INT32_C(  1652464304),  INT32_C(   869042579),  INT32_C(   724192733) },
-      { -INT32_C(   310430927),  INT32_C(  2127359866), -INT32_C(  1378497351), -INT32_C(  1897530994) },
-      { -INT32_C(  1372452611),  INT32_C(   907063459),  INT32_C(   392813625),  INT32_C(  1531089705) },
-       INT32_C(         182),
-      { -INT32_C(   412205108),  INT32_C(   716363241), -INT32_C(  1686595309), -INT32_C(     7395461) } },
-    { {  INT32_C(  1095287238),  INT32_C(  1774130352),  INT32_C(  1863751137), -INT32_C(  1929512050) },
-      { -INT32_C(  1489359100),  INT32_C(   433933024),  INT32_C(  1345341222), -INT32_C(  1582599462) },
-      { -INT32_C(   471665869), -INT32_C(   397565689), -INT32_C(   984128714),  INT32_C(  1666274399) },
-       INT32_C(         183),
-      {  INT32_C(  1574297083), -INT32_C(    30408865), -INT32_C(       17927),  INT32_C(  1582816559) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         180));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         181));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         182));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         183));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -3593,7 +2811,7 @@ test_simde_mm_ternarylogic_epi32_46 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_47 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_24 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -3622,6 +2840,26 @@ test_simde_mm_ternarylogic_epi32_47 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(  1789299009), -INT32_C(  1928383609),  INT32_C(  1367067427), -INT32_C(   771408705) },
        INT32_C(         187),
       { -INT32_C(  1109393409), -INT32_C(  1086343249), -INT32_C(    67371221), -INT32_C(   753958913) } },
+    { { -INT32_C(   173443680), -INT32_C(   457280018), -INT32_C(    50805899),  INT32_C(   329968211) },
+      { -INT32_C(   408419232),  INT32_C(  1517664055),  INT32_C(  1101852802), -INT32_C(   871059156) },
+      {  INT32_C(   348306726), -INT32_C(  1476886478), -INT32_C(  1750863549),  INT32_C(  1001017051) },
+       INT32_C(         188),
+      {  INT32_C(   377583072), -INT32_C(  1090796805), -INT32_C(  1108020233), -INT32_C(   541172865) } },
+    { { -INT32_C(  1994239406), -INT32_C(  1931176182), -INT32_C(  1278308217),  INT32_C(  1736499777) },
+      { -INT32_C(   780385633),  INT32_C(   108557506),  INT32_C(  1084037989), -INT32_C(  1149548695) },
+      { -INT32_C(  1555718503), -INT32_C(  1120917195), -INT32_C(    93258055),  INT32_C(  2137125088) },
+       INT32_C(         189),
+      { -INT32_C(   572640259), -INT32_C(   826285112), -INT32_C(   145515549), -INT32_C(        4738) } },
+    { { -INT32_C(   179249870), -INT32_C(  1208235950),  INT32_C(  1308137699),  INT32_C(  2013819871) },
+      {  INT32_C(  1193037073),  INT32_C(   788810870),  INT32_C(   707359818), -INT32_C(  1750496411) },
+      { -INT32_C(  1165166232), -INT32_C(  1535998015), -INT32_C(    17733089), -INT32_C(   277349667) },
+       INT32_C(         190),
+      { -INT32_C(  1160971925), -INT32_C(  1124104219), -INT32_C(      921921), -INT32_C(   268961025) } },
+    { { -INT32_C(  1103719609),  INT32_C(   703412959),  INT32_C(   324212654),  INT32_C(   179043490) },
+      { -INT32_C(  1228589067), -INT32_C(   564512833),  INT32_C(  2128432289), -INT32_C(  1922214842) },
+      { -INT32_C(   968121369), -INT32_C(  1930479139), -INT32_C(   224443824),  INT32_C(   872172094) },
+       INT32_C(         191),
+      { -INT32_C(   805572609), -INT32_C(         515), -INT32_C(     4195489), -INT32_C(   134288385) } },
   };
 
   simde__m128i a, b, c, r;
@@ -3650,83 +2888,29 @@ test_simde_mm_ternarylogic_epi32_47 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         187));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 160 ; i < 192 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_6(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_48 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(   173443680), -INT32_C(   457280018), -INT32_C(    50805899),  INT32_C(   329968211) },
-      { -INT32_C(   408419232),  INT32_C(  1517664055),  INT32_C(  1101852802), -INT32_C(   871059156) },
-      {  INT32_C(   348306726), -INT32_C(  1476886478), -INT32_C(  1750863549),  INT32_C(  1001017051) },
-       INT32_C(         188),
-      {  INT32_C(   377583072), -INT32_C(  1090796805), -INT32_C(  1108020233), -INT32_C(   541172865) } },
-    { { -INT32_C(  1994239406), -INT32_C(  1931176182), -INT32_C(  1278308217),  INT32_C(  1736499777) },
-      { -INT32_C(   780385633),  INT32_C(   108557506),  INT32_C(  1084037989), -INT32_C(  1149548695) },
-      { -INT32_C(  1555718503), -INT32_C(  1120917195), -INT32_C(    93258055),  INT32_C(  2137125088) },
-       INT32_C(         189),
-      { -INT32_C(   572640259), -INT32_C(   826285112), -INT32_C(   145515549), -INT32_C(        4738) } },
-    { { -INT32_C(   179249870), -INT32_C(  1208235950),  INT32_C(  1308137699),  INT32_C(  2013819871) },
-      {  INT32_C(  1193037073),  INT32_C(   788810870),  INT32_C(   707359818), -INT32_C(  1750496411) },
-      { -INT32_C(  1165166232), -INT32_C(  1535998015), -INT32_C(    17733089), -INT32_C(   277349667) },
-       INT32_C(         190),
-      { -INT32_C(  1160971925), -INT32_C(  1124104219), -INT32_C(      921921), -INT32_C(   268961025) } },
-    { { -INT32_C(  1103719609),  INT32_C(   703412959),  INT32_C(   324212654),  INT32_C(   179043490) },
-      { -INT32_C(  1228589067), -INT32_C(   564512833),  INT32_C(  2128432289), -INT32_C(  1922214842) },
-      { -INT32_C(   968121369), -INT32_C(  1930479139), -INT32_C(   224443824),  INT32_C(   872172094) },
-       INT32_C(         191),
-      { -INT32_C(   805572609), -INT32_C(         515), -INT32_C(     4195489), -INT32_C(   134288385) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         188));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         189));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         190));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         191));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -3749,7 +2933,7 @@ test_simde_mm_ternarylogic_epi32_48 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_49 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_25 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -3778,6 +2962,26 @@ test_simde_mm_ternarylogic_epi32_49 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(  1394277468), -INT32_C(   376111675),  INT32_C(  1546296241),  INT32_C(  1973915405) },
        INT32_C(         195),
       { -INT32_C(  1756513400),  INT32_C(   109216223),  INT32_C(   423426711), -INT32_C(  2107983550) } },
+    { { -INT32_C(   788385285),  INT32_C(   864723176),  INT32_C(  1742360145), -INT32_C(   543319165) },
+      {  INT32_C(  1563605143),  INT32_C(  1732691637),  INT32_C(  1875079266), -INT32_C(    85627905) },
+      { -INT32_C(  2066946148), -INT32_C(   659073401),  INT32_C(   658477732), -INT32_C(   989340371) },
+       INT32_C(         196),
+      {  INT32_C(  1496463507),  INT32_C(   658669744),  INT32_C(  1875009602), -INT32_C(    85644333) } },
+    { {  INT32_C(  1243756949),  INT32_C(  1655793664), -INT32_C(   657361448),  INT32_C(  2094184160) },
+      {  INT32_C(   604020381), -INT32_C(  1711491084),  INT32_C(  2009087049), -INT32_C(  1371748583) },
+      {  INT32_C(    33054209), -INT32_C(  1637635386), -INT32_C(     9030625), -INT32_C(  2005186069) },
+       INT32_C(         197),
+      { -INT32_C(  1274701569),  INT32_C(    29111609),  INT32_C(  1355333224),  INT32_C(   789874196) } },
+    { { -INT32_C(   592610329),  INT32_C(  2088085810), -INT32_C(    17615387), -INT32_C(    22269955) },
+      {  INT32_C(  1409262989),  INT32_C(  1861313103), -INT32_C(  2123536234), -INT32_C(  1744115535) },
+      { -INT32_C(  1787512989),  INT32_C(  1175578976),  INT32_C(   474219551), -INT32_C(  1071976141) },
+       INT32_C(         198),
+      {  INT32_C(  1387209101),  INT32_C(  1827742223), -INT32_C(  2123798388), -INT32_C(  1743243085) } },
+    { { -INT32_C(   451733098),  INT32_C(   290653563),  INT32_C(   512999533),  INT32_C(   196517288) },
+      { -INT32_C(  1264571564),  INT32_C(   872067604), -INT32_C(   363905098), -INT32_C(   961910480) },
+      { -INT32_C(    39076222),  INT32_C(   806354627),  INT32_C(  1716429502), -INT32_C(  1821309889) },
+       INT32_C(         199),
+      { -INT32_C(  1370698371), -INT32_C(   537507692), -INT32_C(  1960633052),  INT32_C(  1995139943) } },
   };
 
   simde__m128i a, b, c, r;
@@ -3806,83 +3010,29 @@ test_simde_mm_ternarylogic_epi32_49 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         195));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 192 ; i < (192 + 32) ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_7(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_50 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(   788385285),  INT32_C(   864723176),  INT32_C(  1742360145), -INT32_C(   543319165) },
-      {  INT32_C(  1563605143),  INT32_C(  1732691637),  INT32_C(  1875079266), -INT32_C(    85627905) },
-      { -INT32_C(  2066946148), -INT32_C(   659073401),  INT32_C(   658477732), -INT32_C(   989340371) },
-       INT32_C(         196),
-      {  INT32_C(  1496463507),  INT32_C(   658669744),  INT32_C(  1875009602), -INT32_C(    85644333) } },
-    { {  INT32_C(  1243756949),  INT32_C(  1655793664), -INT32_C(   657361448),  INT32_C(  2094184160) },
-      {  INT32_C(   604020381), -INT32_C(  1711491084),  INT32_C(  2009087049), -INT32_C(  1371748583) },
-      {  INT32_C(    33054209), -INT32_C(  1637635386), -INT32_C(     9030625), -INT32_C(  2005186069) },
-       INT32_C(         197),
-      { -INT32_C(  1274701569),  INT32_C(    29111609),  INT32_C(  1355333224),  INT32_C(   789874196) } },
-    { { -INT32_C(   592610329),  INT32_C(  2088085810), -INT32_C(    17615387), -INT32_C(    22269955) },
-      {  INT32_C(  1409262989),  INT32_C(  1861313103), -INT32_C(  2123536234), -INT32_C(  1744115535) },
-      { -INT32_C(  1787512989),  INT32_C(  1175578976),  INT32_C(   474219551), -INT32_C(  1071976141) },
-       INT32_C(         198),
-      {  INT32_C(  1387209101),  INT32_C(  1827742223), -INT32_C(  2123798388), -INT32_C(  1743243085) } },
-    { { -INT32_C(   451733098),  INT32_C(   290653563),  INT32_C(   512999533),  INT32_C(   196517288) },
-      { -INT32_C(  1264571564),  INT32_C(   872067604), -INT32_C(   363905098), -INT32_C(   961910480) },
-      { -INT32_C(    39076222),  INT32_C(   806354627),  INT32_C(  1716429502), -INT32_C(  1821309889) },
-       INT32_C(         199),
-      { -INT32_C(  1370698371), -INT32_C(   537507692), -INT32_C(  1960633052),  INT32_C(  1995139943) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         196));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         197));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         198));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         199));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -3905,7 +3055,7 @@ test_simde_mm_ternarylogic_epi32_50 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_51 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_26 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -3934,6 +3084,26 @@ test_simde_mm_ternarylogic_epi32_51 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(   108110231),  INT32_C(  1079607804), -INT32_C(   305549353),  INT32_C(  1894755302) },
        INT32_C(         203),
       {  INT32_C(  1505552524), -INT32_C(  1887734403),  INT32_C(  1876749727),  INT32_C(  1974311678) } },
+    { { -INT32_C(   427697037),  INT32_C(   418775536), -INT32_C(   466260755), -INT32_C(  1479741122) },
+      {  INT32_C(  1268800335), -INT32_C(  1282672164), -INT32_C(  1902095192),  INT32_C(  1946062592) },
+      {  INT32_C(  1549369451),  INT32_C(  1853116289), -INT32_C(   112023109), -INT32_C(   375382374) },
+       INT32_C(         204),
+      {  INT32_C(  1268800335), -INT32_C(  1282672164), -INT32_C(  1902095192),  INT32_C(  1946062592) } },
+    { {  INT32_C(  1429487737), -INT32_C(   502743238),  INT32_C(   342992916), -INT32_C(  1551405257) },
+      {  INT32_C(  1895817711), -INT32_C(   320965840), -INT32_C(  1226493924), -INT32_C(   929069489) },
+      {  INT32_C(     2020294), -INT32_C(  1495062894),  INT32_C(   112874703), -INT32_C(  1280752957) },
+       INT32_C(         205),
+      { -INT32_C(    83890705), -INT32_C(    35753099), -INT32_C(     1756356), -INT32_C(   857762225) } },
+    { {  INT32_C(  1394845731),  INT32_C(   926876187), -INT32_C(  2115164878),  INT32_C(  1900711083) },
+      { -INT32_C(   227383201),  INT32_C(  1570264462),  INT32_C(  1818514345), -INT32_C(  1205924459) },
+      { -INT32_C(   787790922),  INT32_C(  1997097797),  INT32_C(   469366384), -INT32_C(   494124157) },
+       INT32_C(         206),
+      { -INT32_C(   226858017),  INT32_C(  1570266574),  INT32_C(  2121585641), -INT32_C(  1163964523) } },
+    { {  INT32_C(   970260139), -INT32_C(    57184941),  INT32_C(  1433009088), -INT32_C(  1106409464) },
+      {  INT32_C(   277878987), -INT32_C(   746022557),  INT32_C(   317620623),  INT32_C(  1878358980) },
+      { -INT32_C(   844576391), -INT32_C(   154583242),  INT32_C(  1129001530), -INT32_C(  2046732101) },
+       INT32_C(         207),
+      { -INT32_C(   692381217), -INT32_C(   739730449), -INT32_C(  1157724737),  INT32_C(  1878491127) } },
   };
 
   simde__m128i a, b, c, r;
@@ -3962,83 +3132,29 @@ test_simde_mm_ternarylogic_epi32_51 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         203));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 192 ; i < (192 + 32) ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_7(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_52 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(   427697037),  INT32_C(   418775536), -INT32_C(   466260755), -INT32_C(  1479741122) },
-      {  INT32_C(  1268800335), -INT32_C(  1282672164), -INT32_C(  1902095192),  INT32_C(  1946062592) },
-      {  INT32_C(  1549369451),  INT32_C(  1853116289), -INT32_C(   112023109), -INT32_C(   375382374) },
-       INT32_C(         204),
-      {  INT32_C(  1268800335), -INT32_C(  1282672164), -INT32_C(  1902095192),  INT32_C(  1946062592) } },
-    { {  INT32_C(  1429487737), -INT32_C(   502743238),  INT32_C(   342992916), -INT32_C(  1551405257) },
-      {  INT32_C(  1895817711), -INT32_C(   320965840), -INT32_C(  1226493924), -INT32_C(   929069489) },
-      {  INT32_C(     2020294), -INT32_C(  1495062894),  INT32_C(   112874703), -INT32_C(  1280752957) },
-       INT32_C(         205),
-      { -INT32_C(    83890705), -INT32_C(    35753099), -INT32_C(     1756356), -INT32_C(   857762225) } },
-    { {  INT32_C(  1394845731),  INT32_C(   926876187), -INT32_C(  2115164878),  INT32_C(  1900711083) },
-      { -INT32_C(   227383201),  INT32_C(  1570264462),  INT32_C(  1818514345), -INT32_C(  1205924459) },
-      { -INT32_C(   787790922),  INT32_C(  1997097797),  INT32_C(   469366384), -INT32_C(   494124157) },
-       INT32_C(         206),
-      { -INT32_C(   226858017),  INT32_C(  1570266574),  INT32_C(  2121585641), -INT32_C(  1163964523) } },
-    { {  INT32_C(   970260139), -INT32_C(    57184941),  INT32_C(  1433009088), -INT32_C(  1106409464) },
-      {  INT32_C(   277878987), -INT32_C(   746022557),  INT32_C(   317620623),  INT32_C(  1878358980) },
-      { -INT32_C(   844576391), -INT32_C(   154583242),  INT32_C(  1129001530), -INT32_C(  2046732101) },
-       INT32_C(         207),
-      { -INT32_C(   692381217), -INT32_C(   739730449), -INT32_C(  1157724737),  INT32_C(  1878491127) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         204));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         205));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         206));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         207));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -4061,7 +3177,7 @@ test_simde_mm_ternarylogic_epi32_52 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_53 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_27 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -4090,6 +3206,26 @@ test_simde_mm_ternarylogic_epi32_53 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(  1556039370), -INT32_C(   299640475), -INT32_C(  1154565448),  INT32_C(   255921799) },
        INT32_C(         211),
       {  INT32_C(  1165710965),  INT32_C(  1205446072),  INT32_C(   804345097), -INT32_C(   471730779) } },
+    { { -INT32_C(    30679084),  INT32_C(  1412846293),  INT32_C(   457166531), -INT32_C(   877216363) },
+      { -INT32_C(   596707722), -INT32_C(  1999990321), -INT32_C(   767297461), -INT32_C(   605977593) },
+      {  INT32_C(   970591331),  INT32_C(   579670111),  INT32_C(  1950207199),  INT32_C(     4191114) },
+       INT32_C(         212),
+      { -INT32_C(   567281708), -INT32_C(   596454459), -INT32_C(  1690043837), -INT32_C(   606041067) } },
+    { { -INT32_C(  1176719895), -INT32_C(  1992186050), -INT32_C(  1503951713),  INT32_C(  1820474376) },
+      { -INT32_C(  1465557943),  INT32_C(  1271542380), -INT32_C(  2000746498), -INT32_C(   460718341) },
+      { -INT32_C(   375560789), -INT32_C(  1401758196),  INT32_C(  1800588642),  INT32_C(  1406653450) },
+       INT32_C(         213),
+      { -INT32_C(  1092182435),  INT32_C(  1540170751), -INT32_C(  1799407969), -INT32_C(   324517891) } },
+    { { -INT32_C(  1644463056), -INT32_C(  1394031186), -INT32_C(   952784692),  INT32_C(  1387052710) },
+      {  INT32_C(   809191715), -INT32_C(  1965248984), -INT32_C(  2047529349),  INT32_C(   869846019) },
+      { -INT32_C(   154086584),  INT32_C(  1705228696),  INT32_C(   120379489), -INT32_C(  1185294186) },
+       INT32_C(         214),
+      {  INT32_C(  1530654331), -INT32_C(   874523074), -INT32_C(   973242658), -INT32_C(   626151885) } },
+    { {  INT32_C(  1256822050), -INT32_C(  1093352125), -INT32_C(   146486540), -INT32_C(   550888298) },
+      { -INT32_C(  1999242256),  INT32_C(   367884468), -INT32_C(   434365872),  INT32_C(   346060530) },
+      {  INT32_C(  1314818315),  INT32_C(  1124873039), -INT32_C(  1824894723),  INT32_C(  1567777901) },
+       INT32_C(         215),
+      { -INT32_C(  1109133315), -INT32_C(    50868552), -INT32_C(   286806181), -INT32_C(  1224892517) } },
   };
 
   simde__m128i a, b, c, r;
@@ -4118,83 +3254,29 @@ test_simde_mm_ternarylogic_epi32_53 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         211));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 192 ; i < (192 + 32) ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_7(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_54 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(    30679084),  INT32_C(  1412846293),  INT32_C(   457166531), -INT32_C(   877216363) },
-      { -INT32_C(   596707722), -INT32_C(  1999990321), -INT32_C(   767297461), -INT32_C(   605977593) },
-      {  INT32_C(   970591331),  INT32_C(   579670111),  INT32_C(  1950207199),  INT32_C(     4191114) },
-       INT32_C(         212),
-      { -INT32_C(   567281708), -INT32_C(   596454459), -INT32_C(  1690043837), -INT32_C(   606041067) } },
-    { { -INT32_C(  1176719895), -INT32_C(  1992186050), -INT32_C(  1503951713),  INT32_C(  1820474376) },
-      { -INT32_C(  1465557943),  INT32_C(  1271542380), -INT32_C(  2000746498), -INT32_C(   460718341) },
-      { -INT32_C(   375560789), -INT32_C(  1401758196),  INT32_C(  1800588642),  INT32_C(  1406653450) },
-       INT32_C(         213),
-      { -INT32_C(  1092182435),  INT32_C(  1540170751), -INT32_C(  1799407969), -INT32_C(   324517891) } },
-    { { -INT32_C(  1644463056), -INT32_C(  1394031186), -INT32_C(   952784692),  INT32_C(  1387052710) },
-      {  INT32_C(   809191715), -INT32_C(  1965248984), -INT32_C(  2047529349),  INT32_C(   869846019) },
-      { -INT32_C(   154086584),  INT32_C(  1705228696),  INT32_C(   120379489), -INT32_C(  1185294186) },
-       INT32_C(         214),
-      {  INT32_C(  1530654331), -INT32_C(   874523074), -INT32_C(   973242658), -INT32_C(   626151885) } },
-    { {  INT32_C(  1256822050), -INT32_C(  1093352125), -INT32_C(   146486540), -INT32_C(   550888298) },
-      { -INT32_C(  1999242256),  INT32_C(   367884468), -INT32_C(   434365872),  INT32_C(   346060530) },
-      {  INT32_C(  1314818315),  INT32_C(  1124873039), -INT32_C(  1824894723),  INT32_C(  1567777901) },
-       INT32_C(         215),
-      { -INT32_C(  1109133315), -INT32_C(    50868552), -INT32_C(   286806181), -INT32_C(  1224892517) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         212));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         213));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         214));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         215));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -4217,7 +3299,7 @@ test_simde_mm_ternarylogic_epi32_54 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_55 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_28 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -4246,6 +3328,26 @@ test_simde_mm_ternarylogic_epi32_55 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(  1801181803), -INT32_C(  1978621503), -INT32_C(  1090544026),  INT32_C(   511821673) },
        INT32_C(         219),
       { -INT32_C(   538145281), -INT32_C(     1098241), -INT32_C(   872719441), -INT32_C(   538452487) } },
+    { { -INT32_C(  1982711650),  INT32_C(  1237565366),  INT32_C(  2030857979), -INT32_C(   274945702) },
+      { -INT32_C(  1887223602),  INT32_C(  1209701345), -INT32_C(  1694099150),  INT32_C(  2126088416) },
+      {  INT32_C(  1997048768),  INT32_C(  1170262858), -INT32_C(  1816146631),  INT32_C(  1166170998) },
+       INT32_C(         220),
+      { -INT32_C(  1881968418),  INT32_C(  1209776117), -INT32_C(    83477518), -INT32_C(    21124888) } },
+    { {  INT32_C(  2111047324), -INT32_C(   876220775), -INT32_C(   395916280),  INT32_C(   342302548) },
+      { -INT32_C(   175411286),  INT32_C(  1949977658), -INT32_C(  1895302887), -INT32_C(   237729195) },
+      {  INT32_C(   695118224), -INT32_C(  1611320169),  INT32_C(  1418222336),  INT32_C(   627634043) },
+       INT32_C(         221),
+      { -INT32_C(   140804113),  INT32_C(  1950011258), -INT32_C(  1351090689), -INT32_C(    69756203) } },
+    { { -INT32_C(  1743063970),  INT32_C(  1493980480), -INT32_C(  1545071538),  INT32_C(   781499806) },
+      { -INT32_C(    44629146),  INT32_C(   933055543),  INT32_C(   596321704),  INT32_C(  1917383444) },
+      {  INT32_C(   654992359),  INT32_C(   109057976), -INT32_C(   911578837), -INT32_C(  1929953754) },
+       INT32_C(         222),
+      { -INT32_C(    11036673),  INT32_C(  2141015807),  INT32_C(  1808498157), -INT32_C(   227806276) } },
+    { {  INT32_C(  2022264385),  INT32_C(  1135552155),  INT32_C(  1600535115),  INT32_C(   366063150) },
+      { -INT32_C(   918692847),  INT32_C(   516996595),  INT32_C(  1290238502), -INT32_C(    86450504) },
+      { -INT32_C(   948805076), -INT32_C(   737533304), -INT32_C(  1976340388),  INT32_C(   815793439) },
+       INT32_C(         223),
+      { -INT32_C(         513), -INT32_C(  1074397705), -INT32_C(    33554505), -INT32_C(           7) } },
   };
 
   simde__m128i a, b, c, r;
@@ -4274,83 +3376,29 @@ test_simde_mm_ternarylogic_epi32_55 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         219));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = 192 ; i < (192 + 32) ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_7(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_56 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(  1982711650),  INT32_C(  1237565366),  INT32_C(  2030857979), -INT32_C(   274945702) },
-      { -INT32_C(  1887223602),  INT32_C(  1209701345), -INT32_C(  1694099150),  INT32_C(  2126088416) },
-      {  INT32_C(  1997048768),  INT32_C(  1170262858), -INT32_C(  1816146631),  INT32_C(  1166170998) },
-       INT32_C(         220),
-      { -INT32_C(  1881968418),  INT32_C(  1209776117), -INT32_C(    83477518), -INT32_C(    21124888) } },
-    { {  INT32_C(  2111047324), -INT32_C(   876220775), -INT32_C(   395916280),  INT32_C(   342302548) },
-      { -INT32_C(   175411286),  INT32_C(  1949977658), -INT32_C(  1895302887), -INT32_C(   237729195) },
-      {  INT32_C(   695118224), -INT32_C(  1611320169),  INT32_C(  1418222336),  INT32_C(   627634043) },
-       INT32_C(         221),
-      { -INT32_C(   140804113),  INT32_C(  1950011258), -INT32_C(  1351090689), -INT32_C(    69756203) } },
-    { { -INT32_C(  1743063970),  INT32_C(  1493980480), -INT32_C(  1545071538),  INT32_C(   781499806) },
-      { -INT32_C(    44629146),  INT32_C(   933055543),  INT32_C(   596321704),  INT32_C(  1917383444) },
-      {  INT32_C(   654992359),  INT32_C(   109057976), -INT32_C(   911578837), -INT32_C(  1929953754) },
-       INT32_C(         222),
-      { -INT32_C(    11036673),  INT32_C(  2141015807),  INT32_C(  1808498157), -INT32_C(   227806276) } },
-    { {  INT32_C(  2022264385),  INT32_C(  1135552155),  INT32_C(  1600535115),  INT32_C(   366063150) },
-      { -INT32_C(   918692847),  INT32_C(   516996595),  INT32_C(  1290238502), -INT32_C(    86450504) },
-      { -INT32_C(   948805076), -INT32_C(   737533304), -INT32_C(  1976340388),  INT32_C(   815793439) },
-       INT32_C(         223),
-      { -INT32_C(         513), -INT32_C(  1074397705), -INT32_C(    33554505), -INT32_C(           7) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         220));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         221));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         222));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         223));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -4373,7 +3421,7 @@ test_simde_mm_ternarylogic_epi32_56 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_57 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_29 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -4402,6 +3450,26 @@ test_simde_mm_ternarylogic_epi32_57 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(   840214044),  INT32_C(  1790911901), -INT32_C(    13250939), -INT32_C(    83234916) },
        INT32_C(         227),
       {  INT32_C(   887963107), -INT32_C(    12651045), -INT32_C(    79869561),  INT32_C(   443076153) } },
+    { {  INT32_C(   398856147), -INT32_C(  1897420450), -INT32_C(   476335297),  INT32_C(  1405796462) },
+      { -INT32_C(  1239370471),  INT32_C(  1595989978),  INT32_C(  1230919085),  INT32_C(   407136325) },
+      { -INT32_C(   718337417), -INT32_C(   211544396),  INT32_C(   953679817), -INT32_C(   645160512) },
+       INT32_C(         228),
+      {  INT32_C(   923189083), -INT32_C(  1905997474),  INT32_C(  1637593901),  INT32_C(  1372506181) } },
+    { {  INT32_C(   831564631),  INT32_C(   932294794),  INT32_C(  1266740998), -INT32_C(   815545257) },
+      { -INT32_C(  2103143730),  INT32_C(  1903560872), -INT32_C(   928428792),  INT32_C(  1168192750) },
+      {  INT32_C(  1769419231), -INT32_C(   392165150),  INT32_C(  1328750839), -INT32_C(  1289840924) },
+       INT32_C(         229),
+      { -INT32_C(  1483151497),  INT32_C(   836650911), -INT32_C(    70484722), -INT32_C(   945574578) } },
+    { { -INT32_C(   801783256), -INT32_C(   750670901), -INT32_C(   409211912), -INT32_C(    13878241) },
+      {  INT32_C(  1349034862), -INT32_C(  1556608597),  INT32_C(   250768169),  INT32_C(   700518401) },
+      { -INT32_C(  1644562734), -INT32_C(  1703920990),  INT32_C(  1166084901), -INT32_C(  1237012920) },
+       INT32_C(         230),
+      { -INT32_C(   575547460), -INT32_C(  1152894069),  INT32_C(  1341352748), -INT32_C(  1081754039) } },
+    { { -INT32_C(    49894319), -INT32_C(   543146315), -INT32_C(  1427270999),  INT32_C(  1960029858) },
+      {  INT32_C(  1175637156),  INT32_C(   752976390), -INT32_C(   697212274),  INT32_C(  1653388560) },
+      {  INT32_C(   392139361),  INT32_C(  2046230480),  INT32_C(   857990033),  INT32_C(   900200081) },
+       INT32_C(         231),
+      {  INT32_C(  1441783759),  INT32_C(  1572831198), -INT32_C(   411856929), -INT32_C(     5511219) } },
   };
 
   simde__m128i a, b, c, r;
@@ -4430,83 +3498,29 @@ test_simde_mm_ternarylogic_epi32_57 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         227));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = (192+32) ; i < 256 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_8(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_58 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(   398856147), -INT32_C(  1897420450), -INT32_C(   476335297),  INT32_C(  1405796462) },
-      { -INT32_C(  1239370471),  INT32_C(  1595989978),  INT32_C(  1230919085),  INT32_C(   407136325) },
-      { -INT32_C(   718337417), -INT32_C(   211544396),  INT32_C(   953679817), -INT32_C(   645160512) },
-       INT32_C(         228),
-      {  INT32_C(   923189083), -INT32_C(  1905997474),  INT32_C(  1637593901),  INT32_C(  1372506181) } },
-    { {  INT32_C(   831564631),  INT32_C(   932294794),  INT32_C(  1266740998), -INT32_C(   815545257) },
-      { -INT32_C(  2103143730),  INT32_C(  1903560872), -INT32_C(   928428792),  INT32_C(  1168192750) },
-      {  INT32_C(  1769419231), -INT32_C(   392165150),  INT32_C(  1328750839), -INT32_C(  1289840924) },
-       INT32_C(         229),
-      { -INT32_C(  1483151497),  INT32_C(   836650911), -INT32_C(    70484722), -INT32_C(   945574578) } },
-    { { -INT32_C(   801783256), -INT32_C(   750670901), -INT32_C(   409211912), -INT32_C(    13878241) },
-      {  INT32_C(  1349034862), -INT32_C(  1556608597),  INT32_C(   250768169),  INT32_C(   700518401) },
-      { -INT32_C(  1644562734), -INT32_C(  1703920990),  INT32_C(  1166084901), -INT32_C(  1237012920) },
-       INT32_C(         230),
-      { -INT32_C(   575547460), -INT32_C(  1152894069),  INT32_C(  1341352748), -INT32_C(  1081754039) } },
-    { { -INT32_C(    49894319), -INT32_C(   543146315), -INT32_C(  1427270999),  INT32_C(  1960029858) },
-      {  INT32_C(  1175637156),  INT32_C(   752976390), -INT32_C(   697212274),  INT32_C(  1653388560) },
-      {  INT32_C(   392139361),  INT32_C(  2046230480),  INT32_C(   857990033),  INT32_C(   900200081) },
-       INT32_C(         231),
-      {  INT32_C(  1441783759),  INT32_C(  1572831198), -INT32_C(   411856929), -INT32_C(     5511219) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         228));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         229));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         230));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         231));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -4529,7 +3543,7 @@ test_simde_mm_ternarylogic_epi32_58 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_59 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_30 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -4558,6 +3572,26 @@ test_simde_mm_ternarylogic_epi32_59 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(  2064577896),  INT32_C(   329318089),  INT32_C(    43277866), -INT32_C(   587546816) },
        INT32_C(         235),
       {  INT32_C(  2075131752), -INT32_C(   671482117), -INT32_C(  1677819925), -INT32_C(    50348044) } },
+    { {  INT32_C(  1822311765), -INT32_C(  1333041102),  INT32_C(   731204184), -INT32_C(   466914949) },
+      {  INT32_C(   794769766),  INT32_C(  1631780663), -INT32_C(  1637624226), -INT32_C(   344302186) },
+      { -INT32_C(   715712093), -INT32_C(   645471359), -INT32_C(  1459348691), -INT32_C(   225628276) },
+       INT32_C(         236),
+      {  INT32_C(  1868511591), -INT32_C(   238878921), -INT32_C(  1083711906), -INT32_C(   344228450) } },
+    { { -INT32_C(  1608389527),  INT32_C(  1241670636), -INT32_C(   790076102),  INT32_C(  1723556803) },
+      { -INT32_C(    46460036),  INT32_C(   601276918),  INT32_C(  1775033053),  INT32_C(  1935431946) },
+      {  INT32_C(   840138054),  INT32_C(   461116897),  INT32_C(  1055614075),  INT32_C(  1134864071) },
+       INT32_C(         237),
+      { -INT32_C(    33587204), -INT32_C(  1344812554),  INT32_C(  2046623487), -INT32_C(    67339269) } },
+    { { -INT32_C(  1354702919),  INT32_C(  2127763105), -INT32_C(    68706319),  INT32_C(  1064190969) },
+      { -INT32_C(  1569619519),  INT32_C(   314437015),  INT32_C(   424716369),  INT32_C(   140309582) },
+      {  INT32_C(  1958190547), -INT32_C(  1527608653),  INT32_C(   597678634), -INT32_C(   563999459) },
+       INT32_C(         238),
+      { -INT32_C(   151544365), -INT32_C(  1224740937),  INT32_C(  1004534395), -INT32_C(   562102945) } },
+    { {  INT32_C(   645976975),  INT32_C(   288898496),  INT32_C(   875202789),  INT32_C(  1329366908) },
+      { -INT32_C(   674958556), -INT32_C(  1468221826), -INT32_C(  1362420848), -INT32_C(  1198772951) },
+      { -INT32_C(  1059189504),  INT32_C(   819009098),  INT32_C(   442825886), -INT32_C(  1486249853) },
+       INT32_C(         239),
+      { -INT32_C(   536871052), -INT32_C(    16779649), -INT32_C(          98), -INT32_C(  1074790997) } },
   };
 
   simde__m128i a, b, c, r;
@@ -4586,83 +3620,29 @@ test_simde_mm_ternarylogic_epi32_59 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         235));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = (192+32) ; i < 256 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_8(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_60 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(  1822311765), -INT32_C(  1333041102),  INT32_C(   731204184), -INT32_C(   466914949) },
-      {  INT32_C(   794769766),  INT32_C(  1631780663), -INT32_C(  1637624226), -INT32_C(   344302186) },
-      { -INT32_C(   715712093), -INT32_C(   645471359), -INT32_C(  1459348691), -INT32_C(   225628276) },
-       INT32_C(         236),
-      {  INT32_C(  1868511591), -INT32_C(   238878921), -INT32_C(  1083711906), -INT32_C(   344228450) } },
-    { { -INT32_C(  1608389527),  INT32_C(  1241670636), -INT32_C(   790076102),  INT32_C(  1723556803) },
-      { -INT32_C(    46460036),  INT32_C(   601276918),  INT32_C(  1775033053),  INT32_C(  1935431946) },
-      {  INT32_C(   840138054),  INT32_C(   461116897),  INT32_C(  1055614075),  INT32_C(  1134864071) },
-       INT32_C(         237),
-      { -INT32_C(    33587204), -INT32_C(  1344812554),  INT32_C(  2046623487), -INT32_C(    67339269) } },
-    { { -INT32_C(  1354702919),  INT32_C(  2127763105), -INT32_C(    68706319),  INT32_C(  1064190969) },
-      { -INT32_C(  1569619519),  INT32_C(   314437015),  INT32_C(   424716369),  INT32_C(   140309582) },
-      {  INT32_C(  1958190547), -INT32_C(  1527608653),  INT32_C(   597678634), -INT32_C(   563999459) },
-       INT32_C(         238),
-      { -INT32_C(   151544365), -INT32_C(  1224740937),  INT32_C(  1004534395), -INT32_C(   562102945) } },
-    { {  INT32_C(   645976975),  INT32_C(   288898496),  INT32_C(   875202789),  INT32_C(  1329366908) },
-      { -INT32_C(   674958556), -INT32_C(  1468221826), -INT32_C(  1362420848), -INT32_C(  1198772951) },
-      { -INT32_C(  1059189504),  INT32_C(   819009098),  INT32_C(   442825886), -INT32_C(  1486249853) },
-       INT32_C(         239),
-      { -INT32_C(   536871052), -INT32_C(    16779649), -INT32_C(          98), -INT32_C(  1074790997) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         236));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         237));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         238));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         239));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -4685,7 +3665,7 @@ test_simde_mm_ternarylogic_epi32_60 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_61 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_31 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -4714,6 +3694,26 @@ test_simde_mm_ternarylogic_epi32_61 (SIMDE_MUNIT_TEST_ARGS) {
       { -INT32_C(     7702973), -INT32_C(   905634089),  INT32_C(  1078373142), -INT32_C(  1343610419) },
        INT32_C(         243),
       { -INT32_C(  1073842177),  INT32_C(   110458875),  INT32_C(  2146957815), -INT32_C(  1142955221) } },
+    { { -INT32_C(   906530133), -INT32_C(   742071813),  INT32_C(  1821625455),  INT32_C(   727204840) },
+      { -INT32_C(  1876237639),  INT32_C(   375009024), -INT32_C(  1487494950),  INT32_C(  1834435010) },
+      { -INT32_C(  1372172621), -INT32_C(  1618871760), -INT32_C(  1375005242),  INT32_C(   316302168) },
+       INT32_C(         244),
+      { -INT32_C(   637537621), -INT32_C(   740366853),  INT32_C(  1842867327),  INT32_C(  1868383210) } },
+    { {  INT32_C(  1168245829),  INT32_C(   240909620),  INT32_C(  1605808797), -INT32_C(  1496510989) },
+      { -INT32_C(  1957428389), -INT32_C(  1003760130),  INT32_C(  1131624170), -INT32_C(   548057702) },
+      { -INT32_C(  2061109423), -INT32_C(  1835761420),  INT32_C(   636570162), -INT32_C(  1295270313) },
+       INT32_C(         245),
+      {  INT32_C(  2147093743),  INT32_C(  1870397247), -INT32_C(   541149219), -INT32_C(   268612101) } },
+    { { -INT32_C(  1069670462), -INT32_C(   544970251),  INT32_C(   958592927), -INT32_C(  1776715964) },
+      {  INT32_C(  1662729839), -INT32_C(   235556930),  INT32_C(  1343678457),  INT32_C(  1728307877) },
+      { -INT32_C(   165199615),  INT32_C(  1238805674), -INT32_C(   394004317), -INT32_C(   545350544) },
+       INT32_C(         246),
+      { -INT32_C(   717324306), -INT32_C(     5805067), -INT32_C(  1179123745), -INT32_C(  1099071531) } },
+    { { -INT32_C(  1740465702),  INT32_C(  1116289097), -INT32_C(   996958177), -INT32_C(  2094229886) },
+      { -INT32_C(  2122689577), -INT32_C(  1547022081), -INT32_C(  1198830264), -INT32_C(  1013511703) },
+      { -INT32_C(   346236254),  INT32_C(   825156882),  INT32_C(   133546373),  INT32_C(   780869975) },
+       INT32_C(         247),
+      { -INT32_C(    18366977), -INT32_C(   553795603), -INT32_C(       16641), -INT32_C(     8585538) } },
   };
 
   simde__m128i a, b, c, r;
@@ -4742,83 +3742,29 @@ test_simde_mm_ternarylogic_epi32_61 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         243));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = (192+32) ; i < 256 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_8(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_62 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { { -INT32_C(   906530133), -INT32_C(   742071813),  INT32_C(  1821625455),  INT32_C(   727204840) },
-      { -INT32_C(  1876237639),  INT32_C(   375009024), -INT32_C(  1487494950),  INT32_C(  1834435010) },
-      { -INT32_C(  1372172621), -INT32_C(  1618871760), -INT32_C(  1375005242),  INT32_C(   316302168) },
-       INT32_C(         244),
-      { -INT32_C(   637537621), -INT32_C(   740366853),  INT32_C(  1842867327),  INT32_C(  1868383210) } },
-    { {  INT32_C(  1168245829),  INT32_C(   240909620),  INT32_C(  1605808797), -INT32_C(  1496510989) },
-      { -INT32_C(  1957428389), -INT32_C(  1003760130),  INT32_C(  1131624170), -INT32_C(   548057702) },
-      { -INT32_C(  2061109423), -INT32_C(  1835761420),  INT32_C(   636570162), -INT32_C(  1295270313) },
-       INT32_C(         245),
-      {  INT32_C(  2147093743),  INT32_C(  1870397247), -INT32_C(   541149219), -INT32_C(   268612101) } },
-    { { -INT32_C(  1069670462), -INT32_C(   544970251),  INT32_C(   958592927), -INT32_C(  1776715964) },
-      {  INT32_C(  1662729839), -INT32_C(   235556930),  INT32_C(  1343678457),  INT32_C(  1728307877) },
-      { -INT32_C(   165199615),  INT32_C(  1238805674), -INT32_C(   394004317), -INT32_C(   545350544) },
-       INT32_C(         246),
-      { -INT32_C(   717324306), -INT32_C(     5805067), -INT32_C(  1179123745), -INT32_C(  1099071531) } },
-    { { -INT32_C(  1740465702),  INT32_C(  1116289097), -INT32_C(   996958177), -INT32_C(  2094229886) },
-      { -INT32_C(  2122689577), -INT32_C(  1547022081), -INT32_C(  1198830264), -INT32_C(  1013511703) },
-      { -INT32_C(   346236254),  INT32_C(   825156882),  INT32_C(   133546373),  INT32_C(   780869975) },
-       INT32_C(         247),
-      { -INT32_C(    18366977), -INT32_C(   553795603), -INT32_C(       16641), -INT32_C(     8585538) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         244));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         245));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         246));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         247));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -4841,7 +3787,7 @@ test_simde_mm_ternarylogic_epi32_62 (SIMDE_MUNIT_TEST_ARGS) {
 }
 
 static int
-test_simde_mm_ternarylogic_epi32_63 (SIMDE_MUNIT_TEST_ARGS) {
+test_simde_mm_ternarylogic_epi32_32 (SIMDE_MUNIT_TEST_ARGS) {
 #if 1
   static const struct {
     const int32_t a[4];
@@ -4870,6 +3816,26 @@ test_simde_mm_ternarylogic_epi32_63 (SIMDE_MUNIT_TEST_ARGS) {
       {  INT32_C(  2032349759), -INT32_C(  1922949503),  INT32_C(  1156326299),  INT32_C(    55488248) },
        INT32_C(         251),
       { -INT32_C(     4194305), -INT32_C(      294981),  INT32_C(  1610579963), -INT32_C(  1680867333) } },
+    { {  INT32_C(  1491811963),  INT32_C(   236726534), -INT32_C(    16831798), -INT32_C(  1469811607) },
+      {  INT32_C(   673286054),  INT32_C(  1102414757), -INT32_C(  1618632281), -INT32_C(   878455984) },
+      {  INT32_C(   404983313), -INT32_C(  2111422280), -INT32_C(   746576534),  INT32_C(  1081927065) },
+       INT32_C(         252),
+      {  INT32_C(  2028716031),  INT32_C(  1337830311), -INT32_C(       21521), -INT32_C(   337119367) } },
+    { {  INT32_C(   308845932), -INT32_C(   934077151),  INT32_C(   241686718), -INT32_C(  1109849428) },
+      {  INT32_C(  1372978585), -INT32_C(  1479279811), -INT32_C(  1166388447), -INT32_C(  1510279624) },
+      { -INT32_C(  1246272876),  INT32_C(  1048382079), -INT32_C(  1907563294), -INT32_C(  2008275217) },
+       INT32_C(         253),
+      {  INT32_C(  1543372287), -INT32_C(   271319107), -INT32_C(        9281), -INT32_C(      262212) } },
+    { {  INT32_C(  1624842531),  INT32_C(  1040690205),  INT32_C(   955810303),  INT32_C(   215872376) },
+      { -INT32_C(   708733867), -INT32_C(  2146222434),  INT32_C(   286220066), -INT32_C(  1466344571) },
+      { -INT32_C(  1727499652),  INT32_C(   517410590),  INT32_C(   156684433),  INT32_C(   404042691) },
+       INT32_C(         254),
+      { -INT32_C(    36046977), -INT32_C(  1093156961),  INT32_C(   973070335), -INT32_C(  1126302721) } },
+    { {  INT32_C(  1710085831),  INT32_C(   920977428), -INT32_C(   448203680), -INT32_C(   863051441) },
+      {  INT32_C(  1919260244),  INT32_C(   932199846), -INT32_C(   801053171), -INT32_C(   521644775) },
+      {  INT32_C(  1061541419),  INT32_C(   913648598),  INT32_C(  1864154399), -INT32_C(   214193505) },
+       INT32_C(         255),
+      { -INT32_C(           1), -INT32_C(           1), -INT32_C(           1), -INT32_C(           1) } },
   };
 
   simde__m128i a, b, c, r;
@@ -4898,83 +3864,29 @@ test_simde_mm_ternarylogic_epi32_63 (SIMDE_MUNIT_TEST_ARGS) {
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         251));
   simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
 
-  return 0;
-#else
-  fputc('\n', stdout);
-  for (int i = (192+32) ; i < 256 ; i++) {
-    simde__m128i a = simde_test_x86_random_i32x4();
-    simde__m128i b = simde_test_x86_random_i32x4();
-    simde__m128i c = simde_test_x86_random_i32x4();
-    simde__m128i r;
-    SIMDE_CONSTIFY_32_8(simde_mm_ternarylogic_epi32, r, simde_mm_setzero_si128(), i, a, b, c);
-
-    simde_test_x86_write_i32x4(2, a, SIMDE_TEST_VEC_POS_FIRST);
-    simde_test_x86_write_i32x4(2, b, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, c, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_codegen_write_i32(2, i, SIMDE_TEST_VEC_POS_MIDDLE);
-    simde_test_x86_write_i32x4(2, r, SIMDE_TEST_VEC_POS_LAST);
-  }
-  return 1;
-#endif
-}
-
-static int
-test_simde_mm_ternarylogic_epi32_64 (SIMDE_MUNIT_TEST_ARGS) {
-#if 1
-  static const struct {
-    const int32_t a[4];
-    const int32_t b[4];
-    const int32_t c[4];
-    const int32_t imm8;
-    const int32_t r[4];
-  } test_vec[] = {
-    { {  INT32_C(  1491811963),  INT32_C(   236726534), -INT32_C(    16831798), -INT32_C(  1469811607) },
-      {  INT32_C(   673286054),  INT32_C(  1102414757), -INT32_C(  1618632281), -INT32_C(   878455984) },
-      {  INT32_C(   404983313), -INT32_C(  2111422280), -INT32_C(   746576534),  INT32_C(  1081927065) },
-       INT32_C(         252),
-      {  INT32_C(  2028716031),  INT32_C(  1337830311), -INT32_C(       21521), -INT32_C(   337119367) } },
-    { {  INT32_C(   308845932), -INT32_C(   934077151),  INT32_C(   241686718), -INT32_C(  1109849428) },
-      {  INT32_C(  1372978585), -INT32_C(  1479279811), -INT32_C(  1166388447), -INT32_C(  1510279624) },
-      { -INT32_C(  1246272876),  INT32_C(  1048382079), -INT32_C(  1907563294), -INT32_C(  2008275217) },
-       INT32_C(         253),
-      {  INT32_C(  1543372287), -INT32_C(   271319107), -INT32_C(        9281), -INT32_C(      262212) } },
-    { {  INT32_C(  1624842531),  INT32_C(  1040690205),  INT32_C(   955810303),  INT32_C(   215872376) },
-      { -INT32_C(   708733867), -INT32_C(  2146222434),  INT32_C(   286220066), -INT32_C(  1466344571) },
-      { -INT32_C(  1727499652),  INT32_C(   517410590),  INT32_C(   156684433),  INT32_C(   404042691) },
-       INT32_C(         254),
-      { -INT32_C(    36046977), -INT32_C(  1093156961),  INT32_C(   973070335), -INT32_C(  1126302721) } },
-    { {  INT32_C(  1710085831),  INT32_C(   920977428), -INT32_C(   448203680), -INT32_C(   863051441) },
-      {  INT32_C(  1919260244),  INT32_C(   932199846), -INT32_C(   801053171), -INT32_C(   521644775) },
-      {  INT32_C(  1061541419),  INT32_C(   913648598),  INT32_C(  1864154399), -INT32_C(   214193505) },
-       INT32_C(         255),
-      { -INT32_C(           1), -INT32_C(           1), -INT32_C(           1), -INT32_C(           1) } },
-  };
-
-  simde__m128i a, b, c, r;
-
-  a = simde_x_mm_loadu_epi32(test_vec[0].a);
-  b = simde_x_mm_loadu_epi32(test_vec[0].b);
-  c = simde_x_mm_loadu_epi32(test_vec[0].c);
+  a = simde_x_mm_loadu_epi32(test_vec[4].a);
+  b = simde_x_mm_loadu_epi32(test_vec[4].b);
+  c = simde_x_mm_loadu_epi32(test_vec[4].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         252));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[0].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[4].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[1].a);
-  b = simde_x_mm_loadu_epi32(test_vec[1].b);
-  c = simde_x_mm_loadu_epi32(test_vec[1].c);
+  a = simde_x_mm_loadu_epi32(test_vec[5].a);
+  b = simde_x_mm_loadu_epi32(test_vec[5].b);
+  c = simde_x_mm_loadu_epi32(test_vec[5].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         253));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[1].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[5].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[2].a);
-  b = simde_x_mm_loadu_epi32(test_vec[2].b);
-  c = simde_x_mm_loadu_epi32(test_vec[2].c);
+  a = simde_x_mm_loadu_epi32(test_vec[6].a);
+  b = simde_x_mm_loadu_epi32(test_vec[6].b);
+  c = simde_x_mm_loadu_epi32(test_vec[6].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         254));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[2].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[6].r));
 
-  a = simde_x_mm_loadu_epi32(test_vec[3].a);
-  b = simde_x_mm_loadu_epi32(test_vec[3].b);
-  c = simde_x_mm_loadu_epi32(test_vec[3].c);
+  a = simde_x_mm_loadu_epi32(test_vec[7].a);
+  b = simde_x_mm_loadu_epi32(test_vec[7].b);
+  c = simde_x_mm_loadu_epi32(test_vec[7].c);
   r = simde_mm_ternarylogic_epi32(a, b, c, INT32_C(         255));
-  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[3].r));
+  simde_test_x86_assert_equal_i32x4(r, simde_x_mm_loadu_epi32(test_vec[7].r));
 
   return 0;
 #else
@@ -5029,38 +3941,6 @@ SIMDE_TEST_FUNC_LIST_BEGIN
   SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_30)
   SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_31)
   SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_32)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_33)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_34)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_35)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_36)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_37)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_38)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_39)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_40)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_41)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_42)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_43)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_44)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_45)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_46)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_47)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_48)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_49)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_50)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_51)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_52)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_53)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_54)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_55)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_56)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_57)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_58)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_59)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_60)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_61)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_62)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_63)
-  SIMDE_TEST_FUNC_LIST_ENTRY(mm_ternarylogic_epi32_64)
 SIMDE_TEST_FUNC_LIST_END
 
 #include <test/x86/avx512/test-avx512-footer.h>
