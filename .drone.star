@@ -18,18 +18,18 @@ def main(ctx):
       packages = ['ninja-build', 'git-core', 'python3-pip', 'gcovr']
 
       if arch == 'armv7':
-        compiler_flags.extend(['-march=armv7-a', '-mfpu=neon'])
+        compiler_flags.extend(['-march=armv7-a', '-mfpu=neon', '-DSIMDE_CONSTRAINED_COMPILATION'])
       elif arch == 'armv8':
-        compiler_flags.extend(['-march=armv8-a', '-mfpu=neon'])
+        compiler_flags.extend(['-march=armv8-a', '-mfpu=neon', '-DSIMDE_CONSTRAINED_COMPILATION'])
       elif arch == 'aarch64':
-        compiler_flags.extend(['-march=armv8-a+simd+crypto+crc'])
+        compiler_flags.extend(['-march=armv8-a+simd+crypto+crc', '-DSIMDE_CONSTRAINED_COMPILATION'])
 
       if compiler == 'gcc':
         cxx = 'g++'
-        compiler_flags.extend(['-Wextra', '-Werror'])
+        compiler_flags.extend(['-Wextra', '-Werror', '-DSIMDE_CONSTRAINED_COMPILATION'])
         packages.extend(['gcc', 'g++'])
       elif compiler == 'clang':
-        compiler_flags.extend(['-Weverything', '-Werror'])
+        compiler_flags.extend(['-Weverything', '-Werror', '-DSIMDE_CONSTRAINED_COMPILATION'])
         packages.extend(['clang'])
 
       cflags = ' '.join(compiler_flags)
