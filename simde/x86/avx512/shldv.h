@@ -19,7 +19,6 @@ simde_mm_shldv_epi32(simde__m128i a, simde__m128i b, simde__m128i c) {
       c_ = simde__m128i_to_private(c);
 
     #if defined(SIMDE_SHUFFLE_VECTOR_) && SIMDE_NATURAL_VECTOR_SIZE_GE(256)
-      HEDLEY_STATIC_CAST(void, c_);
       simde__m256i_private
         tmp,
         a_ = simde__m256i_to_private(simde_mm256_castsi128_si256(a)),
