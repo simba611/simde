@@ -25,7 +25,12 @@ simde_mm_shldv_epi32(simde__m128i a, simde__m128i b, simde__m128i c) {
     #if defined(SIMDE_SHUFFLE_VECTOR_)
       HEDLEY_STATIC_CAST(void, c_);
       tmp.i32 = SIMDE_SHUFFLE_VECTOR_(32, 32, b_.i32, a_.i32, 0, 4, 1, 5, 2, 6, 3, 7);
-      tmp = simde__m256i_to_private(simde_mm256_sllv_epi64(simde__m256i_from_private(tmp), simde_mm256_and_si256(simde_mm256_set1_epi64x(31), simde_mm256_cvtepi32_epi64(c))));
+
+      SIMDE_VECTORIZE
+      for (size_t i = 0 ; i < (sizeof(tmp.u64) / sizeof(tmp.u64[0])) ; i++) {
+          tmp.u64[i] = tmp.u64[i] << (c_.u32[i] & 31);
+      }
+
       r_.i32 = SIMDE_SHUFFLE_VECTOR_(32, 16, tmp.i32, tmp.i32, 1, 3, 5, 7);
     #else
       SIMDE_VECTORIZE
