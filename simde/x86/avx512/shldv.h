@@ -59,7 +59,7 @@ simde_mm_shldv_epi32(simde__m128i a, simde__m128i b, simde__m128i c) {
 
       SIMDE_VECTORIZE
       for (size_t i = 0 ; i < (sizeof(r_.u32) / sizeof(r_.u32[0])) ; i++) {
-        r_.u32[i] = HEDLEY_STATIC_CAST(int32_t, (((HEDLEY_STATIC_CAST(int64_t, a_.u32[i]) << 32) | b_.u32[i]) << (c_.u32[i] & 31)) >> 32);
+        r_.u32[i] = HEDLEY_STATIC_CAST(uint32_t, (((HEDLEY_STATIC_CAST(uint64_t, a_.u32[i]) << 32) | b_.u32[i]) << (c_.u32[i] & 31)) >> 32);
       }
     #endif
 
