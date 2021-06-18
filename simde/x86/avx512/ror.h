@@ -13,7 +13,7 @@ SIMDE_DISABLE_UNWANTED_DIAGNOSTICS
 SIMDE_BEGIN_DECLS_
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm_ror_epi32(a, imm8) _mm_ror_epi32(a, imm8);
+  #define simde_mm_ror_epi32(a, imm8) _mm_ror_epi32(a, imm8)
 #else
   #define simde_mm_ror_epi32(a, imm8) simde_mm_or_si128(simde_mm_srli_epi32(a, (imm8 & 31)), simde_mm_slli_epi32(a, (32 - (imm8 & 31))))
 #endif
@@ -23,7 +23,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm_mask_ror_epi32(src, k, a, imm8) _mm_mask_ror_epi32(src, k, a, imm8);
+  #define simde_mm_mask_ror_epi32(src, k, a, imm8) _mm_mask_ror_epi32(src, k, a, imm8)
 #else
   #define simde_mm_mask_ror_epi32(src, k, a, imm8) simde_mm_mask_mov_epi32(src, k, simde_mm_ror_epi32(a, imm8))
 #endif
@@ -33,7 +33,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm_maskz_ror_epi32(k, a, imm8) _mm_maskz_ror_epi32(k, a, imm8);
+  #define simde_mm_maskz_ror_epi32(k, a, imm8) _mm_maskz_ror_epi32(k, a, imm8)
 #else
   #define simde_mm_maskz_ror_epi32(k, a, imm8) simde_mm_maskz_mov_epi32(k, simde_mm_ror_epi32(a, imm8))
 #endif
@@ -43,7 +43,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm256_ror_epi32(a, imm8) _mm256_ror_epi32(a, imm8);
+  #define simde_mm256_ror_epi32(a, imm8) _mm256_ror_epi32(a, imm8)
 #else
   #define simde_mm256_ror_epi32(a, imm8) simde_mm256_or_si256(simde_mm256_srli_epi32(a, (imm8 & 31)), simde_mm256_slli_epi32(a, (32 - (imm8 & 31))))
 #endif
@@ -53,7 +53,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm256_mask_ror_epi32(src, k, a, imm8) _mm256_mask_ror_epi32(src, k, a, imm8);
+  #define simde_mm256_mask_ror_epi32(src, k, a, imm8) _mm256_mask_ror_epi32(src, k, a, imm8)
 #else
   #define simde_mm256_mask_ror_epi32(src, k, a, imm8) simde_mm256_mask_mov_epi32(src, k, simde_mm256_ror_epi32(a, imm8))
 #endif
@@ -63,7 +63,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm256_maskz_ror_epi32(k, a, imm8) _mm256_maskz_ror_epi32(k, a, imm8);
+  #define simde_mm256_maskz_ror_epi32(k, a, imm8) _mm256_maskz_ror_epi32(k, a, imm8)
 #else
   #define simde_mm256_maskz_ror_epi32(k, a, imm8) simde_mm256_maskz_mov_epi32(k, simde_mm256_ror_epi32(a, imm8))
 #endif
@@ -73,7 +73,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE)
-  #define simde_mm512_ror_epi32(a, imm8) _mm512_ror_epi32(a, imm8);
+  #define simde_mm512_ror_epi32(a, imm8) _mm512_ror_epi32(a, imm8)
 #else
   #define simde_mm512_ror_epi32(a, imm8) simde_mm512_or_epi32(simde_mm512_srli_epi32(a, (imm8 & 31)), simde_mm512_slli_epi32(a, (32 - (imm8 & 31))))
 #endif
@@ -83,7 +83,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE)
-  #define simde_mm512_mask_ror_epi32(src, k, a, imm8) _mm512_mask_ror_epi32(src, k, a, imm8);
+  #define simde_mm512_mask_ror_epi32(src, k, a, imm8) _mm512_mask_ror_epi32(src, k, a, imm8)
 #else
   #define simde_mm512_mask_ror_epi32(src, k, a, imm8) simde_mm512_mask_mov_epi32(src, k, simde_mm512_ror_epi32(a, imm8))
 #endif
@@ -93,7 +93,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE)
-  #define simde_mm512_maskz_ror_epi32(k, a, imm8) _mm512_maskz_ror_epi32(k, a, imm8);
+  #define simde_mm512_maskz_ror_epi32(k, a, imm8) _mm512_maskz_ror_epi32(k, a, imm8)
 #else
   #define simde_mm512_maskz_ror_epi32(k, a, imm8) simde_mm512_maskz_mov_epi32(k, simde_mm512_ror_epi32(a, imm8))
 #endif
@@ -103,7 +103,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm_ror_epi64(a, imm8) _mm_ror_epi64(a, imm8);
+  #define simde_mm_ror_epi64(a, imm8) _mm_ror_epi64(a, imm8)
 #else
   #define simde_mm_ror_epi64(a, imm8) simde_mm_or_si128(simde_mm_srli_epi64(a, (imm8 & 63)), simde_mm_slli_epi64(a, (64 - (imm8 & 63))))
 #endif
@@ -113,7 +113,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm_mask_ror_epi64(src, k, a, imm8) _mm_mask_ror_epi64(src, k, a, imm8);
+  #define simde_mm_mask_ror_epi64(src, k, a, imm8) _mm_mask_ror_epi64(src, k, a, imm8)
 #else
   #define simde_mm_mask_ror_epi64(src, k, a, imm8) simde_mm_mask_mov_epi64(src, k, simde_mm_ror_epi64(a, imm8))
 #endif
@@ -123,7 +123,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm_maskz_ror_epi64(k, a, imm8) _mm_maskz_ror_epi64(k, a, imm8);
+  #define simde_mm_maskz_ror_epi64(k, a, imm8) _mm_maskz_ror_epi64(k, a, imm8)
 #else
   #define simde_mm_maskz_ror_epi64(k, a, imm8) simde_mm_maskz_mov_epi64(k, simde_mm_ror_epi64(a, imm8))
 #endif
@@ -133,7 +133,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm256_ror_epi64(a, imm8) _mm256_ror_epi64(a, imm8);
+  #define simde_mm256_ror_epi64(a, imm8) _mm256_ror_epi64(a, imm8)
 #else
   #define simde_mm256_ror_epi64(a, imm8) simde_mm256_or_si256(simde_mm256_srli_epi64(a, (imm8 & 63)), simde_mm256_slli_epi64(a, (64 - (imm8 & 63))))
 #endif
@@ -143,7 +143,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm256_mask_ror_epi64(src, k, a, imm8) _mm256_mask_ror_epi64(src, k, a, imm8);
+  #define simde_mm256_mask_ror_epi64(src, k, a, imm8) _mm256_mask_ror_epi64(src, k, a, imm8)
 #else
   #define simde_mm256_mask_ror_epi64(src, k, a, imm8) simde_mm256_mask_mov_epi64(src, k, simde_mm256_ror_epi64(a, imm8))
 #endif
@@ -153,7 +153,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
-  #define simde_mm256_maskz_ror_epi64(k, a, imm8) _mm256_maskz_ror_epi64(k, a, imm8);
+  #define simde_mm256_maskz_ror_epi64(k, a, imm8) _mm256_maskz_ror_epi64(k, a, imm8)
 #else
   #define simde_mm256_maskz_ror_epi64(k, a, imm8) simde_mm256_maskz_mov_epi64(k, simde_mm256_ror_epi64(a, imm8))
 #endif
@@ -163,7 +163,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE)
-  #define simde_mm512_ror_epi64(a, imm8) _mm512_ror_epi64(a, imm8);
+  #define simde_mm512_ror_epi64(a, imm8) _mm512_ror_epi64(a, imm8)
 #else
   #define simde_mm512_ror_epi64(a, imm8) simde_mm512_or_epi64(simde_mm512_srli_epi64(a, (imm8 & 63)), simde_mm512_slli_epi64(a, (64 - (imm8 & 63))))
 #endif
@@ -173,7 +173,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE)
-  #define simde_mm512_mask_ror_epi64(src, k, a, imm8) _mm512_mask_ror_epi64(src, k, a, imm8);
+  #define simde_mm512_mask_ror_epi64(src, k, a, imm8) _mm512_mask_ror_epi64(src, k, a, imm8)
 #else
   #define simde_mm512_mask_ror_epi64(src, k, a, imm8) simde_mm512_mask_mov_epi64(src, k, simde_mm512_ror_epi64(a, imm8))
 #endif
@@ -183,7 +183,7 @@ SIMDE_BEGIN_DECLS_
 #endif
 
 #if defined(SIMDE_X86_AVX512F_NATIVE)
-  #define simde_mm512_maskz_ror_epi64(k, a, imm8) _mm512_maskz_ror_epi64(k, a, imm8);
+  #define simde_mm512_maskz_ror_epi64(k, a, imm8) _mm512_maskz_ror_epi64(k, a, imm8)
 #else
   #define simde_mm512_maskz_ror_epi64(k, a, imm8) simde_mm512_maskz_mov_epi64(k, simde_mm512_ror_epi64(a, imm8))
 #endif
