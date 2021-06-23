@@ -14,15 +14,6 @@ SIMDE_BEGIN_DECLS_
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
   #define simde_mm_ror_epi32(a, imm8) _mm_ror_epi32(a, imm8)
-#elif defined(SIMDE_POWER_ALTIVEC_P6_NATIVE)
-  simde__m128i_private
-    r_,
-    a_ = simde__m128i_to_private(a),
-    b_ = simde__m128i_to_private(b);
-
-  r_.altivec_i32 = vec_rl(a_.altivec_i32, vec_splats(HEDLEY_STATIC_CAST(unsigned int, 32 - imm8)));
-
-  return simde__m128i_from_private(r_);
 #else
   SIMDE_FUNCTION_ATTRIBUTES
   simde__m128i
@@ -32,7 +23,9 @@ SIMDE_BEGIN_DECLS_
       r_,
       a_ = simde__m128i_to_private(a);
 
-    #if defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
+    #if defined(SIMDE_POWER_ALTIVEC_P6_NATIVE)
+      r_.altivec_i32 = vec_rl(a_.altivec_i32, vec_splats(HEDLEY_STATIC_CAST(unsigned int, 32 - imm8)));
+    #elif defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
       switch (imm8 & 31) {
         case 0:
           r_ = a_;
@@ -85,17 +78,6 @@ SIMDE_BEGIN_DECLS_
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
   #define simde_mm256_ror_epi32(a, imm8) _mm256_ror_epi32(a, imm8)
-#elif defined(SIMDE_POWER_ALTIVEC_P6_NATIVE)
-  simde__m256i_private
-    r_,
-    a_ = simde__m256i_to_private(a),
-    b_ = simde__m256i_to_private(b);
-
-  for (size_t i = 0 ; i < (sizeof(r_.m128i_private) / sizeof(r_.m128i_private[0])) ; i++) {
-    r_.m128i_private[i].altivec_i32 = vec_rl(a_.m128i_private[i].altivec_i32, vec_splats(HEDLEY_STATIC_CAST(unsigned int, 32 - imm8)));
-  }
-
-  return simde__m256i_from_private(r_);
 #else
   SIMDE_FUNCTION_ATTRIBUTES
   simde__m256i
@@ -105,7 +87,11 @@ SIMDE_BEGIN_DECLS_
       r_,
       a_ = simde__m256i_to_private(a);
 
-    #if defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
+    #if defined(SIMDE_POWER_ALTIVEC_P6_NATIVE)
+      for (size_t i = 0 ; i < (sizeof(r_.m128i_private) / sizeof(r_.m128i_private[0])) ; i++) {
+        r_.m128i_private[i].altivec_i32 = vec_rl(a_.m128i_private[i].altivec_i32, vec_splats(HEDLEY_STATIC_CAST(unsigned int, 32 - imm8)));
+      }
+    #elif defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
       switch (imm8 & 31) {
         case 0:
           r_ = a_;
@@ -158,17 +144,6 @@ SIMDE_BEGIN_DECLS_
 
 #if defined(SIMDE_X86_AVX512F_NATIVE)
   #define simde_mm512_ror_epi32(a, imm8) _mm512_ror_epi32(a, imm8)
-#elif defined(SIMDE_POWER_ALTIVEC_P6_NATIVE)
-  simde__m512i_private
-    r_,
-    a_ = simde__m512i_to_private(a),
-    b_ = simde__m512i_to_private(b);
-
-  for (size_t i = 0 ; i < (sizeof(r_.m128i_private) / sizeof(r_.m128i_private[0])) ; i++) {
-    r_.m128i_private[i].altivec_i32 = vec_rl(a_.m128i_private[i].altivec_i32, vec_splats(HEDLEY_STATIC_CAST(unsigned int, 32 - imm8)));
-  }
-
-  return simde__m512i_from_private(r_);
 #else
   SIMDE_FUNCTION_ATTRIBUTES
   simde__m512i
@@ -178,7 +153,11 @@ SIMDE_BEGIN_DECLS_
       r_,
       a_ = simde__m512i_to_private(a);
 
-    #if defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
+    #if defined(SIMDE_POWER_ALTIVEC_P6_NATIVE)
+      for (size_t i = 0 ; i < (sizeof(r_.m128i_private) / sizeof(r_.m128i_private[0])) ; i++) {
+        r_.m128i_private[i].altivec_i32 = vec_rl(a_.m128i_private[i].altivec_i32, vec_splats(HEDLEY_STATIC_CAST(unsigned int, 32 - imm8)));
+      }
+    #elif defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
       switch (imm8 & 31) {
         case 0:
           r_ = a_;
@@ -231,15 +210,6 @@ SIMDE_BEGIN_DECLS_
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
   #define simde_mm_ror_epi64(a, imm8) _mm_ror_epi64(a, imm8)
-#elif defined(SIMDE_POWER_ALTIVEC_P8_NATIVE)
-  simde__m128i_private
-    r_,
-    a_ = simde__m128i_to_private(a),
-    b_ = simde__m128i_to_private(b);
-
-  r_.altivec_i64 = vec_rl(a_.altivec_i64, vec_splats(HEDLEY_STATIC_CAST(unsigned long long, 64 - imm8)));
-
-  return simde__m128i_from_private(r_);
 #else
   SIMDE_FUNCTION_ATTRIBUTES
   simde__m128i
@@ -249,7 +219,9 @@ SIMDE_BEGIN_DECLS_
       r_,
       a_ = simde__m128i_to_private(a);
 
-    #if defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
+    #if defined(SIMDE_POWER_ALTIVEC_P8_NATIVE)
+      r_.altivec_i64 = vec_rl(a_.altivec_i64, vec_splats(HEDLEY_STATIC_CAST(unsigned long long, 64 - imm8)));
+    #elif defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
       switch (imm8 & 63) {
         case 0:
           r_ = a_;
@@ -302,17 +274,6 @@ SIMDE_BEGIN_DECLS_
 
 #if defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_X86_AVX512VL_NATIVE)
   #define simde_mm256_ror_epi64(a, imm8) _mm256_ror_epi64(a, imm8)
-#elif defined(SIMDE_POWER_ALTIVEC_P8_NATIVE)
-  simde__m256i_private
-    r_,
-    a_ = simde__m256i_to_private(a),
-    b_ = simde__m256i_to_private(b);
-
-  for (size_t i = 0 ; i < (sizeof(r_.m128i_private) / sizeof(r_.m128i_private[0])) ; i++) {
-    r_.m128i_private[i].altivec_i64 = vec_rl(a_.m128i_private[i].altivec_i64, vec_splats(HEDLEY_STATIC_CAST(unsigned long long, 64 - imm8)));
-  }
-
-  return simde__m256i_from_private(r_);
 #else
   SIMDE_FUNCTION_ATTRIBUTES
   simde__m256i
@@ -322,7 +283,11 @@ SIMDE_BEGIN_DECLS_
       r_,
       a_ = simde__m256i_to_private(a);
 
-    #if defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
+    #if defined(SIMDE_POWER_ALTIVEC_P8_NATIVE)
+      for (size_t i = 0 ; i < (sizeof(r_.m128i_private) / sizeof(r_.m128i_private[0])) ; i++) {
+        r_.m128i_private[i].altivec_i64 = vec_rl(a_.m128i_private[i].altivec_i64, vec_splats(HEDLEY_STATIC_CAST(unsigned long long, 64 - imm8)));
+      }
+    #elif defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
       switch (imm8 & 63) {
         case 0:
           r_ = a_;
@@ -375,17 +340,6 @@ SIMDE_BEGIN_DECLS_
 
 #if defined(SIMDE_X86_AVX512F_NATIVE)
   #define simde_mm512_ror_epi64(a, imm8) _mm512_ror_epi64(a, imm8)
-#elif defined(SIMDE_POWER_ALTIVEC_P8_NATIVE)
-  simde__m512i_private
-    r_,
-    a_ = simde__m512i_to_private(a),
-    b_ = simde__m512i_to_private(b);
-
-  for (size_t i = 0 ; i < (sizeof(r_.m128i_private) / sizeof(r_.m128i_private[0])) ; i++) {
-    r_.m128i_private[i].altivec_i64 = vec_rl(a_.m128i_private[i].altivec_i64, vec_splats(HEDLEY_STATIC_CAST(unsigned long long, 64 - imm8)));
-  }
-
-  return simde__m512i_from_private(r_);
 #else
   SIMDE_FUNCTION_ATTRIBUTES
   simde__m512i
@@ -395,7 +349,11 @@ SIMDE_BEGIN_DECLS_
       r_,
       a_ = simde__m512i_to_private(a);
 
-    #if defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
+    #if defined(SIMDE_POWER_ALTIVEC_P8_NATIVE)
+      for (size_t i = 0 ; i < (sizeof(r_.m128i_private) / sizeof(r_.m128i_private[0])) ; i++) {
+        r_.m128i_private[i].altivec_i64 = vec_rl(a_.m128i_private[i].altivec_i64, vec_splats(HEDLEY_STATIC_CAST(unsigned long long, 64 - imm8)));
+      }
+    #elif defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
       switch (imm8 & 63) {
         case 0:
           r_ = a_;
