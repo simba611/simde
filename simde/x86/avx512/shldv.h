@@ -18,35 +18,83 @@ simde_mm_shldv_epi32(simde__m128i a, simde__m128i b, simde__m128i c) {
       r_,
       c_ = simde__m128i_to_private(c);
 
-    #if 1
+    #if defined(SIMDE_ARM_NEON_A64V8_NATIVE)
+      simde__m128i_private
+        a_ = simde__m128i_to_private(a),
+        b_ = simde__m128i_to_private(b);
+
+      uint64x2_t values_lo = vreinterpretq_u64_u32(vzip1q_u32(b_.neon_u32, a_.neon_u32));
+      uint64x2_t values_hi = vreinterpretq_u64_u32(vzip2q_u32(b_.neon_u32, a_.neon_u32));
+
+      int32x4_t count = vandq_s32(c_.neon_i32, vdupq_n_s32(31));
+
+      values_lo = vshlq_u64(values_lo, vmovl_s32(vget_low_s32(count)));
+      values_hi = vshlq_u64(values_hi, vmovl_high_s32(count));
+
+      r_.neon_u32 =
+        vuzp2q_u32(
+          vreinterpretq_u32_u64(values_lo),
+          vreinterpretq_u32_u64(values_hi)
+        );
+    #elif defined(SIMDE_X86_AVX2_NATIVE)
+      HEDLEY_STATIC_CAST(void, c_);
       simde__m256i
-        lo = simde_mm256_unpacklo_epi32(simde_mm256_castsi128_si256(b), simde_mm256_castsi128_si256(a)),
-        hi = simde_mm256_unpackhi_epi32(simde_mm256_castsi128_si256(b), simde_mm256_castsi128_si256(a));
-      simde__m256i_private tmp = simde__m256i_to_private(simde_mm256_castpd_si256(simde_mm256_permute2f128_pd(simde_mm256_castsi256_pd(lo), simde_mm256_castsi256_pd(hi), 32)));
+        tmp1,
+        lo =
+          simde_mm256_castps_si256(
+            simde_mm256_unpacklo_ps(
+              simde_mm256_castsi256_ps(simde_mm256_castsi128_si256(b)),
+              simde_mm256_castsi256_ps(simde_mm256_castsi128_si256(a))
+            )
+          ),
+        hi =
+          simde_mm256_castps_si256(
+            simde_mm256_unpackhi_ps(
+              simde_mm256_castsi256_ps(simde_mm256_castsi128_si256(b)),
+              simde_mm256_castsi256_ps(simde_mm256_castsi128_si256(a))
+            )
+          ),
+        tmp2 =
+          simde_mm256_castpd_si256(
+            simde_mm256_permute2f128_pd(
+              simde_mm256_castsi256_pd(lo),
+              simde_mm256_castsi256_pd(hi), 32
+            )
+          );
 
-      SIMDE_VECTORIZE
-      for (size_t i = 0 ; i < (sizeof(tmp.u64) / sizeof(tmp.u64[0])) ; i++) {
-        tmp.u64[i] = tmp.u64[i] << (c_.u32[i] & 31);
-      }
+      tmp2 =
+        simde_mm256_sllv_epi64(
+          tmp2,
+          simde_mm256_cvtepi32_epi64(
+            simde_mm_and_si128(
+              c,
+              simde_mm_set1_epi32(31)
+            )
+          )
+        );
 
-      tmp.i32 = SIMDE_SHUFFLE_VECTOR_(32, 32, tmp.i32, tmp.i32, 1, 3, 5, 7, -1, -1, -1, -1);
-      r_ = simde__m128i_to_private(simde_mm256_castsi256_si128(simde__m256i_from_private(tmp)));
-    #elif SIMDE_NATURAL_VECTOR_SIZE_GE(256)
-      simde__m256i_private
-        tmp,
-        a_ = simde__m256i_to_private(simde_mm256_castsi128_si256(a)),
-        b_ = simde__m256i_to_private(simde_mm256_castsi128_si256(b));
+      tmp1 =
+        simde_mm256_castpd_si256(
+          simde_mm256_permute2f128_pd(
+            simde_mm256_castsi256_pd(tmp2),
+            simde_mm256_castsi256_pd(tmp2),
+            1
+          )
+        );
 
-      tmp.u64 = HEDLEY_REINTERPRET_CAST(__typeof__(tmp.u64), SIMDE_SHUFFLE_VECTOR_(32, 32, b_.i32, a_.i32, 0, 8, 1, 9, 2, 10, 3, 11));
-
-      SIMDE_VECTORIZE
-      for (size_t i = 0 ; i < (sizeof(tmp.u64) / sizeof(tmp.u64[0])) ; i++) {
-        tmp.u64[i] = tmp.u64[i] << (c_.u32[i] & 31);
-      }
-
-      tmp.i32 = SIMDE_SHUFFLE_VECTOR_(32, 32, tmp.i32, tmp.i32, 1, 3, 5, 7, -1, -1, -1, -1);
-      r_ = simde__m128i_to_private(simde_mm256_castsi256_si128(simde__m256i_from_private(tmp)));
-    #elif SIMDE_NATURAL_VECTOR_SIZE_LE(128)
+      r_ =
+        simde__m128i_to_private(
+          simde_mm256_castsi256_si128(
+            simde_mm256_castps_si256(
+              simde_mm256_shuffle_ps(
+                simde_mm256_castsi256_ps(tmp2),
+                simde_mm256_castsi256_ps(tmp1),
+                221
+              )
+            )
+          )
+        );
+    #elif defined(SIMDE_X86_SSE2_NATIVE)
       simde__m128i_private
         lo,
         hi;
@@ -61,7 +109,15 @@ simde_mm_shldv_epi32(simde__m128i a, simde__m128i b, simde__m128i c) {
         hi.u64[i] = hi.u64[i] << (c_.u32[halfway + i] & 31);
       }
 
-      r_ = simde__m128i_to_private(simde_mm_castps_si128(simde_mm_shuffle_ps(simde_mm_castsi128_ps(simde__m128i_from_private(lo)), simde_mm_castsi128_ps(simde__m128i_from_private(hi)), 221)));
+      r_ =
+        simde__m128i_to_private(
+          simde_mm_castps_si128(
+            simde_mm_shuffle_ps(
+              simde_mm_castsi128_ps(simde__m128i_from_private(lo)),
+              simde_mm_castsi128_ps(simde__m128i_from_private(hi)),
+              221)
+          )
+        );
     #else
       simde__m128i_private
         a_ = simde__m128i_to_private(a),
