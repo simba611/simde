@@ -58,7 +58,8 @@ simde_mm_shldv_epi32(simde__m128i a, simde__m128i b, simde__m128i c) {
           simde_mm256_castpd_si256(
             simde_mm256_permute2f128_pd(
               simde_mm256_castsi256_pd(lo),
-              simde_mm256_castsi256_pd(hi), 32
+              simde_mm256_castsi256_pd(hi),
+              32
             )
           );
 
