@@ -505,7 +505,7 @@ typedef enum
   #endif
 } SIMDE_MM_PERM_ENUM;
 
-#if !defined(_MM_PERM_ENUM) && defined(SIMDE_ENABLE_NATIVE_ALIASES)
+#if !defined(SIMDE_X86_AVX512F_NATIVE) && defined(SIMDE_ENABLE_NATIVE_ALIASES)
   #if !defined(HEDLEY_INTEL_VERSION)
     typedef SIMDE_MM_PERM_ENUM _MM_PERM_ENUM;
   #else
