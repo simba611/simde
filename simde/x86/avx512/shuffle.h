@@ -170,6 +170,70 @@ simde_mm512_shuffle_i32x4 (simde__m512i a, simde__m512i b, const int imm8)
 #define simde_mm512_maskz_shuffle_f64x2(k, a, b, imm8) simde_mm512_maskz_mov_pd(k, simde_mm512_shuffle_f64x2(a, b, imm8))
 #define simde_mm512_mask_shuffle_f64x2(src, k, a, b, imm8) simde_mm512_mask_mov_pd(src, k, simde_mm512_shuffle_f64x2(a, b, imm8))
 
+#if defined(SIMDE_X86_AVX512F_NATIVE)
+  #define simde_mm512_shuffle_epi32(a, imm8) _mm512_shuffle_epi32(a, imm8)
+#elif SIMDE_NATURAL_VECTOR_SIZE_LE(256) && defined(SIMDE_STATEMENT_EXPR_)
+  #define simde_mm512_shuffle_epi32(a, imm8) SIMDE_STATEMENT_EXPR_(({ \
+    simde__m512i_private simde_mm512i_shuffle_epi32_a_ = simde__m512i_to_private(a); \
+    \
+    simde_mm512i_shuffle_epi32_a_.m256i[0] = simde_mm256_shuffle_epi32(simde_mm512i_shuffle_epi32_a_.m256i[0], imm8); \
+    simde_mm512i_shuffle_epi32_a_.m256i[1] = simde_mm256_shuffle_epi32(simde_mm512i_shuffle_epi32_a_.m256i[1], imm8); \
+    \
+    simde__m512i_from_private(simde_mm512i_shuffle_epi32_a_); \
+  }))
+#elif defined(SIMDE_SHUFFLE_VECTOR_) && defined(SIMDE_STATEMENT_EXPR_)
+  #define simde_mm512_shuffle_epi32(a, imm8) SIMDE_STATEMENT_EXPR_(({ \
+    simde__m512i_private simde_mm512_shuffle_epi32_a_ = simde__m512i_to_private(a); \
+    \
+    simde_mm512_shuffle_epi32_a_.i32 = \
+      SIMDE_SHUFFLE_VECTOR_( \
+        32, 64, \
+        simde_mm512_shuffle_epi32_a_.i32, \
+        simde_mm512_shuffle_epi32_a_.i32, \
+        ((imm8)     ) & 3, \
+        ((imm8) >> 2) & 3, \
+        ((imm8) >> 4) & 3, \
+        ((imm8) >> 6) & 3, \
+        (((imm8)     ) & 3) + 4, \
+        (((imm8) >> 2) & 3) + 4, \
+        (((imm8) >> 4) & 3) + 4, \
+        (((imm8) >> 6) & 3) + 4, \
+        (((imm8)     ) & 3) + 8, \
+        (((imm8) >> 2) & 3) + 8, \
+        (((imm8) >> 4) & 3) + 8, \
+        (((imm8) >> 6) & 3) + 8, \
+        (((imm8)     ) & 3) + 12, \
+        (((imm8) >> 2) & 3) + 12, \
+        (((imm8) >> 4) & 3) + 12, \
+        (((imm8) >> 6) & 3) + 12 \
+      ); \
+    \
+    simde__m512i_from_private(simde_mm512_shuffle_epi32_a_); \
+  }))
+#else
+  SIMDE_FUNCTION_ATTRIBUTES
+  simde__m512i
+  simde_mm512_shuffle_epi32(simde__m512i a, SIMDE_MM_PERM_ENUM imm8)
+      SIMDE_REQUIRE_CONSTANT_RANGE (imm8, 0, 255) {
+    simde__m512i_private
+      r_,
+      a_ = simde__m512i_to_private(a);
+
+    for (size_t i = 0 ; i < (sizeof(r_.m128i_private) / sizeof(r_.m128i_private[0])) ; i++) {
+      SIMDE_VECTORIZE
+      for (size_t j = 0 ; j < (sizeof(r_.m128i_private[i].i32) / sizeof(r_.m128i_private[i].i32[0])) ; j++) {
+        r_.m128i_private[i].i32[j] = a_.m128i_private[i].i32[(imm8 >> (j * 2)) & 3];
+      }
+    }
+
+    return simde__m512i_from_private(r_);
+  }
+#endif
+#if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES)
+  #undef _mm512_shuffle_epi32
+  #define _mm512_shuffle_epi32(a, imm8) simde_mm512_shuffle_epi32(a, imm8)
+#endif
+
 SIMDE_END_DECLS_
 HEDLEY_DIAGNOSTIC_POP
 
