@@ -18,16 +18,16 @@ simde_mm_popcnt_epi16 (simde__m128i a) {
       a_ = simde__m128i_to_private(a);
 
     #if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
-      r_.neon_i16 = simde_vpaddlq_s8(simde_vcntq_s8(a_.neon_i8));
+      r_.neon_i16 = vpaddlq_s8(vcntq_s8(a_.neon_i8));
     #elif defined(SIMDE_WASM_SIMD128_NATIVE)
-      r_.wasm_v128 = simde_wasm_i16x8_extadd_pairwise_i8x16(simde_wasm_i8x16_popcnt(a_.wasm_v128));
+      r_.wasm_v128 = wasm_i16x8_extadd_pairwise_i8x16(wasm_i8x16_popcnt(a_.wasm_v128));
+    #elif defined(SIMDE_POWER_ALTIVEC_P8_NATIVE)
+      r_.altivec_u16 = HEDLEY_REINTERPRET_CAST(SIMDE_POWER_ALTIVEC_VECTOR(unsigned short), vec_popcnt(HEDLEY_REINTERPRET_CAST(SIMDE_POWER_ALTIVEC_VECTOR(unsigned short), a_.altivec_u16)));
     #elif defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR)
       a_.u16 -= ((a_.u16 >> 1) & 0x5555);
       a_.u16  = ((a_.u16 & 0x3333) + ((a_.u16 >> 2) & 0x3333));
       a_.u16  = (a_.u16 + (a_.u16 >> 4)) & 0x0F0F;
       r_.u16  = (a_.u16 * 0x0101) >> ((sizeof(uint16_t) - 1) * CHAR_BIT);
-    #elif defined(SIMDE_POWER_ALTIVEC_P8_NATIVE)
-      r_.altivec_u16 = HEDLEY_REINTERPRET_CAST(SIMDE_POWER_ALTIVEC_VECTOR(unsigned short), vec_popcnt(HEDLEY_REINTERPRET_CAST(SIMDE_POWER_ALTIVEC_VECTOR(unsigned short), a_.altivec_u16)));
     #else
       SIMDE_VECTORIZE
       for (size_t i = 0 ; i < (sizeof(r_.u16) / sizeof(r_.u16[0])) ; i++) {
