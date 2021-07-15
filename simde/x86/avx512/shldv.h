@@ -116,6 +116,21 @@ simde_mm_shldv_epi32(simde__m128i a, simde__m128i b, simde__m128i c) {
               221)
           )
         );
+    #elif defined(SIMDE_VECTOR_SUBSCRIPT_SCALAR) && defined(SIMDE_SHUFFLE_VECTOR_) && defined(SIMDE_CONVERT_VECTOR_)
+      simde__m128i_private
+        c_ = simde__m128i_to_private(c);
+      simde__m256i_private
+        a_ = simde__m256i_to_private(simde_mm256_castsi128_si256(a)),
+        b_ = simde__m256i_to_private(simde_mm256_castsi128_si256(b)),
+        tmp1,
+        tmp2;
+
+      tmp1.u64 = HEDLEY_REINTERPRET_CAST(__typeof__(tmp1.u64), SIMDE_SHUFFLE_VECTOR_(32, 32, b_.i32, a_.i32, 0, 8, 1, 9, 2, 10, 3, 11));
+      SIMDE_CONVERT_VECTOR_(tmp2.u64, c_.u32);
+
+      tmp1.u64 = tmp1.u64 << (tmp2.u64 & 31);
+
+      r_.i32 = SIMDE_SHUFFLE_VECTOR_(32, 16, tmp1.m128i_private[0].i32, tmp1.m128i_private[1].i32, 1, 3, 5, 7);
     #else
       simde__m128i_private
         a_ = simde__m128i_to_private(a),
