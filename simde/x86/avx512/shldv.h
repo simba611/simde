@@ -103,8 +103,8 @@ simde_mm_shldv_epi32(simde__m128i a, simde__m128i b, simde__m128i c) {
       size_t halfway = (sizeof(r_.u32) / sizeof(r_.u32[0]) / 2);
       SIMDE_VECTORIZE
       for (size_t i = 0 ; i < halfway ; i++) {
-        lo.u64[i] = lo.u64[i] << (c_.u32[i] & 31);
-        hi.u64[i] = hi.u64[i] << (c_.u32[halfway + i] & 31);
+        lo.u64[i] <<= (c_.u32[i] & 31);
+        hi.u64[i] <<= (c_.u32[halfway + i] & 31);
       }
 
       r_ =
@@ -128,7 +128,7 @@ simde_mm_shldv_epi32(simde__m128i a, simde__m128i b, simde__m128i c) {
       tmp1.u64 = HEDLEY_REINTERPRET_CAST(__typeof__(tmp1.u64), SIMDE_SHUFFLE_VECTOR_(32, 32, b_.i32, a_.i32, 0, 8, 1, 9, 2, 10, 3, 11));
       SIMDE_CONVERT_VECTOR_(tmp2.u64, c_.u32);
 
-      tmp1.u64 = tmp1.u64 << (tmp2.u64 & 31);
+      tmp1.u64 <<= (tmp2.u64 & 31);
 
       r_.i32 = SIMDE_SHUFFLE_VECTOR_(32, 16, tmp1.m128i_private[0].i32, tmp1.m128i_private[1].i32, 1, 3, 5, 7);
     #else
