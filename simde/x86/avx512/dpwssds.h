@@ -56,7 +56,7 @@ simde_mm_dpwssds_epi32 (simde__m128i src, simde__m128i a, simde__m128i b) {
       src_.i32 = HEDLEY_REINTERPRET_CAST(__typeof__(src_.i32), (au & ~m) | (ru & m));
     #else
       SIMDE_VECTORIZE
-      for (size_t i = 0 ; i < (sizeof(a_.u16) / sizeof(a_.i16[0]) / 2) ; i++) {
+      for (size_t i = 0 ; i < (sizeof(a_.i16) / sizeof(a_.i16[0]) / 2) ; i++) {
         src_.i32[i] =
           simde_math_adds_i32(
             src_.i32[i],
