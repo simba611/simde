@@ -452,9 +452,9 @@ simde_x_mm_adds_epi32(simde__m128i a, simde__m128i b) {
         r_.i32[i] = simde_math_adds_i32(a_.i32[i], b_.i32[i]);
       }
     #endif
-
-    return simde__m128i_from_private(r_);
   #endif
+
+  return simde__m128i_from_private(r_);
 }
 
 SIMDE_FUNCTION_ATTRIBUTES
