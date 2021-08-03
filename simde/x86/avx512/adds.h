@@ -393,7 +393,7 @@ simde_x_mm_adds_epi32(simde__m128i a, simde__m128i b) {
     b_ = simde__m128i_to_private(b);
 
   #if defined(SIMDE_ARM_NEON_A32V7_NATIVE)
-    r_.neon_.i32 = vqaddq_s32(a_.neon_i32, b_.neon_i32);
+    r_.neon_i32 = vqaddq_s32(a_.neon_i32, b_.neon_i32);
   #elif defined(SIMDE_POWER_ALTIVEC_P6)
     r_.altivec_i32 = vec_adds(a_.altivec_i32, b_.altivec_i32);
   #else
