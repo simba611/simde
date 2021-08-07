@@ -161,7 +161,7 @@ simde_mm_fixupimm_ps (simde__m128 a, simde__m128 b, simde__m128i c, int imm8)
 #endif
 #if defined(SIMDE_X86_AVX512F_ENABLE_NATIVE_ALIASES) && defined(SIMDE_X86_AVX512VL_ENABLE_NATIVE_ALIASES)
   #undef _mm_maskz_fixupimm_ps
-  #define _mm_maskz_fixupimm_ps(k, a, b, c, imm8) simde_mm_mask_fixupimm_ps(k, a, b, c, imm8)
+  #define _mm_maskz_fixupimm_ps(k, a, b, c, imm8) simde_mm_maskz_fixupimm_ps(k, a, b, c, imm8)
 #endif
 
 SIMDE_END_DECLS_
